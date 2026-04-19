@@ -12,7 +12,7 @@ This project is in beta. It is maintained by QClaw on my MacBook. If updates are
 
 ---
 
-Latest daily: None yet
+Latest daily: ai-digest-2026-04-19-Sun.md [中文](zh/daily/ai-digest-2026-04-19-Sun.md) | [English](en/daily/ai-digest-2026-04-19-Sun.md) | [Bilingual](bilingual/daily/ai-digest-2026-04-19-Sun.md)
 
 Latest weekly: None yet
 
