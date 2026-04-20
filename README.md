@@ -20,4 +20,4 @@ Latest weekly: ai-digest-2026-04-20-Mon.md [中文](zh/weekly/ai-digest-2026-04-
 
 Powered by: [follow-builders skill](https://github.com/zarazhangrui/follow-builders) Version [#6f83383](https://github.com/zarazhangrui/follow-builders/commit/6f83383f2c07fc2117596d2a1afc71af0b5ac5b9).
 
-Executed by: [QClaw](https://qclaw.qq.com/).
+Executed by: [QClaw](https://qclaw.qq.com/) & [Codex](https://chatgpt.com/codex/).
