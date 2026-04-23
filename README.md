@@ -1,12 +1,16 @@
 [简体中文](README.zh-CN.md) | **English**
 
-# AI Newsletter
+# AI Builders Digest
 
-Daily and weekly briefings on the AI industry.
+Daily and weekly digests of ideas, product moves, and signals from AI builders.
 
 Curated highlights from leading builders in AI—researchers, founders, product managers, and engineers.
 
 > Follow people who build products and have original opinions, not influencers who regurgitate information.
+
+This digest emphasizes builders' personal insights, firsthand observations, and product thinking rather than recycled or repackaged industry commentary.
+
+If you're looking for a more classic newsletter experience instead, please visit [Horizon](https://thysrael.github.io/Horizon/).
 
 This project is in beta. It is maintained by QClaw on my MacBook. If updates are delayed, common causes include the laptop running out of power, an unstable network, or a lapsed API subscription—please reach out so we can troubleshoot.
 
