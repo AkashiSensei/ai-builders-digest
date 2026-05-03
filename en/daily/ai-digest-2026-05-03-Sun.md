@@ -8,127 +8,127 @@
 
 Five themes define today's digest:
 
-1. **Headless, agent-facing software is becoming the default assumption.** Aaron Levie, Ryo Lu, and the broader product chatter all point to a future where software is consumed more by agents than by human seats.
+1. **Inference is becoming the next scarce infrastructure layer.** The Baseten conversation makes the case that AI demand is shifting from training headlines to production inference capacity, custom models, and multi-cloud runtime fabric.
 
-2. **Design, media, and interface creation are collapsing into promptable workflows.** Google Flow Music, Claude Design, Alex Albert's design claims, and Zara Zhang's code-first graphics argument all push toward the same creative stack.
+2. **Agent products are being judged by harness quality and memory, not just model quality.** Claude Managed Agents memory, Claude Code quality fixes, and builder chatter around Codex all point to the same operational layer.
 
-3. **Enterprise AI discussions are moving from experimentation to operating models.** Kevin Weil's exit note, Bill McDermott's No Priors interview, and Nikunj Kothari's product-team commentary all focus on organizational structure, ROI, and scale.
+3. **Enterprise AI is moving into everyday workflows.** Claude connectors now reach consumer and work apps, while Aaron Levie keeps arguing that agents will expand the value of systems of record rather than simply replace seats.
 
-4. **Builders are obsessing over the harness around the model, not just the model itself.** Garry Tan, Swyx, Dan Shipper, and Peter Yang all point at workflows, demos, benchmark rituals, and product packaging as the real source of leverage.
+4. **Builders are treating coding agents as collaborators.** Zara Zhang frames agents as cofounders, Peter Yang and Peter Steinberger are stress-testing Codex features, and Replit is using its tenth anniversary to restate coding accessibility as the mission.
 
-5. **Anthropic's product surface is expanding in multiple directions at once.** Claude for Word, the Opus 4.7 hackathon, bug fixes, Claude Design demos, and general builder reactions show an ecosystem shipping rapidly around one model family.
+5. **AI product companies are wrestling with reliability in public.** Anthropic published a detailed Claude Code postmortem, Sam Altman is publicly playing with release culture, and the ecosystem is increasingly comfortable discussing broken features and fixes in the open.
 
 ## X / Twitter
 
 **Swyx**
-Swyx mostly amplified and riffed on the OpenClaw ecosystem rather than posting a single deep thesis, but the pattern is still telling. He highlighted a Colossus profile, joked about a close race, and thanked Peter Steinberger for kicking off an AMA with a question about the future of ClosedClaw. The signal is that agent tooling now has enough surface area for community narrative, intra-ecosystem rivalry, and public roadmap speculation all at once.
+Swyx sketched a small but revealing product request: a Chrome extension that upgrades every image input box on the web with simple text generation, drawing through tldraw, or image generation from words and sketches. He also noted that Codex can be a better Slack search than Slack AI search, and pointed at Grok/xAI efficiency comparisons. The shared theme is interface leverage: AI tools become more useful when they sit inside existing input surfaces instead of asking users to move elsewhere.
 
-https://x.com/swyx/status/2045263229329580420
-https://x.com/swyx/status/2045202026020421951
-https://x.com/swyx/status/2045186912009458104
-
-**Josh Woodward (VP, Google Labs)**
-Josh Woodward announced that ProducerAI has been renamed Google Flow Music and repositioned as a standalone music-making experience. The pitch is straightforward: keep the same creative mission, but give users more direct control over tracks and remixing through natural-language workflows. Together with the main Flow product, this suggests Google is splitting creative AI into clearer media-specific surfaces instead of one vague umbrella.
-
-https://x.com/joshwoodward/status/2045305262362530043
-
-**Kevin Weil (VP of Science, OpenAI)**
-Kevin Weil used his last day at OpenAI to make a structural point: OpenAI for Science is being decentralized into other research teams. That reads less like a retreat and more like a sign that science-related work is no longer a side initiative that needs separate branding. His message also reinforces a broader belief that accelerating science remains one of the most positive downstream uses of frontier models, even if the org chart around it changes.
-
-https://x.com/kevinweil/status/2045230426210648348
+https://x.com/swyx/status/2050460622706626740
+https://x.com/swyx/status/2050432398161264664
+https://x.com/swyx/status/2050396374282408358
 
 **Peter Yang**
-Peter Yang had a classic builder-curator day: a joke about Anthropic shipping models daily, a strong endorsement of Peter Steinberger's product thinking, and a hands-on demo of Claude Design spanning videos, slides, websites, mobile apps, and design systems. The connective tissue is practical exploration. He is less interested in model mystique than in showing how a fast-moving model surface becomes an immediately useful tutorial object for other product people.
+Peter Yang had a Codex-heavy day: he called out the first broken Codex feature he has found, joked that buying a MacBook Pro to run local models became an excuse to keep using cloud agents, and noted how good it feels when a Codex workflow finally breaks through. The useful signal is not just enthusiasm. It is that experienced AI product educators are now treating agent reliability, local model curiosity, and workflow breakthroughs as practical daily material.
 
-https://x.com/petergyang/status/2045335553059746259
-https://x.com/petergyang/status/2045334450461192270
-https://x.com/petergyang/status/2045307149740609591
-
-**Google Labs**
-Google Labs provided the formal product framing behind Josh Woodward's post: Flow now has a sibling product, Flow Music, focused on creating, sharing, and remixing songs and playlists from natural-language prompts. The interesting product decision is separation. Rather than treating music as just another mode inside a general creator app, Google is naming it as its own surface with its own identity and behavior.
-
-https://x.com/GoogleLabs/status/2045250788864495874
+https://x.com/petergyang/status/2050406287008268450
+https://x.com/petergyang/status/2050394924395434233
+https://x.com/petergyang/status/2050378287348899962
 
 **Amjad Masad (CEO, Replit)**
-Amjad Masad's posts were short, but they still sketch a product direction. One post simply signaled excitement around a new launch; the other two emphasized virality through animation and a feature that anticipates minor but meaningful app improvements. The through-line is that product value is increasingly tied to how much the system can suggest, refine, and package on behalf of the user before they even ask.
+Amjad Masad marked Replit turning 10 by making the product free for 24 hours and tying the celebration back to a mission that predates the company: making coding accessible to everyone. The post matters because it frames Replit less as a coding tool and more as a decade-long distribution project for software creation. In the agent era, that mission has more leverage because the act of coding is being compressed into shorter loops of intent, generation, and shipping.
 
-https://x.com/amasad/status/2045350848985968796
-https://x.com/amasad/status/2045198577941844178
-https://x.com/amasad/status/2045198476385104372
-
-**Alex Albert (Research, Anthropic)**
-Alex Albert made two practical claims about the current Anthropic stack. First, high-quality design is no longer reserved for trained designers when Claude is in the loop. Second, the rough edges people hit on day one of Opus 4.7 were already being fixed by the next day. That combination matters more than either statement alone: fast iteration and improved output quality are compounding into a product narrative, not just a research one.
-
-https://x.com/alexalbert__/status/2045165630421364853
-https://x.com/alexalbert__/status/2045159041283064095
+https://x.com/amasad/status/2050479551537619413
 
 **Aaron Levie (CEO, Box)**
-Aaron Levie posted the clearest enterprise software thesis of the day. His argument is that agents will use software far more than people ever did, which pushes platforms toward a headless future where API and agent consumption become major revenue lines next to human seats. The important nuance is that he sees this as positive-sum rather than cannibalistic: once agents can work continuously across documents, CRM records, contracts, and campaigns, the ceiling on software value rises instead of falling.
+Aaron Levie sharpened his agent-era software thesis with Atlassian as the example. His heuristic is to ask which software categories grow when there are 100 times more agents than people doing work: code, leads, contracts, invoices, designs, payments, and the systems that govern them. He also argued that enterprises outside Silicon Valley mostly want AI to augment and accelerate bottlenecked work, and that cost-cutting gains will be competed away when rivals use AI to serve customers better.
 
-https://x.com/levie/status/2045355693050655048
-https://x.com/levie/status/2045137708620906573
-
-**Ryo Lu (Design, Cursor)**
-Ryo Lu compressed an entire product philosophy into one line: the best agent is the best harness plus the best models plus the ability to run anywhere. That is a useful corrective to raw-model discourse. His point is that portability and orchestration matter just as much as capability, especially when agents start leaving the editor and touching broader software environments.
-
-https://x.com/ryolu_/status/2045336089867825157
+https://x.com/levie/status/2050295657836277764
+https://x.com/levie/status/2050240083325030404
 
 **Garry Tan (President & CEO, Y Combinator)**
-Garry Tan's posts mixed humor with a fairly direct complaint about agent reliability. His Ferrari-versus-Accord comparison and his frustration about OpenClaw editing its own config both point to the same real issue: agent ambition is outpacing operational trust in some workflows. That is exactly why harness quality, observability, and failure containment are becoming product differentiators instead of invisible infrastructure details.
+Garry Tan did not post much AI-specific analysis in this feed slice. His substantive post was a California policy critique about asset seizure proposals and the tax base; the other item was link-only. For this digest, the useful takeaway is simply that there was no notable builder signal from Garry on AI products today.
 
-https://x.com/garrytan/status/2045378112846983496
-https://x.com/garrytan/status/2045373889044472259
-https://x.com/garrytan/status/2045372015213978106
-
-**Matt Turck**
-Matt Turck's short note called Anthropic Labs a “generational run,” naming Claude Code, Skills, Claude Cowork, and Claude Design in one breath. It is brief, but the framing matters: outside observers are no longer evaluating model vendors only by leaderboard jumps. They are grading them as product companies with a coherent surface area.
-
-https://x.com/mattturck/status/2045211226272129274
+https://x.com/garrytan/status/2050365216421241152
+https://x.com/garrytan/status/2050348984171192773
 
 **Zara Zhang**
-Zara Zhang argued for two related distinctions that matter to builders. First, writing is not the same as generating text, because most of the work is upstream of the final wording. Second, in many cases design-through-code beats design-through-image-generation. Put together, the claim is that LLMs become much more useful when they plug into structured authoring systems instead of being treated as generic content emitters.
+Zara Zhang made one of the clearest comments on how to work with coding agents: she does not treat them as employees who receive orders, but as cofounders who get context, problems, and a chance to offer opinions. That is a practical operating pattern, not just a metaphor. The better the agent, the more the user needs to shift from command-giving to problem framing, tradeoff sharing, and collaborative judgment.
 
-https://x.com/zarazhangrui/status/2045394997630099922
-https://x.com/zarazhangrui/status/2045374512691360177
+https://x.com/zarazhangrui/status/2050445806428438734
+https://x.com/zarazhangrui/status/2050326543797469415
+https://x.com/zarazhangrui/status/2050280810302062927
 
 **Nikunj Kothari**
-Nikunj Kothari's updates were mostly about people and teams, but there is a consistent product lens underneath them. He praised Fintool as a product that could handle heavy reasoning work even before the current model era, backed another new team on first principles, and pointed readers to an essay that immediately “roasts” venture investing. The underlying signal is that strong product teams and strong reasoning tooling are converging, and acquirers like Microsoft are willing to buy both at once.
+Nikunj Kothari shared a tiny but concrete paid-product milestone: a project at $36,500 ARR, built with Railway, Conductor, Claude, and Stripe, with reports priced mostly at cost because each one costs $8-$9 to produce. The interesting part is the stack and scope. AI-assisted builders can now ship narrow, paid, feedback-seeking products quickly enough that even small revenue experiments reveal real unit economics.
 
-https://x.com/nikunj/status/2045250489189908534
-https://x.com/nikunj/status/2045173395608961281
-https://x.com/nikunj/status/2045153654861431177
+https://x.com/nikunj/status/2050407946438467878
+https://x.com/nikunj/status/2050355231486316818
+https://x.com/nikunj/status/2050353986742698400
 
 **Peter Steinberger**
-Peter Steinberger's single post from Vancouver was light on explicit product detail, but in the context of the surrounding conversation it still reads as ecosystem travel more than personal travel. He remains a central node in the OpenClaw and agent-tooling discourse, so even a simple conference-style check-in reinforces how much of today's builder energy is moving through in-person demos, live events, and networked product conversations.
+Peter Steinberger highlighted the new `/goal` feature in Codex and called out a workaround he gave Codex to make xAI work again. The posts are small, but they point to the same thing: agent workflows are becoming configurable enough that users talk about features, goals, and model-provider repair as part of normal usage. That is a sign the product surface is moving from novelty to daily operating environment.
 
-https://x.com/steipete/status/2045276507527143629
+https://x.com/steipete/status/2050440893786685837
+https://x.com/steipete/status/2050384648119734683
+https://x.com/steipete/status/2050275598178586921
 
 **Dan Shipper (CEO, Every)**
-Dan Shipper pushed traffic toward Every's Opus 4.7 “vibe check,” especially around coding, writing, spreadsheets, and the question of how much different Claude models try to help. That is useful because it reframes model evaluation as a workflow benchmark rather than a leaderboard screenshot. The interesting part is not who wins abstractly, but how model personality and product affordances change the shape of real work.
+Dan Shipper made a compact model-learning point: models know more than any individual human, but an individual human learns faster than models do. That is a useful frame for AI collaboration. The model brings broad prior knowledge, while the person brings fast local adaptation, taste, and feedback. The best workflows are not about replacing one side with the other; they are about tightening that learning loop.
 
-https://x.com/danshipper/status/2045246172022149537
-https://x.com/danshipper/status/2045246160202580192
-https://x.com/danshipper/status/2045241699992047638
+https://x.com/danshipper/status/2050380001279975517
+https://x.com/danshipper/status/2050363982813552820
+https://x.com/danshipper/status/2050304359024759242
+
+**Aditya Agarwal (General Partner, South Park Commons)**
+Aditya Agarwal kept the product bar blunt: the best way to kill a company is to focus on everything except the product. It is not AI-specific, but it belongs in an AI builders digest because the current tooling makes distraction dangerously easy. When demos, launches, agents, and content all get cheaper, product judgment becomes more important, not less.
+
+https://x.com/adityaag/status/2050229509840900434
+
+**Sam Altman (CEO, OpenAI)**
+Sam Altman mostly posted in release-culture mode: future releases need bigger parties, more people wanted to come than expected, and he teased `/hatch clippy`. The signal is light but real. OpenAI is treating product releases as community events, and the tone around agents is getting more playful as these tools move from infrastructure into culture.
+
+https://x.com/sama/status/2050427808456077541
+https://x.com/sama/status/2050402088266694689
+https://x.com/sama/status/2050399512494227709
 
 **Claude**
-Claude's account highlighted three different surfaces in one burst: a Claude Code hackathon for Opus 4.7 with $100K in API credits, Claude for Word now available on Pro and Max plans, and a design-system workflow that reads code and design files to keep teams on-brand. The breadth is the point. Anthropic is not treating Claude as a single chat interface anymore; it is pushing it into events, office software, and end-to-end design operations at the same time.
+Claude announced that Code with Claude returns next week, with sessions for both new and experienced Claude Code users and a livestream registration link. The product signal is straightforward: Anthropic is investing in developer education as a first-class adoption channel. For coding agents, docs are not enough; conferences, sessions, and shared workflows are part of teaching the market how to use the tool.
 
-https://x.com/claudeai/status/2045248224659644654
-https://x.com/claudeai/status/2045222254699511855
-https://x.com/claudeai/status/2045156271251218897
+https://x.com/claudeai/status/2050252933866930339
 
 ## Podcast
 
-**No Priors - "Scaling Global Organizations in the Age of AI with ServiceNow CEO Bill McDermott"**
-The takeaway from Bill McDermott's No Priors appearance is that enterprise AI is exiting the toy phase, but not in the simplistic way consumer AI discourse often assumes. McDermott argues that replacing a mature enterprise platform with raw model calls is still economically irrational in many cases, because the true cost includes not just tokens and GPUs but also workflow risk, migration complexity, and the human cost of rebuilding institutional knowledge. In his framing, the winning enterprise platform becomes an AI control tower: deeply embedded, fast to implement, and trusted enough to coordinate humans, agents, systems of record, and security layers at once.
+**No Priors - "Baseten CEO Tuhin Srivastava on the AI Inference Crunch, Custom Models, and Building the Inference Cloud"**
+The Takeaway: Baseten CEO Tuhin Srivastava argues that the next AI bottleneck is not whether models can be called, but whether production inference can be owned, customized, routed, and supplied at scale.
 
-He also makes a harder organizational claim. AI does not just accelerate output; it changes hiring, departmental design, and the threshold for adding headcount. ServiceNow already routes most customer-service cases through agents, expects faster deployment cycles, and sees customers asking for prescriptive transformation plans instead of exploratory demos. The broad signal is that enterprise buyers no longer want to hear that AI is possible. They want to know which workflows should be automated first, what the ROI is, and how the operating model changes when agents become part of the workforce.
+Baseten has grown 30x in a year and is operating in the part of the stack where AI turns from demo into workload. Srivastava says the market changed because open source models crossed a capability threshold, post-training became mainstream, and customers began wanting to own more of their intelligence. His strongest application-layer argument is that companies keep their moat when user signal lives in workflows rather than only in the model. Abridge, support companies, and enterprise AI apps are valuable because they see the corrections, actions, and downstream steps that frontier labs usually do not.
 
-https://www.youtube.com/@NoPriorsPodcast
+The most useful infrastructure detail is supply. Baseten sits across 18 clouds and 90 clusters, running at uncomfortably high utilization, because slack compute is scarce. Srivastava also says the workload is overwhelmingly custom: roughly 90-95% of tokens on Baseten are custom models rather than vanilla open source. His worldview is that specialized models can be better, faster, and cheaper when the task is narrow, and that a multi-chip, multi-cloud inference layer becomes strategic when everyone wants more intelligence embedded everywhere.
+
+https://www.youtube.com/watch?v=XAbKflCncDo
 
 ## Blog
 
-No new blog posts appeared in today's feed.
+**Anthropic Engineering - "An update on recent Claude Code quality reports"**
+Anthropic traced recent Claude quality complaints to three separate product-layer issues affecting Claude Code, the Claude Agent SDK, and Claude Cowork. The API and inference layer were not affected, and the company says all three issues were resolved as of April 20 in v2.1.116. The most important detail is that one issue dropped reasoning context during tool use, which showed up as forgetfulness, repetition, odd tool choices, and faster usage-limit drain.
+
+The post matters because it treats agent reliability as a systems problem rather than a vibes problem. Changing default reasoning effort to reduce latency, mishandling thinking blocks, and having reproduction masked by unrelated experiments are exactly the kinds of problems that appear when agents become products with state, tools, queues, and UX layers.
+
+https://www.anthropic.com/engineering/april-23-postmortem
+
+**Claude Blog - "New connectors in Claude for everyday life"**
+Claude is expanding connectors beyond work apps into everyday services such as AllTrails, Instacart, Audible, Tripadvisor, TurboTax, and more. Anthropic says the connector directory has grown to over 200 connectors since July 2025, and that people often chain multiple apps in one Claude conversation. The product direction is clear: Claude wants to be a cross-app operating surface, not a destination chat box.
+
+The interesting shift is from workplace automation to life workflow automation. A user can already move from Amplitude to Canva to Asana in one conversation; now the same pattern is being pushed into travel, errands, finance, media, reservations, and local services.
+
+https://claude.com/blog/connectors-for-everyday-life
+
+**Claude Blog - "Built-in memory for Claude Managed Agents"**
+Memory for Claude Managed Agents is now in public beta. The design choice is practical: memories are stored as files, can be exported, managed through the API, permissioned, audited, rolled back, and shared across agents with different scopes. Anthropic argues that agents remember best when memory builds on tools they already use, so the feature mounts directly onto a filesystem.
+
+The customer examples make the business case sharper. Rakuten cut first-pass errors by 97% with task-based long-running agents that learn from every session, while Wisedocs sped up document verification by 30% by remembering recurring document issues. This is memory as production infrastructure, not just a personalized chat feature.
+
+https://claude.com/blog/claude-managed-agents-memory
 
 ---
 

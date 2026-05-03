@@ -6,169 +6,174 @@
 
 ## Reader's Briefing / 导读
 
-**Headless, agent-facing software is becoming the default assumption.** Aaron Levie, Ryo Lu, and the broader product chatter all point to a future where software is consumed more by agents than by human seats.
-**面向 agent 的无头软件正在成为默认前提。** Aaron Levie、Ryo Lu 以及多位 builder 的讨论都指向同一个判断：未来软件的主要使用者会越来越多地变成 agent，而不是人工 seat。
+**Inference is becoming the next scarce infrastructure layer.** The Baseten conversation makes the case that AI demand is shifting from training headlines to production inference capacity, custom models, and multi-cloud runtime fabric.
+**Inference 正在变成下一层稀缺基础设施。** Baseten 这期访谈说明，AI 需求的重心正在从训练叙事转向生产环境里的 inference 容量、定制模型和跨云 runtime fabric。
 
-**Design, media, and interface creation are collapsing into promptable workflows.** Google Flow Music, Claude Design, Alex Albert's design claims, and Zara Zhang's code-first graphics argument all push toward the same creative stack.
-**设计、媒体与界面创作正在收敛为可提示的工作流。** Google Flow Music、Claude Design、Alex Albert 对高质量设计的判断，以及 Zara Zhang 提出的“用代码做设计”观点，共同描绘了这条趋势。
+**Agent products are being judged by harness quality and memory, not just model quality.** Claude Managed Agents memory, Claude Code quality fixes, and builder chatter around Codex all point to the same operational layer.
+**agent 产品正在按 harness 质量和 memory 能力来被评估，而不只是模型质量。** Claude Managed Agents memory、Claude Code 质量修复，以及 builders 围绕 Codex 的讨论，都指向同一个运行层。
 
-**Enterprise AI discussions are moving from experimentation to operating models.** Kevin Weil's exit note, Bill McDermott's No Priors interview, and Nikunj Kothari's product-team commentary all focus on organizational structure, ROI, and scale.
-**企业 AI 讨论正在从实验阶段进入经营模型阶段。** Kevin Weil 的离任说明、Bill McDermott 在 No Priors 的访谈，以及 Nikunj Kothari 的产品观察，核心都落在组织结构、ROI 与规模化落地。
+**Enterprise AI is moving into everyday workflows.** Claude connectors now reach consumer and work apps, while Aaron Levie keeps arguing that agents will expand the value of systems of record rather than simply replace seats.
+**企业 AI 正在进入日常工作流。** Claude connectors 扩展到消费和工作应用，同时 Aaron Levie 继续强调 agent 会扩大 systems of record 的价值，而不是简单替代 seat。
 
-**Builders are obsessing over the harness around the model, not just the model itself.** Garry Tan, Swyx, Dan Shipper, and Peter Yang all point at workflows, demos, benchmark rituals, and product packaging as the real source of leverage.
-**Builder 们越来越在意模型外层的 harness，而不只是模型本身。** Garry Tan、Swyx、Dan Shipper 与 Peter Yang 讨论的重点，都落在工作流、演示方式、评测过程与产品封装上。
+**Builders are treating coding agents as collaborators.** Zara Zhang frames agents as cofounders, Peter Yang and Peter Steinberger are stress-testing Codex features, and Replit is using its tenth anniversary to restate coding accessibility as the mission.
+**builders 正在把 coding agents 当作协作者。** Zara Zhang 把 agent 描述为 cofounder，Peter Yang 和 Peter Steinberger 都在测试 Codex 功能，而 Replit 借十周年再次强调让所有人都能 coding 的使命。
 
-**Anthropic's product surface is expanding in multiple directions at once.** Claude for Word, the Opus 4.7 hackathon, bug fixes, Claude Design demos, and general builder reactions show an ecosystem shipping rapidly around one model family.
-**Anthropic 的产品面正在同时向多个方向扩张。** Claude for Word、Opus 4.7 hackathon、已修复的缺陷、Claude Design 的演示，以及社区里的连锁反应，都说明这个生态正在高频发布。
+**AI product companies are wrestling with reliability in public.** Anthropic published a detailed Claude Code postmortem, Sam Altman is publicly playing with release culture, and the ecosystem is increasingly comfortable discussing broken features and fixes in the open.
+**AI 产品公司正在公开处理可靠性问题。** Anthropic 发布了 Claude Code 质量问题复盘，Sam Altman 公开谈 release 文化，整个生态也越来越习惯把 broken feature 和修复过程摆到台前。
 
 ## X / Twitter
 
 **Swyx**
-Swyx mostly amplified and riffed on the OpenClaw ecosystem rather than posting a single deep thesis, but the pattern is still telling. He highlighted a Colossus profile, joked about a close race, and thanked Peter Steinberger for kicking off an AMA with a question about the future of ClosedClaw. The signal is that agent tooling now has enough surface area for community narrative, intra-ecosystem rivalry, and public roadmap speculation all at once.
+Swyx sketched a small but revealing product request: a Chrome extension that upgrades every image input box on the web with simple text generation, drawing through tldraw, or image generation from words and sketches. He also noted that Codex can be a better Slack search than Slack AI search, and pointed at Grok/xAI efficiency comparisons. The shared theme is interface leverage: AI tools become more useful when they sit inside existing input surfaces instead of asking users to move elsewhere.
 
-Swyx 这次更多是在放大和串联 OpenClaw 生态中的讨论，而不是抛出一条完整长论。他转发了 Colossus 的人物内容、调侃了一场胶着竞争，也感谢 Peter Steinberger 在 AMA 里率先抛出有关 ClosedClaw 未来的问题。更值得注意的信号是，agent 工具体系如今已经有足够多的产品面，能同时承载社区叙事、生态竞争与公开路线讨论。
+Swyx 提了一个小但很有启发的产品需求：做一个 Chrome extension，把网页上所有图片输入框都升级成可以输入简单文字、用 tldraw 画草图，或者从文字和草图生成指定比例图片的入口。他还提到 Codex 做 Slack 搜索可能比 Slack AI search 更好，并转发了 Grok/xAI 的效率对比。共同主题是界面杠杆：AI 工具嵌入已有输入面时，比要求用户切换到另一个地方更有价值。
 
-https://x.com/swyx/status/2045263229329580420
-https://x.com/swyx/status/2045202026020421951
-https://x.com/swyx/status/2045186912009458104
-
-**Josh Woodward (VP, Google Labs)**
-Josh Woodward announced that ProducerAI has been renamed Google Flow Music and repositioned as a standalone music-making experience. The pitch is straightforward: keep the same creative mission, but give users more direct control over tracks and remixing through natural-language workflows. Together with the main Flow product, this suggests Google is splitting creative AI into clearer media-specific surfaces instead of one vague umbrella.
-
-Josh Woodward 宣布 ProducerAI 更名为 Google Flow Music，并被重新定位为一个独立的音乐创作产品。它的核心卖点很直接：延续原本的创作使命，但让用户通过自然语言工作流对曲目生成、控制与 remix 拥有更直接的掌控。结合主产品 Flow 来看，Google 正在把创意 AI 拆成更清晰的媒介型产品面，而不是停留在一个模糊的大一统入口。
-
-https://x.com/joshwoodward/status/2045305262362530043
-
-**Kevin Weil (VP of Science, OpenAI)**
-Kevin Weil used his last day at OpenAI to make a structural point: OpenAI for Science is being decentralized into other research teams. That reads less like a retreat and more like a sign that science-related work is no longer a side initiative that needs separate branding. His message also reinforces a broader belief that accelerating science remains one of the most positive downstream uses of frontier models, even if the org chart around it changes.
-
-Kevin Weil 在离开 OpenAI 的最后一天强调了一个组织层面的变化：OpenAI for Science 正在被下放并融入其他研究团队。这与其说是收缩，不如说是一个信号，说明科学相关能力已经不再只是需要单独命名的侧边项目。他同时再次强调，加速科学研究仍然会是通往 AGI 过程里最正面的下游结果之一，只是组织形态正在调整。
-
-https://x.com/kevinweil/status/2045230426210648348
+https://x.com/swyx/status/2050460622706626740
+https://x.com/swyx/status/2050432398161264664
+https://x.com/swyx/status/2050396374282408358
 
 **Peter Yang**
-Peter Yang had a classic builder-curator day: a joke about Anthropic shipping models daily, a strong endorsement of Peter Steinberger's product thinking, and a hands-on demo of Claude Design spanning videos, slides, websites, mobile apps, and design systems. The connective tissue is practical exploration. He is less interested in model mystique than in showing how a fast-moving model surface becomes an immediately useful tutorial object for other product people.
+Peter Yang had a Codex-heavy day: he called out the first broken Codex feature he has found, joked that buying a MacBook Pro to run local models became an excuse to keep using cloud agents, and noted how good it feels when a Codex workflow finally breaks through. The useful signal is not just enthusiasm. It is that experienced AI product educators are now treating agent reliability, local model curiosity, and workflow breakthroughs as practical daily material.
 
-Peter Yang 这次的动态很典型，兼具 builder 与内容策展人的风格：一边调侃 Anthropic 最好像发产品一样每天发模型，一边大力推荐 Peter Steinberger 的产品思路，还亲自演示了 Claude Design 在视频、幻灯片、网站、移动应用和设计系统上的五种用法。贯穿其中的核心是实用探索。他关注的并不是模型光环本身，而是如何把一个快速变化的模型能力面，变成其他产品人可以立刻上手的教学对象。
+Peter Yang 这次几乎都围绕 Codex：他指出自己遇到的第一个 broken Codex feature，调侃买 MacBook Pro 试本地模型最后可能只是继续用云端 agent 的借口，也说和 Codex 一起突破某个卡点时体验很好。这里的信号不只是热情，而是有经验的 AI 产品教育者已经把 agent 可靠性、本地模型尝试和工作流突破当作日常材料来观察。
 
-https://x.com/petergyang/status/2045335553059746259
-https://x.com/petergyang/status/2045334450461192270
-https://x.com/petergyang/status/2045307149740609591
-
-**Google Labs**
-Google Labs provided the formal product framing behind Josh Woodward's post: Flow now has a sibling product, Flow Music, focused on creating, sharing, and remixing songs and playlists from natural-language prompts. The interesting product decision is separation. Rather than treating music as just another mode inside a general creator app, Google is naming it as its own surface with its own identity and behavior.
-
-Google Labs 给出了 Josh Woodward 那条消息背后的正式产品定义：Flow 现在有了一个专门面向音乐的姊妹产品 Flow Music，主打通过自然语言提示来创作、分享与 remix 歌曲和歌单。更有意思的产品决策在于“拆分”。Google 没有把音乐仅仅当作通用创作应用里的一个模式，而是把它命名成一个独立产品面，赋予单独的身份与使用逻辑。
-
-https://x.com/GoogleLabs/status/2045250788864495874
+https://x.com/petergyang/status/2050406287008268450
+https://x.com/petergyang/status/2050394924395434233
+https://x.com/petergyang/status/2050378287348899962
 
 **Amjad Masad (CEO, Replit)**
-Amjad Masad's posts were short, but they still sketch a product direction. One post simply signaled excitement around a new launch; the other two emphasized virality through animation and a feature that anticipates minor but meaningful app improvements. The through-line is that product value is increasingly tied to how much the system can suggest, refine, and package on behalf of the user before they even ask.
+Amjad Masad marked Replit turning 10 by making the product free for 24 hours and tying the celebration back to a mission that predates the company: making coding accessible to everyone. The post matters because it frames Replit less as a coding tool and more as a decade-long distribution project for software creation. In the agent era, that mission has more leverage because the act of coding is being compressed into shorter loops of intent, generation, and shipping.
 
-Amjad Masad 这几条内容都很短，但仍然勾勒出明确的产品方向。一条是在为新东西预热，另外两条则分别强调“动画带来传播性”和“系统能主动预判并补上小但重要的改进”。贯穿其中的主线是，产品价值正越来越依赖系统在用户明确提出需求之前，能否先替用户完成建议、优化与包装。
+Amjad Masad 借 Replit 十周年宣布产品免费 24 小时，并把庆祝活动拉回到一个早于公司的使命：让每个人都能 coding。这条内容的重要性在于，它把 Replit 不只是定义为一个 coding tool，而是定义为一个持续十年的软件创作分发项目。在 agent 时代，这个使命有了更高杠杆，因为 coding 正在被压缩成更短的意图、生成和发布循环。
 
-https://x.com/amasad/status/2045350848985968796
-https://x.com/amasad/status/2045198577941844178
-https://x.com/amasad/status/2045198476385104372
-
-**Alex Albert (Research, Anthropic)**
-Alex Albert made two practical claims about the current Anthropic stack. First, high-quality design is no longer reserved for trained designers when Claude is in the loop. Second, the rough edges people hit on day one of Opus 4.7 were already being fixed by the next day. That combination matters more than either statement alone: fast iteration and improved output quality are compounding into a product narrative, not just a research one.
-
-Alex Albert 这次释放了两个很务实的判断。第一，借助 Claude，高质量设计已经不再只是专业设计师的专属能力。第二，用户在 Opus 4.7 首日遇到的一批问题，第二天就已经在快速修复。把这两点放在一起看，比单独看任何一条都更重要，因为它们共同指向一个事实：Anthropic 正在把“快速迭代 + 输出质量提升”组合成一个产品叙事，而不只是研究叙事。
-
-https://x.com/alexalbert__/status/2045165630421364853
-https://x.com/alexalbert__/status/2045159041283064095
+https://x.com/amasad/status/2050479551537619413
 
 **Aaron Levie (CEO, Box)**
-Aaron Levie posted the clearest enterprise software thesis of the day. His argument is that agents will use software far more than people ever did, which pushes platforms toward a headless future where API and agent consumption become major revenue lines next to human seats. The important nuance is that he sees this as positive-sum rather than cannibalistic: once agents can work continuously across documents, CRM records, contracts, and campaigns, the ceiling on software value rises instead of falling.
+Aaron Levie sharpened his agent-era software thesis with Atlassian as the example. His heuristic is to ask which software categories grow when there are 100 times more agents than people doing work: code, leads, contracts, invoices, designs, payments, and the systems that govern them. He also argued that enterprises outside Silicon Valley mostly want AI to augment and accelerate bottlenecked work, and that cost-cutting gains will be competed away when rivals use AI to serve customers better.
 
-Aaron Levie 给出了今天最完整的一条企业软件论述。他的核心判断是：agent 对软件的使用量将远超人类，因此平台必然走向“无头化”，未来除了人工 seat 外，API 与 agent 消耗也会成为关键收入项。更重要的细节是，他把这件事视为增量而不是蚕食。因为一旦 agent 可以持续处理文档、CRM 数据、合同与营销流程，软件能创造的价值上限反而会显著抬高。
+Aaron Levie 用 Atlassian 的业绩继续打磨他的 agent 时代软件论。他的判断方式是：当工作中的 agent 数量达到人类的 100 倍时，哪些软件类别会因为更多工作被执行而增长，比如代码、线索、合同、发票、设计、支付，以及管理这些工作的底层系统。他还强调，硅谷之外的企业更想用 AI 增强和加速瓶颈流程，而单纯降本带来的收益很快会被竞争对手用 AI 更好服务客户而抵消。
 
-https://x.com/levie/status/2045355693050655048
-https://x.com/levie/status/2045137708620906573
-
-**Ryo Lu (Design, Cursor)**
-Ryo Lu compressed an entire product philosophy into one line: the best agent is the best harness plus the best models plus the ability to run anywhere. That is a useful corrective to raw-model discourse. His point is that portability and orchestration matter just as much as capability, especially when agents start leaving the editor and touching broader software environments.
-
-Ryo Lu 用一句话浓缩了一整套产品哲学：最好的 agent 等于最好的 harness、最好的模型，再加上随处可运行的能力。这对只讨论底层模型强弱的叙事是个很好的纠偏。他强调的是，可移植性与编排能力和模型本身一样重要，尤其当 agent 开始走出编辑器，进入更广泛的软件环境之后。
-
-https://x.com/ryolu_/status/2045336089867825157
+https://x.com/levie/status/2050295657836277764
+https://x.com/levie/status/2050240083325030404
 
 **Garry Tan (President & CEO, Y Combinator)**
-Garry Tan's posts mixed humor with a fairly direct complaint about agent reliability. His Ferrari-versus-Accord comparison and his frustration about OpenClaw editing its own config both point to the same real issue: agent ambition is outpacing operational trust in some workflows. That is exactly why harness quality, observability, and failure containment are becoming product differentiators instead of invisible infrastructure details.
+Garry Tan did not post much AI-specific analysis in this feed slice. His substantive post was a California policy critique about asset seizure proposals and the tax base; the other item was link-only. For this digest, the useful takeaway is simply that there was no notable builder signal from Garry on AI products today.
 
-Garry Tan 这几条内容一半是玩笑，一半是对 agent 可靠性的直接抱怨。无论是他把 OpenClaw 和 Hermes Agent 拿来做“法拉利对本田雅阁”的类比，还是吐槽 OpenClaw 会对自己的配置文件“动脑外科手术”，都指向同一个真实问题：agent 的能力野心正在超过部分工作流里的运行可信度。也正因为如此，harness 质量、可观测性与故障隔离正在从幕后细节变成前台卖点。
+Garry Tan 在这批 feed 里没有太多 AI 相关分析。比较实质的一条是对 California 资产征收提案和税基问题的政策批评，另一条只有链接。对本期 digest 来说，合理结论就是今天没有来自 Garry 的显著 AI 产品信号。
 
-https://x.com/garrytan/status/2045378112846983496
-https://x.com/garrytan/status/2045373889044472259
-https://x.com/garrytan/status/2045372015213978106
-
-**Matt Turck**
-Matt Turck's short note called Anthropic Labs a “generational run,” naming Claude Code, Skills, Claude Cowork, and Claude Design in one breath. It is brief, but the framing matters: outside observers are no longer evaluating model vendors only by leaderboard jumps. They are grading them as product companies with a coherent surface area.
-
-Matt Turck 用一句很短的话把 Anthropic Labs 形容成“这一代级别的连胜状态”，并把 Claude Code、Skills、Claude Cowork 和 Claude Design 并列点名。虽然篇幅很短，但这种 framing 很重要：外部观察者已经不再只用榜单分数来评估模型公司，而是在把它们当作拥有完整产品面的公司来打分。
-
-https://x.com/mattturck/status/2045211226272129274
+https://x.com/garrytan/status/2050365216421241152
+https://x.com/garrytan/status/2050348984171192773
 
 **Zara Zhang**
-Zara Zhang argued for two related distinctions that matter to builders. First, writing is not the same as generating text, because most of the work is upstream of the final wording. Second, in many cases design-through-code beats design-through-image-generation. Put together, the claim is that LLMs become much more useful when they plug into structured authoring systems instead of being treated as generic content emitters.
+Zara Zhang made one of the clearest comments on how to work with coding agents: she does not treat them as employees who receive orders, but as cofounders who get context, problems, and a chance to offer opinions. That is a practical operating pattern, not just a metaphor. The better the agent, the more the user needs to shift from command-giving to problem framing, tradeoff sharing, and collaborative judgment.
 
-Zara Zhang 提出了两个对 builder 很关键的区分。第一，写作不等于生成文本，因为真正重要的大部分工作都发生在成文之前。第二，在很多场景里，用代码来做设计比用图像生成模型更好。把这两点放在一起看，本质是在说：当 LLM 接入结构化创作系统，而不是被当作通用内容喷发器时，它的价值才会更大。
+Zara Zhang 给出了今天最清晰的一条 coding agent 使用方式：她不会把 agent 当作只接命令的员工，而是当作 cofounder，会向它描述问题、交代局面，并询问它的意见。这不是单纯的比喻，而是一种实际工作方法。agent 越强，用户越需要从下命令转向描述问题、提供取舍背景和共同判断。
 
-https://x.com/zarazhangrui/status/2045394997630099922
-https://x.com/zarazhangrui/status/2045374512691360177
+https://x.com/zarazhangrui/status/2050445806428438734
+https://x.com/zarazhangrui/status/2050326543797469415
+https://x.com/zarazhangrui/status/2050280810302062927
 
 **Nikunj Kothari**
-Nikunj Kothari's updates were mostly about people and teams, but there is a consistent product lens underneath them. He praised Fintool as a product that could handle heavy reasoning work even before the current model era, backed another new team on first principles, and pointed readers to an essay that immediately “roasts” venture investing. The underlying signal is that strong product teams and strong reasoning tooling are converging, and acquirers like Microsoft are willing to buy both at once.
+Nikunj Kothari shared a tiny but concrete paid-product milestone: a project at $36,500 ARR, built with Railway, Conductor, Claude, and Stripe, with reports priced mostly at cost because each one costs $8-$9 to produce. The interesting part is the stack and scope. AI-assisted builders can now ship narrow, paid, feedback-seeking products quickly enough that even small revenue experiments reveal real unit economics.
 
-Nikunj Kothari 这几条内容表面上更多是在讲团队与人才，但底下其实有一条稳定的产品判断。他称赞 Fintool 在当前模型时代之前就已经能承担大量复杂推理任务，也提到自己基于第一性原理支持了另一支新团队，同时转发了一篇甚至顺手“吐槽”风投工作的文章。更深层的信号是，强产品团队与强推理工具正在收敛，而像微软这样的收购方愿意把两者一起买走。
+Nikunj Kothari 分享了一个很小但具体的付费产品里程碑：一个用 Railway、Conductor、Claude 和 Stripe 做出来的项目到了 36,500 美元 ARR，报告基本按成本价出售，因为每份成本是 8 到 9 美元。这里有意思的是 stack 和范围。AI-assisted builder 现在可以足够快地发布狭窄、付费、寻求反馈的产品，小规模收入实验也能暴露真实单位经济。
 
-https://x.com/nikunj/status/2045250489189908534
-https://x.com/nikunj/status/2045173395608961281
-https://x.com/nikunj/status/2045153654861431177
+https://x.com/nikunj/status/2050407946438467878
+https://x.com/nikunj/status/2050355231486316818
+https://x.com/nikunj/status/2050353986742698400
 
 **Peter Steinberger**
-Peter Steinberger's single post from Vancouver was light on explicit product detail, but in the context of the surrounding conversation it still reads as ecosystem travel more than personal travel. He remains a central node in the OpenClaw and agent-tooling discourse, so even a simple conference-style check-in reinforces how much of today's builder energy is moving through in-person demos, live events, and networked product conversations.
+Peter Steinberger highlighted the new `/goal` feature in Codex and called out a workaround he gave Codex to make xAI work again. The posts are small, but they point to the same thing: agent workflows are becoming configurable enough that users talk about features, goals, and model-provider repair as part of normal usage. That is a sign the product surface is moving from novelty to daily operating environment.
 
-Peter Steinberger 这次来自温哥华的更新本身没有太多明确产品信息，但放在整个上下文里，它更像是一种生态流动，而不是单纯的旅行动态。他依然是 OpenClaw 与 agent 工具讨论里的关键节点，所以即便只是一次简短打卡，也在侧面说明今天很多 builder 能量正在通过线下演示、现场活动与网络化产品交流来扩散。
+Peter Steinberger 提到了 Codex 新的 `/goal` 功能，也展示了他告诉 Codex 需要付费才能让 xAI 重新工作的一个处理方式。这些内容都不长，但指向同一件事：agent 工作流已经足够可配置，用户会把功能、目标和模型提供方修复当作日常使用的一部分来讨论。这说明产品面正在从新奇工具变成日常操作环境。
 
-https://x.com/steipete/status/2045276507527143629
+https://x.com/steipete/status/2050440893786685837
+https://x.com/steipete/status/2050384648119734683
+https://x.com/steipete/status/2050275598178586921
 
 **Dan Shipper (CEO, Every)**
-Dan Shipper pushed traffic toward Every's Opus 4.7 “vibe check,” especially around coding, writing, spreadsheets, and the question of how much different Claude models try to help. That is useful because it reframes model evaluation as a workflow benchmark rather than a leaderboard screenshot. The interesting part is not who wins abstractly, but how model personality and product affordances change the shape of real work.
+Dan Shipper made a compact model-learning point: models know more than any individual human, but an individual human learns faster than models do. That is a useful frame for AI collaboration. The model brings broad prior knowledge, while the person brings fast local adaptation, taste, and feedback. The best workflows are not about replacing one side with the other; they are about tightening that learning loop.
 
-Dan Shipper 集中把流量引向 Every 对 Opus 4.7 的一次“vibe check”，重点覆盖了编程、写作、电子表格，以及不同 Claude 模型“会帮你帮到什么程度”这个问题。这种做法很有价值，因为它把模型评测从排行榜截图重新拉回到工作流基准。真正有意思的不是谁抽象意义上更强，而是模型性格与产品功能如何改变真实工作的形状。
+Dan Shipper 提了一个很精炼的模型学习判断：模型知道的比任何单个人都多，但单个人学习得比模型更快。这是理解 AI 协作的好框架。模型提供广泛先验，人提供快速本地适应、品味和反馈。最好的工作流不是用一方替代另一方，而是把这个学习循环收紧。
 
-https://x.com/danshipper/status/2045246172022149537
-https://x.com/danshipper/status/2045246160202580192
-https://x.com/danshipper/status/2045241699992047638
+https://x.com/danshipper/status/2050380001279975517
+https://x.com/danshipper/status/2050363982813552820
+https://x.com/danshipper/status/2050304359024759242
+
+**Aditya Agarwal (General Partner, South Park Commons)**
+Aditya Agarwal kept the product bar blunt: the best way to kill a company is to focus on everything except the product. It is not AI-specific, but it belongs in an AI builders digest because the current tooling makes distraction dangerously easy. When demos, launches, agents, and content all get cheaper, product judgment becomes more important, not less.
+
+Aditya Agarwal 把产品判断说得很直接：毁掉一家公司的最好方式，就是关注除了产品之外的一切。它不是 AI-specific，但很适合放进 AI builders digest，因为现在的工具让分心变得格外容易。当 demo、发布、agent 和内容都变便宜时，产品判断只会更重要。
+
+https://x.com/adityaag/status/2050229509840900434
+
+**Sam Altman (CEO, OpenAI)**
+Sam Altman mostly posted in release-culture mode: future releases need bigger parties, more people wanted to come than expected, and he teased `/hatch clippy`. The signal is light but real. OpenAI is treating product releases as community events, and the tone around agents is getting more playful as these tools move from infrastructure into culture.
+
+Sam Altman 这次更多是在 release culture 的语境里发言：未来发布需要更大的 party，想来的人比预期更多，他还预告了 `/hatch clippy`。信号不重但存在。OpenAI 正在把产品发布当作社区事件来经营，而围绕 agent 的语气也随着工具从基础设施进入文化层而变得更轻松。
+
+https://x.com/sama/status/2050427808456077541
+https://x.com/sama/status/2050402088266694689
+https://x.com/sama/status/2050399512494227709
 
 **Claude**
-Claude's account highlighted three different surfaces in one burst: a Claude Code hackathon for Opus 4.7 with $100K in API credits, Claude for Word now available on Pro and Max plans, and a design-system workflow that reads code and design files to keep teams on-brand. The breadth is the point. Anthropic is not treating Claude as a single chat interface anymore; it is pushing it into events, office software, and end-to-end design operations at the same time.
+Claude announced that Code with Claude returns next week, with sessions for both new and experienced Claude Code users and a livestream registration link. The product signal is straightforward: Anthropic is investing in developer education as a first-class adoption channel. For coding agents, docs are not enough; conferences, sessions, and shared workflows are part of teaching the market how to use the tool.
 
-Claude 官方账号在一轮更新里同时强调了三个不同产品面：面向 Opus 4.7 的 Claude Code hackathon，奖金池为 10 万美元 API credits；面向 Pro 与 Max 用户开放的 Claude for Word；以及能读取代码库和设计文件、自动维持品牌一致性的设计系统工作流。重点就在这种“广度”本身。Anthropic 已经不再把 Claude 只当作一个聊天界面，而是在同时把它推向活动、办公软件与端到端设计流程。
+Claude 宣布 Code with Claude 将在下周回归，并提供面向 Claude Code 新用户和老用户的不同 session 以及 livestream 注册入口。产品信号很直接：Anthropic 正在把 developer education 当作一等 adoption channel 来投入。对 coding agents 来说，文档不够，会议、session 和共享工作流也是教市场如何使用工具的一部分。
 
-https://x.com/claudeai/status/2045248224659644654
-https://x.com/claudeai/status/2045222254699511855
-https://x.com/claudeai/status/2045156271251218897
+https://x.com/claudeai/status/2050252933866930339
 
 ## Podcast
 
-**No Priors - "Scaling Global Organizations in the Age of AI with ServiceNow CEO Bill McDermott"**
-The takeaway from Bill McDermott's No Priors appearance is that enterprise AI is exiting the toy phase, but not in the simplistic way consumer AI discourse often assumes. McDermott argues that replacing a mature enterprise platform with raw model calls is still economically irrational in many cases, because the true cost includes not just tokens and GPUs but also workflow risk, migration complexity, and the human cost of rebuilding institutional knowledge. In his framing, the winning enterprise platform becomes an AI control tower: deeply embedded, fast to implement, and trusted enough to coordinate humans, agents, systems of record, and security layers at once.
+**No Priors - "Baseten CEO Tuhin Srivastava on the AI Inference Crunch, Custom Models, and Building the Inference Cloud"**
+The Takeaway: Baseten CEO Tuhin Srivastava argues that the next AI bottleneck is not whether models can be called, but whether production inference can be owned, customized, routed, and supplied at scale.
 
-He also makes a harder organizational claim. AI does not just accelerate output; it changes hiring, departmental design, and the threshold for adding headcount. ServiceNow already routes most customer-service cases through agents, expects faster deployment cycles, and sees customers asking for prescriptive transformation plans instead of exploratory demos. The broad signal is that enterprise buyers no longer want to hear that AI is possible. They want to know which workflows should be automated first, what the ROI is, and how the operating model changes when agents become part of the workforce.
+Baseten has grown 30x in a year and is operating in the part of the stack where AI turns from demo into workload. Srivastava says the market changed because open source models crossed a capability threshold, post-training became mainstream, and customers began wanting to own more of their intelligence. His strongest application-layer argument is that companies keep their moat when user signal lives in workflows rather than only in the model. Abridge, support companies, and enterprise AI apps are valuable because they see the corrections, actions, and downstream steps that frontier labs usually do not.
 
-Bill McDermott 在 No Priors 这期访谈里的核心观点是，企业 AI 正在走出“玩具阶段”，但并不是消费级叙事里那种简单直线式的跃迁。他认为，在许多场景下，用原始模型调用去替换成熟企业平台在经济上依然不划算，因为真正的成本不只是 token 和 GPU，还包括工作流风险、迁移复杂度，以及重建组织知识的人工代价。在他的表述里，胜出的企业平台会成为一种 AI control tower：足够深入地嵌入组织、足够快地部署上线，也足够值得信任，能够同时协调人类、agent、系统记录层和安全层。
+The most useful infrastructure detail is supply. Baseten sits across 18 clouds and 90 clusters, running at uncomfortably high utilization, because slack compute is scarce. Srivastava also says the workload is overwhelmingly custom: roughly 90-95% of tokens on Baseten are custom models rather than vanilla open source. His worldview is that specialized models can be better, faster, and cheaper when the task is narrow, and that a multi-chip, multi-cloud inference layer becomes strategic when everyone wants more intelligence embedded everywhere.
 
-他还提出了一个更硬的组织判断。AI 不只是提升输出速度，它会改变招聘、部门设计以及新增 headcount 的门槛。ServiceNow 已经让绝大多数客服案例交给 agent 处理，期望更快的部署周期，也看到客户不再满足于探索式 demo，而是要求平台方直接给出转型方案。更大的信号是，企业买家已经不再想听“AI 能不能做”，而是想知道“先自动化哪些流程、ROI 怎么算、当 agent 成为劳动力一部分时，组织模型要怎么变”。
+The Takeaway：Baseten CEO Tuhin Srivastava 认为，AI 的下一个瓶颈不是模型能不能被调用，而是生产环境里的 inference 能否被拥有、定制、路由，并在供给紧张时规模化运行。
 
-https://www.youtube.com/@NoPriorsPodcast
+Baseten 一年增长 30 倍，所在的位置正是 AI 从 demo 进入真实 workload 的那层栈。Srivastava 说，市场变化来自三个因素：开源模型跨过了基础能力门槛，post-training 变得主流，客户开始希望拥有更多属于自己的 intelligence。他对 application layer 的关键判断是：当用户信号存在于 workflow 里，而不只是模型里，公司就仍然有 moat。Abridge、客服公司和企业 AI 应用有价值，是因为它们能看到 frontier labs 通常看不到的修改、动作和下游步骤。
+
+最有用的基础设施细节是供给。Baseten 横跨 18 个 cloud 和 90 个 cluster，并且以很高利用率运行，因为可用算力余量非常少。Srivastava 还说，Baseten 上的 workload 绝大多数都是 custom：大约 90-95% 的 token 来自定制模型，而不是原始开源模型。他的世界观是，当任务足够窄时，专用模型可以更好、更快、更便宜；而当所有人都想把 intelligence 嵌入更多地方时，多芯片、多云的 inference layer 就会变成战略能力。
+
+https://www.youtube.com/watch?v=XAbKflCncDo
 
 ## Blog
 
-No new blog posts appeared in today's feed.
-今天的 feed 中没有新的博客文章。
+**Anthropic Engineering - "An update on recent Claude Code quality reports"**
+Anthropic traced recent Claude quality complaints to three separate product-layer issues affecting Claude Code, the Claude Agent SDK, and Claude Cowork. The API and inference layer were not affected, and the company says all three issues were resolved as of April 20 in v2.1.116. The most important detail is that one issue dropped reasoning context during tool use, which showed up as forgetfulness, repetition, odd tool choices, and faster usage-limit drain.
+
+The post matters because it treats agent reliability as a systems problem rather than a vibes problem. Changing default reasoning effort to reduce latency, mishandling thinking blocks, and having reproduction masked by unrelated experiments are exactly the kinds of problems that appear when agents become products with state, tools, queues, and UX layers.
+
+Anthropic 将近期 Claude 质量投诉追溯到三个独立的产品层问题，分别影响 Claude Code、Claude Agent SDK 和 Claude Cowork。API 和 inference layer 没有受到影响，公司表示三个问题都已在 4 月 20 日的 v2.1.116 中修复。最关键的细节是，其中一个问题会在 tool use 过程中丢失 reasoning context，表现为遗忘、重复、奇怪的工具选择，以及 usage limit 更快消耗。
+
+这篇文章重要，是因为它把 agent 可靠性当成系统问题，而不是感受问题。为了降低延迟而调整默认 reasoning effort、错误处理 thinking blocks、以及被无关实验掩盖复现路径，这些都是 agent 从 demo 变成带状态、工具、队列和 UX 层的产品后会遇到的问题。
+
+https://www.anthropic.com/engineering/april-23-postmortem
+
+**Claude Blog - "New connectors in Claude for everyday life"**
+Claude is expanding connectors beyond work apps into everyday services such as AllTrails, Instacart, Audible, Tripadvisor, TurboTax, and more. Anthropic says the connector directory has grown to over 200 connectors since July 2025, and that people often chain multiple apps in one Claude conversation. The product direction is clear: Claude wants to be a cross-app operating surface, not a destination chat box.
+
+The interesting shift is from workplace automation to life workflow automation. A user can already move from Amplitude to Canva to Asana in one conversation; now the same pattern is being pushed into travel, errands, finance, media, reservations, and local services.
+
+Claude 正在把 connectors 从工作应用扩展到日常服务，包括 AllTrails、Instacart、Audible、Tripadvisor、TurboTax 等。Anthropic 表示，自 2025 年 7 月以来，connector directory 已经增长到 200 多个 connectors，而且用户经常在一次 Claude 对话里串联多个 app。产品方向很清楚：Claude 想成为跨 app 的操作面，而不是一个目的地式聊天框。
+
+有意思的变化是，它正在从 workplace automation 走向 life workflow automation。用户已经可以在一次对话里从 Amplitude 到 Canva 再到 Asana；现在同样模式被推向旅行、杂务、财务、媒体、订位和本地服务。
+
+https://claude.com/blog/connectors-for-everyday-life
+
+**Claude Blog - "Built-in memory for Claude Managed Agents"**
+Memory for Claude Managed Agents is now in public beta. The design choice is practical: memories are stored as files, can be exported, managed through the API, permissioned, audited, rolled back, and shared across agents with different scopes. Anthropic argues that agents remember best when memory builds on tools they already use, so the feature mounts directly onto a filesystem.
+
+The customer examples make the business case sharper. Rakuten cut first-pass errors by 97% with task-based long-running agents that learn from every session, while Wisedocs sped up document verification by 30% by remembering recurring document issues. This is memory as production infrastructure, not just a personalized chat feature.
+
+Claude Managed Agents 的 memory 已经进入 public beta。它的设计很务实：memory 以文件形式存储，可以导出、通过 API 管理、设置权限、审计、回滚，并按不同 scope 在多个 agents 之间共享。Anthropic 的判断是，agent 的 memory 最有效时，是建立在它已经使用的工具之上，所以这个功能直接挂载到 filesystem。
+
+客户案例让商业价值更清楚。Rakuten 的长运行任务型 agents 通过从每次 session 学习，把 first-pass errors 降低了 97%；Wisedocs 则通过记住反复出现的文档问题，把 document verification 加速了 30%。这不是个性化聊天功能里的 memory，而是生产级 agent 基础设施。
+
+https://claude.com/blog/claude-managed-agents-memory
 
 ---
 
