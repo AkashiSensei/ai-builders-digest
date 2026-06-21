@@ -16,7 +16,7 @@
 
 ---
 
-最新日报: ai-digest-2026-06-20-Sat.md [中文](zh/daily/ai-digest-2026-06-20-Sat.md) | [English](en/daily/ai-digest-2026-06-20-Sat.md) | [双语](bilingual/daily/ai-digest-2026-06-20-Sat.md)
+最新日报: ai-digest-2026-06-21-Sun.md [中文](zh/daily/ai-digest-2026-06-21-Sun.md) | [English](en/daily/ai-digest-2026-06-21-Sun.md) | [双语](bilingual/daily/ai-digest-2026-06-21-Sun.md)
 
 最新周报: ai-digest-2026-06-15-Mon.md [中文](zh/weekly/ai-digest-2026-06-15-Mon.md) | [English](en/weekly/ai-digest-2026-06-15-Mon.md) | [双语](bilingual/weekly/ai-digest-2026-06-15-Mon.md)
 
