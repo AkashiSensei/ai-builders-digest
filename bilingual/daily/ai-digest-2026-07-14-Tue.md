@@ -5,185 +5,168 @@
 # AI Builders Digest
 
 ## Reader's Briefing / 导读
-1. Today's strongest theme is capacity: builders are talking about model usage limits, inference optimization, parallel coding sessions, and the physical energy stack needed for AI compute to keep scaling.
-今天最强的主题是 capacity：builders 在讨论模型用量限制、inference 优化、并行 coding sessions，以及 AI compute 继续扩张所需要的实体能源栈。
 
-2. OpenAI and Anthropic both used the day to adjust paid-plan access. Thibault Sottiaux says GPT 5.6 Sol usage should improve after inference savings and a context-limit rollback, while Claude says Fable 5 access and higher Claude Code weekly limits will stay extended through July 19.
-OpenAI 和 Anthropic 都在调整付费计划访问。Thibault Sottiaux 表示，GPT 5.6 Sol 会受益于 inference savings 和 context-limit 回滚；Claude 则宣布 Fable 5 访问以及 Claude Code 更高 weekly limits 将延长到 7 月 19 日。
+OpenAI and Anthropic are treating access and usage limits as product trust issues. Thibault Sottiaux explained Codex and ChatGPT usage changes for GPT-5.6 Sol, while Claude extended Fable 5 access and Claude Code limits through July 19.  
+OpenAI 和 Anthropic 都在把模型访问与用量限制当成产品信任问题来处理。Thibault Sottiaux 解释了 Codex 和 ChatGPT 中 GPT-5.6 Sol 的用量调整，Claude 则把 Fable 5 访问权限和 Claude Code 更高周限额延长到 7 月 19 日。
 
-3. AI coding is moving from novelty into workflow design. Zara Zhang frames meeting transcripts as PRDs for Codex, Amjad Masad shows Replit models doing ML experiments around chess, and Peter Steinberger is sharding agent work across multiple machines.
-AI coding 正从 novelty 进入 workflow design。Zara Zhang 把 meeting transcript 当作 Codex 的 PRD；Amjad Masad 展示 Replit 模型围绕 chess 做 ML experiments；Peter Steinberger 则把 agent 工作分片到多台机器上。
+The strongest builder theme is control over the AI stack. Guillermo Rauch argued that teams should own their data, evals, model choices, and software layer, while Aaron Levie framed enterprise advantage as the ability to turn company IP into AI workflows.  
+本期最强的 builder 主题是掌控 AI stack。Guillermo Rauch 认为团队要拥有自己的数据、eval、模型选择和软件层；Aaron Levie 则把企业优势定义为把公司 IP 转化为 AI workflow 的能力。
 
-4. The enterprise AI debate is shifting toward ownership. Guillermo Rauch argues companies should keep control of data, evals, model choice, and the software layer, while Aaron Levie says the durable value is in applying frontier intelligence to a firm's own decisions, workflows, and best practices.
-enterprise AI 的讨论正在转向 ownership。Guillermo Rauch 认为企业必须掌控 data、evals、model choice 和 software layer；Aaron Levie 则强调，真正持久的价值在于把 frontier intelligence 应用于企业自己的 decisions、workflows 和 best practices。
+AI-assisted building is moving from demos into everyday operating habits. Amjad Masad showed Replit being used for ML experimentation around chess, Zara Zhang described meeting transcripts as PRDs for Codex, and Sam Altman asked builders to share what they have made with GPT-5.6 Sol.  
+AI 辅助构建正在从演示走进日常工作流。Amjad Masad 展示了在 Replit 上围绕国际象棋做 ML 实验，Zara Zhang 把会议 transcript 当成 Codex 的 PRD，Sam Altman 则邀请大家展示用 GPT-5.6 Sol 做出的东西。
 
-5. The podcast widens the frame from software to infrastructure: Valar Atomics founder Isaiah Taylor argues nuclear needs a manufacturing and iteration mindset so energy can become dramatically cheaper for AI compute and broader industrial growth.
-播客把视角从软件扩展到基础设施：Valar Atomics 创始人 Isaiah Taylor 认为，核能需要制造业和快速迭代思维，才能让 energy 对 AI compute 和更广泛工业增长变得显著更便宜。
+Several posts cut through the agent hype with a reminder that direction still matters. Nikunj Kothari warned that token-heavy workflows are useless without knowing what and whom you are building for, and Peter Yang argued that model companies should communicate more directly when community sentiment turns.  
+几条帖子也提醒大家，agent 热潮里方向感仍然重要。Nikunj Kothari 说，如果说不清为谁构建、构建什么，再多 token 和 subagent 也没用；Peter Yang 则认为，当社区情绪转向时，模型公司应该更直接、更有人味地沟通。
+
+The podcast theme is energy abundance for AI-scale industry. No Priors featured Valar Atomics founder Isaiah Taylor, who argues nuclear needs a manufacturing mindset, not just modeling and simulation, if compute-driven energy demand is going to be met.  
+播客主题是支撑 AI 级工业化的能源丰裕。No Priors 采访了 Valar Atomics 创始人 Isaiah Taylor，他认为核能若要满足计算需求，必须从建造项目变成可制造产品，而不只是做建模和仿真。
 
 ## X / Twitter
 
-### Swyx
-Swyx uses a reinforcement-learning metaphor for the difference between introspection and backpropagation: repeated rollouts only help if there is some expectation of advantage. He also points readers to a Latent Space writeup for more context.
-https://x.com/swyx/status/2076345087634620528
-https://x.com/swyx/status/2076216180529156097
-### Swyx
-Swyx 用 reinforcement learning 的比喻解释 introspection 和 backpropagation 的区别：重复 rollouts 只有在存在 advantage 预期时才有意义。他也指向一篇 Latent Space writeup 供读者继续阅读。
-https://x.com/swyx/status/2076345087634620528
+**Swyx (Latent Space, AI Engineer, Cognition affiliations)** argues that better AI systems need introspection and backpropagation, not just repeated rollouts with no expectation of advantage. He also pointed readers to a Latent Space writeup for more context.  
+https://x.com/swyx/status/2076345087634620528  
 https://x.com/swyx/status/2076216180529156097
 
-### Thibault Sottiaux
-OpenAI's Thibault Sottiaux says Codex and ChatGPT Work users should see around 10% more GPT 5.6 Sol usage from inference optimizations. He also says OpenAI reverted the product context limit from 372k back to 272k because the larger limit was charging more usage than intended, with a planned re-rollout later. He adds that GPT 5.6 Sol will remain available across paid ChatGPT plans, including Go, Plus, Pro, Team, and Edu, until an even better model ships.
-https://x.com/thsottiaux/status/2076495156757577895
-https://x.com/thsottiaux/status/2076460408437887268
-https://x.com/thsottiaux/status/2076459871021736245
-### Thibault Sottiaux
-OpenAI 的 Thibault Sottiaux 表示，Codex 和 ChatGPT Work 用户会因为 GPT 5.6 Sol 的 inference optimizations 获得约 10% 的额外 usage。他还说，OpenAI 已把产品里的 context limit 从 372k 回滚到 272k，因为更大的 limit 导致 usage 扣费高于预期，之后会重新推进 372k。GPT 5.6 Sol 也会继续留在 Go、Plus、Pro、Team、Edu 等付费 ChatGPT plans 中，直到更好的模型发布。
-https://x.com/thsottiaux/status/2076495156757577895
-https://x.com/thsottiaux/status/2076460408437887268
-https://x.com/thsottiaux/status/2076459871021736245
+**Swyx（Latent Space、AI Engineer、Cognition 相关）**认为，更好的 AI 系统需要 introspection 和 backpropagation，而不是只做一轮又一轮、没有优势预期的 rollout。他也指向了一篇 Latent Space 文章，供读者了解更多背景。  
+https://x.com/swyx/status/2076345087634620528  
+https://x.com/swyx/status/2076216180529156097
 
-### Peter Yang
-Peter Yang reads the day's sentiment as heavy GPT 5.6 Sol adoption, guessing that more than 90% of people are using it while fewer than 10% use Terra or Luna. His broader product-communications point is that model companies should communicate more directly and humanly when community sentiment turns, not retreat into corporate language.
-https://x.com/petergyang/status/2076519927843000448
-https://x.com/petergyang/status/2076512796481880270
-https://x.com/petergyang/status/2076510899490480228
-### Peter Yang
-Peter Yang 观察到当天社区里 GPT 5.6 Sol 的使用很重，并猜测超过 90% 的人正在用它，使用 Terra 或 Luna 的人不到 10%。他更大的观点是，当 community sentiment 转差时，模型公司应该更直接、更有人味地沟通，而不是退回 corporate language。
-https://x.com/petergyang/status/2076519927843000448
-https://x.com/petergyang/status/2076512796481880270
+**OpenAI Codex and ChatGPT builder Thibault Sottiaux** said OpenAI landed inference optimizations for GPT-5.6 Sol and is passing savings through as roughly 10% more usage for subscriptions. He also said a context-limit change from 272k to 372k caused more usage to be charged than intended, so the product reverted to 272k while OpenAI works on rolling 372k back out. Paid ChatGPT subscriptions, including Go, Plus, Pro, Team, and Edu, will keep access to GPT-5.6 Sol until a better model ships.  
+https://x.com/thsottiaux/status/2076495156757577895  
+https://x.com/thsottiaux/status/2076459871021736245  
+https://x.com/thsottiaux/status/2076460408437887268
+
+**OpenAI Codex 和 ChatGPT builder Thibault Sottiaux**表示，OpenAI 已经完成 GPT-5.6 Sol 的 inference 优化，并把节省下来的成本转化为订阅用户大约 10% 的额外用量。他还解释说，把上下文限制从 272k 调到 372k 后，实际计费消耗高于预期，因此产品先回退到 272k，之后再重新推进 372k。包括 Go、Plus、Pro、Team、Edu 在内的付费 ChatGPT 订阅都会继续保留 GPT-5.6 Sol，直到更好的模型发布。  
+https://x.com/thsottiaux/status/2076495156757577895  
+https://x.com/thsottiaux/status/2076459871021736245  
+https://x.com/thsottiaux/status/2076460408437887268
+
+**AI educator Peter Yang** guessed that more than 90% of people are choosing GPT-5.6 Sol over Terra or Luna. His sharper point was about communication: when community sentiment turns, companies should get more human and transparent, not more corporate. He contrasted OpenAI's direct engagement with Anthropic's more distant style.  
+https://x.com/petergyang/status/2076519927843000448  
+https://x.com/petergyang/status/2076512796481880270  
 https://x.com/petergyang/status/2076510899490480228
 
-### Cat Wu
-Anthropic's Cat Wu shares a short "Enjoy!" update around Claude Code and cowork.
+**AI 教程作者 Peter Yang**猜测，超过 90% 的用户正在选择 GPT-5.6 Sol，而不是 Terra 或 Luna。他更尖锐的观点在沟通上：当社区情绪变差时，公司不应该变得更 corporate，而应该更有人味、更透明。他把 OpenAI 的直接互动和 Anthropic 较远的沟通方式做了对比。  
+https://x.com/petergyang/status/2076519927843000448  
+https://x.com/petergyang/status/2076512796481880270  
+https://x.com/petergyang/status/2076510899490480228
+
+**Anthropic Claude Code builder Cat Wu** shared a link with the short note "Enjoy!" The feed does not include enough surrounding context to summarize the substance without guessing.  
 https://x.com/_catwu/status/2076358263688569314
-### Cat Wu
-Anthropic 的 Cat Wu 围绕 Claude Code 和 cowork 发了一条简短的 "Enjoy!" 更新。
+
+**Anthropic Claude Code builder Cat Wu**分享了一条链接，并只写了 "Enjoy!"。feed 里没有足够上下文，无法在不猜测的情况下总结实质内容。  
 https://x.com/_catwu/status/2076358263688569314
 
-### Amjad Masad
-Replit CEO Amjad Masad shows Replit's computer-use model playing against a chess engine and describes a "vibe research" workflow: fine-tuning a Qwen-8B chess model on Replit with three parallel experimental branches. His takeaway is that models have become much better at ML work, making it possible for someone with strong intuition to guide meaningful experiments without prior deep ML experience.
+**Replit CEO Amjad Masad** is using Replit as a playground for applied ML. He described fine-tuning a Qwen-8b model to play chess, running three parallel experiment branches, and making real progress. His takeaway is that models have become strong enough at ML workflows that a person with good intuition can now do meaningful experimentation without prior deep ML experience.  
+https://x.com/amasad/status/2076227936202662357  
 https://x.com/amasad/status/2076356893736673507
-https://x.com/amasad/status/2076227936202662357
-### Amjad Masad
-Replit CEO Amjad Masad 展示了 Replit 的 computer-use model 与自己的 chess engine 对弈，并描述了一个 "vibe research" workflow：在 Replit 上 fine-tune 一个 Qwen-8B chess model，同时跑三个 parallel branches。核心 takeaway 是，models 做 ML work 的能力已经进步很多，有直觉的人即使没有深厚 ML 背景，也能指导有意义的实验。
-https://x.com/amasad/status/2076356893736673507
-https://x.com/amasad/status/2076227936202662357
 
-### Guillermo Rauch
-Vercel CEO Guillermo Rauch argues that startups and enterprises should make the model a component inside a system they own. His stack is open model APIs through AI SDK, an open Agent API through Vercel, and zero-data-retention inference through AI Gateway; the strategic point is to keep ownership of data, evals, model choice, and the software layer.
-https://x.com/rauchg/status/2076364176252191222
-### Guillermo Rauch
-Vercel CEO Guillermo Rauch 认为，startups 和 enterprises 应该把 model 变成自己系统里的一个 cog。他给出的 stack 是 AI SDK 的 open model API、Vercel 的 open Agent API，以及 AI Gateway 的 zero-data-retention inference；战略重点是保留对 data、evals、model choices 和 software layer 的 ownership。
+**Replit CEO Amjad Masad**正在把 Replit 当成应用 ML 的实验场。他提到 fine-tune 一个 Qwen-8b 模型来下棋，同时跑三个并行实验分支，并取得了真实进展。他的结论是，模型做 ML workflow 的能力已经足够强，有好直觉的人即使没有深厚 ML 背景，也能做出有意义的实验。  
+https://x.com/amasad/status/2076227936202662357  
+https://x.com/amasad/status/2076356893736673507
+
+**Vercel CEO Guillermo Rauch** warned startups and enterprises not to outsource their brain to model providers. His prescription: make the model a cog in a machine you own, with AI SDK as an open model API, an open Agent API, AI Gateway, and zero-data-retention inference. The important layer is ownership of data, evals, model choice, and software.  
 https://x.com/rauchg/status/2076364176252191222
 
-### Aaron Levie
-Box CEO Aaron Levie frames one of the central enterprise AI questions as how companies maximize their own IP: decisions, insights, workflow patterns, and best practices. Even if frontier intelligence becomes widely available, he argues that value remains in connecting that intelligence to a firm's own evals, workflows, content, and operating knowledge.
-https://x.com/levie/status/2076338364635287637
-### Aaron Levie
-Box CEO Aaron Levie 把 enterprise AI 的关键问题定义为：企业如何最大化自己的 IP，包括 decisions、insights、workflow patterns 和 best practices。即使 frontier intelligence 变得普遍可用，真正的价值仍在于把这种 intelligence 接入企业自己的 evals、workflows、content 和 operating knowledge。
+**Vercel CEO Guillermo Rauch**提醒创业公司和企业，不要把自己的大脑外包给模型提供商。他的建议是：让模型成为你拥有的机器中的一个齿轮，包括 AI SDK 作为 open model API、open Agent API、AI Gateway 和 zero-data-retention inference。真正关键的是拥有数据、eval、模型选择和软件层。  
+https://x.com/rauchg/status/2076364176252191222
+
+**Box CEO Aaron Levie** argued that the defining enterprise AI question is how companies maximize their own IP: decisions, insights, workflow patterns, and best practices. Frontier intelligence will be broadly available, so differentiation shifts to how each firm applies it through workflow evals, context, and enterprise-specific systems between the business and the base model.  
 https://x.com/levie/status/2076338364635287637
 
-### Garry Tan
-YC CEO Garry Tan criticizes politicians who disable public-safety technology for culture-war reasons, arguing that the consequences show up in real-world safety outcomes.
-https://x.com/garrytan/status/2076534860064416115
-### Garry Tan
-YC CEO Garry Tan 批评那些出于 culture war 目的禁用 public-safety technology 的政客，认为后果会体现在真实的公共安全结果里。
+**Box CEO Aaron Levie**认为，企业 AI 的核心问题是如何最大化自己的 IP，包括决策、洞察、workflow patterns 和 best practices。当 frontier intelligence 变得普遍可用，差异化会转向每家公司如何通过 workflow eval、上下文和企业特定系统，把基础模型真正用出自己的优势。  
+https://x.com/levie/status/2076338364635287637
+
+**YC President Garry Tan** criticized politicians who disable public safety technology for culture-war reasons, arguing that blocking deployed safety tools creates real-world consequences.  
 https://x.com/garrytan/status/2076534860064416115
 
-### Matt Turck
-Matt Turck keeps the tone lighter: one post jokes about soccer geopolitics, and another jokes about the gap between "anyone can build apps with an agentic coding tool" and the messy reality of actually building.
-https://x.com/mattturck/status/2076343266291626064
-https://x.com/mattturck/status/2076311766049374598
-### Matt Turck
-Matt Turck 今天语气更轻：一条调侃足球地缘政治，另一条则调侃“anyone can build apps with an agentic coding tool”和真正动手构建之间的落差。
-https://x.com/mattturck/status/2076343266291626064
-https://x.com/mattturck/status/2076311766049374598
+**YC President Garry Tan**批评那些出于文化战争理由关闭公共安全技术的政客，认为阻止已经部署的安全工具会带来现实后果。  
+https://x.com/garrytan/status/2076534860064416115
 
-### Zara Zhang
-Zara Zhang describes a practical Codex workflow: discuss a feature's implementation with a colleague, send the meeting transcript to Codex, and let it build the prototype from the conversation. Her shorthand is that "the meeting is the prompt." She also notes that passion remains the biggest moat.
-https://x.com/zarazhangrui/status/2076300222884626754
-https://x.com/zarazhangrui/status/2076284012339843546
-### Zara Zhang
-Zara Zhang 分享了一个很实用的 Codex workflow：和同事讨论 feature implementation，把 meeting transcript 发给 Codex，然后让它根据讨论搭 prototype。她的总结是："the meeting is the prompt"。她还补了一句，passion 是最大的 moat。
-https://x.com/zarazhangrui/status/2076300222884626754
+**FirstMark investor Matt Turck** mostly posted humor, including a joke about agentic coding tools and a sports-related aside. No substantive AI builder update surfaced in the feed beyond the agentic-coding joke.  
+https://x.com/mattturck/status/2076311766049374598  
+https://x.com/mattturck/status/2076343266291626064
+
+**FirstMark 投资人 Matt Turck**主要发了几条玩笑，包括关于 agentic coding tools 的梗和一条体育相关玩笑。除了 agentic coding 的调侃之外，feed 中没有出现更实质的 AI builder 更新。  
+https://x.com/mattturck/status/2076311766049374598  
+https://x.com/mattturck/status/2076343266291626064
+
+**Builder Zara Zhang** offered a practical Codex workflow: use a meeting transcript as the PRD. She described discussing a feature implementation with a colleague, sending the transcript to Codex, and getting a prototype that follows the conversation. Her compressed lesson: "The meeting is the prompt."  
+https://x.com/zarazhangrui/status/2076300222884626754  
 https://x.com/zarazhangrui/status/2076284012339843546
 
-### Nikunj Kothari
-Nikunj Kothari pushes back on token-maxxing as a substitute for direction: many people talk about subagents looping work, but fewer can clearly state what they are building and for whom. His builder advice is to spend time on simplicity, importance, and direction before letting tokens run. He also calls outbound sales humbling and increasingly important.
-https://x.com/nikunj/status/2076458876816540144
-https://x.com/nikunj/status/2076416145255731677
-https://x.com/nikunj/status/2076370608833827124
-### Nikunj Kothari
-Nikunj Kothari 提醒大家，token-maxxing 不能替代 direction：很多人会说自己有 subagents 在循环干活，但很少有人能清楚回答自己在为谁构建什么。他给 builders 的建议是，在 tokens go brrr 之前，先花时间想清楚 simplicity、importance 和 direction。他也提到 outbound sales 很 humbling，而且会越来越重要。
-https://x.com/nikunj/status/2076458876816540144
-https://x.com/nikunj/status/2076416145255731677
+**Builder Zara Zhang**给了一个很实用的 Codex 工作流：把会议 transcript 当成 PRD。她描述了和同事讨论一个功能实现，把 transcript 发给 Codex，然后得到一个按讨论构建的 prototype。她的压缩总结是："The meeting is the prompt."  
+https://x.com/zarazhangrui/status/2076300222884626754  
+https://x.com/zarazhangrui/status/2076284012339843546
+
+**FPV Ventures partner Nikunj Kothari** pushed back on tokenmaxxing theater. He sees many people in San Francisco boasting about looping subagents, but few can clearly say what they are building and for whom. Even in an AI-heavy era, simplicity, direction, outbound sales, and time discipline still matter.  
+https://x.com/nikunj/status/2076458876816540144  
 https://x.com/nikunj/status/2076370608833827124
 
-### Peter Steinberger
-Peter Steinberger shows the operational side of running many agent sessions: he shards work across roughly five machines through Jump Desktop, pushes a Mac Studio to its session limit, and spent the weekend on a small product facelift.
-https://x.com/steipete/status/2076553742883930455
-https://x.com/steipete/status/2076552605262872904
-https://x.com/steipete/status/2076551622227095828
-### Peter Steinberger
-Peter Steinberger 展示了运行大量 agent sessions 的操作侧：他通过 Jump Desktop 把工作分片到大约五台机器上，把一台 Mac Studio 推到 session limit，并在周末做了一次小 facelift。
-https://x.com/steipete/status/2076553742883930455
-https://x.com/steipete/status/2076552605262872904
+**FPV Ventures partner Nikunj Kothari**反对 tokenmaxxing 式表演。他在旧金山见到很多人吹嘘自己如何让 subagent 循环干活，但很少有人能清楚说出自己在为谁构建、构建什么。即使在 AI 密度极高的时代，简单、方向、outbound sales 和时间纪律仍然重要。  
+https://x.com/nikunj/status/2076458876816540144  
+https://x.com/nikunj/status/2076370608833827124
+
+**OpenAI and OpenClaw builder Peter Steinberger** showed the operational side of heavy agent use: he is sharding work across about five machines via Jump Desktop, with one Mac Studio handling a high number of sessions. He also spent the weekend on a UI facelift.  
+https://x.com/steipete/status/2076553742883930455  
+https://x.com/steipete/status/2076552605262872904  
 https://x.com/steipete/status/2076551622227095828
 
-### Dan Shipper
-Every CEO Dan Shipper shares a set of short reaction posts, including skepticism about one result and a nod to market incentives.
-https://x.com/danshipper/status/2076455432546066826
-https://x.com/danshipper/status/2076351869782286707
-https://x.com/danshipper/status/2076340879787237562
-### Dan Shipper
-Every CEO Dan Shipper 发了几条简短 reaction posts，包括对某个结果的 skepticism，以及对市场激励的一句调侃。
-https://x.com/danshipper/status/2076455432546066826
-https://x.com/danshipper/status/2076351869782286707
+**OpenAI 和 OpenClaw builder Peter Steinberger**展示了重度 agent 使用背后的运营面：他通过 Jump Desktop 把工作分散到大约五台机器上，其中一台 Mac Studio 承载了大量 session。他也提到周末做了一次 UI facelift。  
+https://x.com/steipete/status/2076553742883930455  
+https://x.com/steipete/status/2076552605262872904  
+https://x.com/steipete/status/2076551622227095828
+
+**Every CEO Dan Shipper** posted short reactions rather than a substantive AI update. The feed captures sentiment and humor, but not enough standalone context to draw a product or strategy takeaway.  
+https://x.com/danshipper/status/2076455432546066826  
+https://x.com/danshipper/status/2076351869782286707  
 https://x.com/danshipper/status/2076340879787237562
 
-### Sam Altman
-Sam Altman asks people to share interesting projects built with GPT 5.6 Sol and says he will send the creator of the coolest one a special gift from the OpenAI archives.
-https://x.com/sama/status/2076398253332140410
-### Sam Altman
-Sam Altman 邀请大家分享用 GPT 5.6 Sol 构建的有趣作品，并表示会给最酷作品的作者寄一份来自 OpenAI archives 的特别礼物。
+**Every CEO Dan Shipper**发的是几条短反应，而不是实质 AI 更新。feed 捕捉到了一些情绪和幽默，但没有足够独立上下文来总结产品或策略信号。  
+https://x.com/danshipper/status/2076455432546066826  
+https://x.com/danshipper/status/2076351869782286707  
+https://x.com/danshipper/status/2076340879787237562
+
+**Sam Altman** asked people to share interesting things they have built with GPT-5.6 Sol and said the coolest build would receive a special gift from the OpenAI archives. It is a simple but useful signal: OpenAI is trying to pull real user-built artifacts into the model launch narrative.  
 https://x.com/sama/status/2076398253332140410
 
-### Claude
-Claude says Anthropic is extending Claude Fable 5 access on all paid plans and keeping Claude Code weekly rate limits 50% higher through July 19. Users can spend up to half of their weekly usage limit on Fable 5, then either continue with usage credits or switch models.
+**Sam Altman**邀请大家分享用 GPT-5.6 Sol 做出的有趣东西，并表示最酷的作品会收到一份来自 OpenAI archives 的特别礼物。这是一个简单但有用的信号：OpenAI 正试图把真实用户构建的 artifact 拉进模型发布叙事里。  
+https://x.com/sama/status/2076398253332140410
+
+**Claude** announced that Claude Fable 5 access is being extended on all paid plans, and Claude Code's weekly rate limits will remain 50% higher through July 19. Users can spend up to half of their weekly usage limit on Fable 5, then continue with usage credits or switch models within remaining limits.  
+https://x.com/claudeai/status/2076351399999557669  
 https://x.com/claudeai/status/2076351401006154204
-https://x.com/claudeai/status/2076351399999557669
-### Claude
-Claude 表示 Anthropic 会把所有 paid plans 上的 Claude Fable 5 access，以及 Claude Code 额外 50% weekly rate limits 延长到 7 月 19 日。用户最多可以把一半 weekly usage limit 用在 Fable 5 上，之后可以继续使用 usage credits，或切换到其他模型。
+
+**Claude**宣布，所有付费计划中的 Claude Fable 5 访问权限将延长，Claude Code 的 weekly rate limits 也会继续保持 50% 的提高，直到 7 月 19 日。用户最多可以把每周用量额度的一半用于 Fable 5，之后可以继续使用 usage credits，或切换到其他模型使用剩余额度。  
+https://x.com/claudeai/status/2076351399999557669  
 https://x.com/claudeai/status/2076351401006154204
-https://x.com/claudeai/status/2076351399999557669
 
 ## Podcast
 
-### No Priors: How Nuclear Will Unlock Energy Abundance with Valar Atomics Founder Isaiah Taylor
-The Takeaway: Valar Atomics founder Isaiah Taylor argues that AI compute is making energy abundance a first-order technology problem again. His claim is not just that nuclear can help data centers; it is that nuclear has to be rebuilt as a manufacturing discipline if the world wants dramatically cheaper energy.
-The Takeaway：Valar Atomics 创始人 Isaiah Taylor 认为，AI compute 正在让 energy abundance 重新成为一等技术问题。他的主张不只是 nuclear 可以帮助 data centers，而是如果世界想要显著更便宜的 energy，nuclear 必须被重建为一种 manufacturing discipline。
+**No Priors: How Nuclear Will Unlock Energy Abundance with Valar Atomics Founder Isaiah Taylor**
 
-Taylor frames Valar as an attempt to give nuclear its Ford or Tesla moment. The company is trying to build reactors that are more manufactured than constructed, with the goal of making fission scalable enough to make energy 10 times cheaper for humanity. He contrasts that with a nuclear industry that he says has often become more focused on modeling, simulation, and complicated design work than on hardware iteration.
-Taylor 把 Valar 描述成一次让 nuclear 迎来 Ford 或 Tesla moment 的尝试。公司希望制造更像 manufactured 而不是 constructed 的 reactors，目标是把 fission 扩展到足以让 humanity 的 energy 便宜 10 倍。他把这和他眼中更偏 modeling、simulation 和复杂 design 的传统 nuclear industry 区分开来。
+The Takeaway: Isaiah Taylor's core argument is that nuclear will only matter for AI-scale energy demand if it becomes a manufactured product, not a bespoke construction project.
 
-The milestone in the episode is concrete: Valar says it turned on Ward 250, described as the first advanced reactor from a startup to make power and the first TRISO reactor to turn on in more than fifty years in the United States. The opening also highlights an AI angle: an AI chip powered by a nuclear reactor. In the podcast's framing, AI compute is one of the demand signals that makes cheap, scalable energy feel urgent again.
-这期里的 milestone 很具体：Valar 称其启动了 Ward 250，并称这是 startup 建成并发电的 first advanced reactor，也是美国五十多年来 first TRISO reactor。开场还强调了一个 AI angle：一个 AI chip 由 nuclear reactor 供电。在播客的框架里，AI compute 是让 cheap、scalable energy 再次变得紧迫的需求信号之一。
+核心 takeaway：Isaiah Taylor 的核心观点是，如果核能要真正支撑 AI 规模的能源需求，它必须变成一种可制造产品，而不是每次都像定制工程项目一样建造。
 
-Taylor's product philosophy is simplicity over exotic performance. He says the nuclear industry does not need a Lamborghini; it needs something closer to a Toyota Camry: simple, safe, cheap, and manufacturable in very large numbers. The cost argument is scale-driven. A slightly less exotic reactor that can be built by the thousand can beat a more complex reactor on delivered energy cost.
-Taylor 的产品哲学是 simplicity over exotic performance。他说 nuclear industry 现在不需要 Lamborghini，而需要更像 Toyota Camry 的东西：simple、safe、cheap，并且能以很大数量制造。成本论点来自 scale：一个稍微不那么 exotic、但能成千上万制造的 reactor，可以在 delivered energy cost 上打败更复杂的设计。
+Taylor, founder and CEO of Valar Atomics, frames nuclear as an old technology that never had its Ford or Tesla moment. His company is trying to build reactors for planetary scale by making them more manufactured than constructed, with the goal of making energy much cheaper. The most concrete claim is that Valar turned on what he describes as the first Triso reactor in the United States in more than 50 years and powered an AI chip from a nuclear reactor.
 
-The safety discussion focuses on reactor behavior after shutdown. Taylor contrasts Valar's approach with traditional light-water reactors, where scram is only the start of a long cooling-management process because decay heat remains a major operational concern. His broader claim is that reactor design has to reduce operational complexity if the technology is going to scale beyond bespoke projects.
-安全讨论集中在 shutdown 之后的 reactor behavior。Taylor 把 Valar 的路径和传统 light-water reactors 对比：在后者中，scram 只是长时间 cooling-management process 的开始，因为 decay heat 仍然是重大运营问题。他更大的主张是，如果 nuclear 要从 bespoke projects 走向规模化，reactor design 必须降低 operational complexity。
+Valar Atomics 创始人兼 CEO Taylor 把核能描述成一项老技术，但它从未迎来自己的 Ford moment 或 Tesla moment。他的公司想通过让反应堆更像制造品、而不是建筑工程，来实现 planetary scale，并把能源价格大幅降低。最具体的进展是，Valar 启动了他所说的美国 50 多年来第一个 Triso reactor，并用核反应堆给 AI chip 供电。
 
-The broader builder lesson is that AI infrastructure is not only chips, models, and software orchestration. It is also energy price, regulatory openness, manufacturing cadence, and the willingness to iterate on hard hardware. Taylor's view is that if energy is cheap enough, demand will appear, and AI compute is one of the clearest examples of that latent demand.
-更大的 builder lesson 是，AI infrastructure 不只是 chips、models 和 software orchestration。它还包括 energy price、regulatory openness、manufacturing cadence，以及愿意在 hard hardware 上持续迭代。Taylor 的看法是，只要 energy 足够便宜，demand 就会出现，而 AI compute 是这种 latent demand 最清晰的例子之一。
+The contrarian point is that demand is not the hard part. Taylor says energy demand is set by price: if energy gets cheaper, demand appears. AI compute just makes the constraint visible faster. He argues that much of nuclear has become a modeling and simulation industry, while the missing capability is hardware iteration and execution. In his words, "Most of the nuclear industry is a modeling and simulation industry. They're not focused on hardware iteration, hardware execution, building the simplest and safest reactor that allows them to scale."
+
+他的反直觉点是，需求不是难题。Taylor 说，能源需求由价格决定：如果能源变便宜，需求自然会出现。AI compute 只是更快地暴露了这个约束。他认为核能行业很大一部分已经变成了建模和仿真行业，而真正缺失的是硬件迭代与执行。他的原话是："Most of the nuclear industry is a modeling and simulation industry. They're not focused on hardware iteration, hardware execution, building the simplest and safest reactor that allows them to scale."
+
+For AI builders, the lesson is not just about nuclear. It is about industrial bottlenecks: software demand can grow almost instantly, but the physical inputs, especially power, still require companies that can iterate on atoms with startup speed.
+
+对 AI builders 来说，这一课不只关于核能，也关于工业瓶颈：软件需求几乎可以瞬间增长，但物理投入，尤其是电力，仍然需要能以 startup 速度迭代 atoms 的公司来解决。
 
 https://www.youtube.com/watch?v=5Xvbq_zvOQ4
 
 ## Blog
 
 No new blog posts in today's feed.
-今日 feed 中没有新的 blog posts。
+
+今天的 feed 中没有新的 blog posts。
 
 Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders
-通过 Follow Builders skill 生成: https://github.com/zarazhangrui/follow-builders
