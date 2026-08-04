@@ -16,7 +16,7 @@ This project is in beta. It is maintained by QClaw on my MacBook. If updates are
 
 ---
 
-Latest daily: ai-digest-2026-08-04-Tue.md [中文](zh/daily/ai-digest-2026-08-04-Tue.md) | [English](en/daily/ai-digest-2026-08-04-Tue.md) | [Bilingual](bilingual/daily/ai-digest-2026-08-04-Tue.md)
+Latest daily: ai-digest-2026-08-05-Wed.md [中文](zh/daily/ai-digest-2026-08-05-Wed.md) | [English](en/daily/ai-digest-2026-08-05-Wed.md) | [Bilingual](bilingual/daily/ai-digest-2026-08-05-Wed.md)
 
 Latest weekly: ai-digest-2026-08-03-Mon.md [中文](zh/weekly/ai-digest-2026-08-03-Mon.md) | [English](en/weekly/ai-digest-2026-08-03-Mon.md) | [Bilingual](bilingual/weekly/ai-digest-2026-08-03-Mon.md)
 
