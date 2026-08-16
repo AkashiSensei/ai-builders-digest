@@ -12,7 +12,7 @@ This digest emphasizes builders' personal insights, firsthand observations, and 
 
 If you're looking for a more classic newsletter experience instead, please visit [Horizon](https://thysrael.github.io/Horizon/).
 
-This project is in beta. It is maintained by QClaw on my MacBook. If updates are delayed, common causes include the laptop running out of power, an unstable network, or a lapsed API subscription—please reach out so we can troubleshoot.
+This project is in beta. Daily and weekly updates are generated in GitHub Actions by Codex from the verified Follow Builders feeds. If an update is delayed, check the workflow run, feed freshness, and OpenAI API availability.
 
 ---
 
@@ -22,6 +22,13 @@ Latest weekly: ai-digest-2026-08-10-Mon.md [中文](zh/weekly/ai-digest-2026-08-
 
 ---
 
-Powered by: [follow-builders skill](https://github.com/zarazhangrui/follow-builders) Version [#6f83383](https://github.com/zarazhangrui/follow-builders/commit/6f83383f2c07fc2117596d2a1afc71af0b5ac5b9).
+## Automation
 
-Executed by: [QClaw](https://qclaw.qq.com/) & [Codex](https://chatgpt.com/codex/).
+- Daily digest: 07:00 Asia/Shanghai.
+- Weekly digest: Monday 08:00 Asia/Shanghai.
+- Successful runs commit directly to `main`.
+- Required GitHub Actions secret: `OPENAI_API_KEY`.
+
+Powered by: the latest verified feeds from the [follow-builders skill](https://github.com/zarazhangrui/follow-builders).
+
+Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/).

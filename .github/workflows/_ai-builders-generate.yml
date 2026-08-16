@@ -1,0 +1,203 @@
+name: AI Builders Digest Generator
+
+on:
+  workflow_call:
+    inputs:
+      digest_type:
+        description: Digest cadence to generate
+        required: true
+        type: string
+    secrets:
+      OPENAI_API_KEY:
+        required: true
+
+concurrency:
+  group: ai-builders-digest-publish
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    outputs:
+      has_patch: ${{ steps.package.outputs.has_patch }}
+      filename: ${{ steps.context.outputs.filename }}
+      commit_message: ${{ steps.context.outputs.commit_message }}
+    steps:
+      - name: Check out digest repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check out latest Follow Builders feeds
+        uses: actions/checkout@v5
+        with:
+          repository: zarazhangrui/follow-builders
+          ref: main
+          path: _follow-builders
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate and stage feed inputs
+        id: context
+        env:
+          DIGEST_TYPE: ${{ inputs.digest_type }}
+          FOLLOW_BUILDERS_DIR: _follow-builders
+          DIGEST_INPUT_DIR: .codex-input
+          MAX_FEED_AGE_HOURS: "24"
+        run: node .github/scripts/prepare-digest-input.mjs
+
+      - name: Remove the source checkout
+        run: rm -rf -- "$GITHUB_WORKSPACE/_follow-builders"
+
+      - name: Generate digest with Codex
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .github/codex/prompts/generate-digest.md
+          effort: medium
+          sandbox: workspace-write
+          safety-strategy: drop-sudo
+          codex-args: '["--ephemeral"]'
+          output-file: ${{ runner.temp }}/codex-output.md
+
+      - name: Validate changes and create patch
+        id: package
+        shell: bash
+        env:
+          DIGEST_TYPE: ${{ inputs.digest_type }}
+          DIGEST_FILENAME: ${{ steps.context.outputs.filename }}
+        run: |
+          set -euo pipefail
+
+          expected=(
+            "README.md"
+            "README.zh-CN.md"
+            "en/$DIGEST_TYPE/$DIGEST_FILENAME"
+            "zh/$DIGEST_TYPE/$DIGEST_FILENAME"
+            "bilingual/$DIGEST_TYPE/$DIGEST_FILENAME"
+          )
+
+          for file in "${expected[@]:2}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "Expected output is missing: $file" >&2
+              exit 1
+            fi
+          done
+
+          rm -rf -- "$GITHUB_WORKSPACE/.codex-input"
+
+          mapfile -t changed < <(
+            git status --porcelain=v1 --untracked-files=all | cut -c4-
+          )
+
+          for file in "${changed[@]}"; do
+            allowed=false
+            for expected_file in "${expected[@]}"; do
+              if [[ "$file" == "$expected_file" ]]; then
+                allowed=true
+                break
+              fi
+            done
+            if [[ "$allowed" != true ]]; then
+              echo "Codex changed an unexpected path: $file" >&2
+              exit 1
+            fi
+          done
+
+          git add -N -- "${expected[@]}"
+          patch_file="$RUNNER_TEMP/digest.patch"
+          git diff --binary -- "${expected[@]}" > "$patch_file"
+
+          if [[ -s "$patch_file" ]]; then
+            echo "has_patch=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_patch=false" >> "$GITHUB_OUTPUT"
+            echo "Digest already matches the requested output; nothing to publish."
+          fi
+
+      - name: Upload digest patch
+        if: steps.package.outputs.has_patch == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-patch-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/digest.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: generate
+    if: needs.generate.outputs.has_patch == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download digest patch
+        uses: actions/download-artifact@v4
+        with:
+          name: digest-patch-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/digest-patch
+
+      - name: Apply and validate patch
+        shell: bash
+        env:
+          DIGEST_TYPE: ${{ inputs.digest_type }}
+          DIGEST_FILENAME: ${{ needs.generate.outputs.filename }}
+        run: |
+          set -euo pipefail
+
+          git apply --index "$RUNNER_TEMP/digest-patch/digest.patch"
+
+          expected=(
+            "README.md"
+            "README.zh-CN.md"
+            "en/$DIGEST_TYPE/$DIGEST_FILENAME"
+            "zh/$DIGEST_TYPE/$DIGEST_FILENAME"
+            "bilingual/$DIGEST_TYPE/$DIGEST_FILENAME"
+          )
+          mapfile -t staged < <(git diff --cached --name-only)
+
+          if [[ ${#staged[@]} -eq 0 ]]; then
+            echo "Patch did not stage any files." >&2
+            exit 1
+          fi
+
+          for file in "${staged[@]}"; do
+            allowed=false
+            for expected_file in "${expected[@]}"; do
+              if [[ "$file" == "$expected_file" ]]; then
+                allowed=true
+                break
+              fi
+            done
+            if [[ "$allowed" != true ]]; then
+              echo "Patch contains an unexpected path: $file" >&2
+              exit 1
+            fi
+          done
+
+      - name: Commit and push directly to main
+        env:
+          COMMIT_MESSAGE: ${{ needs.generate.outputs.commit_message }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "$COMMIT_MESSAGE"
+          git push origin HEAD:main

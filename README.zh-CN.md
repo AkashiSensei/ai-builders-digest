@@ -12,7 +12,7 @@
 
 如果你想看更偏传统 newsletter 形态的内容，可以移步到 [Horizon](https://thysrael.github.io/Horizon/)。
 
-测试中，由我 MacBook 上的 QClaw 维护，如果没有及时更新，可能是由于它没电了、没有稳定的网络连接或者我的 API 忘了续费了等等，麻烦联系我排查问题。
+项目仍在测试中。日报和周报由 GitHub Actions 上的 Codex 基于通过验证的 Follow Builders feeds 自动生成。如果更新延迟，请检查 workflow 运行记录、feed 新鲜度以及 OpenAI API 可用性。
 
 ---
 
@@ -22,6 +22,13 @@
 
 ---
 
-Powered by: [follow-builders skill](https://github.com/zarazhangrui/follow-builders) Version [#6f83383](https://github.com/zarazhangrui/follow-builders/commit/6f83383f2c07fc2117596d2a1afc71af0b5ac5b9).
+## 自动化
 
-Executed by: [QClaw](https://qclaw.qq.com/) & [Codex](https://chatgpt.com/codex/).
+- 日报：每天 07:00（Asia/Shanghai）。
+- 周报：每周一 08:00（Asia/Shanghai）。
+- 成功运行后直接提交到 `main`。
+- 必需的 GitHub Actions Secret：`OPENAI_API_KEY`。
+
+Powered by: [follow-builders skill](https://github.com/zarazhangrui/follow-builders) 的最新已验证 feeds。
+
+Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/).
