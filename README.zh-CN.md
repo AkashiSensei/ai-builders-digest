@@ -27,8 +27,8 @@
 - 日报：每天 07:00（Asia/Shanghai）。
 - 周报：每周一 08:00（Asia/Shanghai）。
 - 成功运行后直接提交到 `main`。
-- 必需的 GitHub Actions Secret：`OPENAI_API_KEY`。
+- 必需的 GitHub Actions Secret：`DEEPSEEK_API_KEY`。
 
 Powered by: [follow-builders skill](https://github.com/zarazhangrui/follow-builders) 的最新已验证 feeds。
 
-Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/).
+Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/)，模型后端使用 DeepSeek V4 Flash。

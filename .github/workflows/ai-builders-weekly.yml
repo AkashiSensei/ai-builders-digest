@@ -15,4 +15,4 @@ jobs:
     with:
       digest_type: weekly
     secrets:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

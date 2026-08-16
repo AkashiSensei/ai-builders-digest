@@ -27,8 +27,8 @@ Latest weekly: ai-digest-2026-08-10-Mon.md [中文](zh/weekly/ai-digest-2026-08-
 - Daily digest: 07:00 Asia/Shanghai.
 - Weekly digest: Monday 08:00 Asia/Shanghai.
 - Successful runs commit directly to `main`.
-- Required GitHub Actions secret: `OPENAI_API_KEY`.
+- Required GitHub Actions secret: `DEEPSEEK_API_KEY`.
 
 Powered by: the latest verified feeds from the [follow-builders skill](https://github.com/zarazhangrui/follow-builders).
 
-Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/).
+Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/), using DeepSeek V4 Flash as the model backend.
