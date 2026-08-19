@@ -41,6 +41,7 @@ Use the copied prompt files for editorial style, with the rules below taking pre
 7. If a section has no qualifying content, keep the section and state clearly that the validated feed contained no new qualifying items.
 8. End every version with: `Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders`
 9. Do not use em dashes in the Chinese translation.
+10. Cite the same set of source URLs in the English, Chinese, and bilingual files. Every absolute URL other than the required footer must be an exact item URL from one of the three feed files.
 
 ## Required document structure
 
@@ -72,7 +73,7 @@ The briefing must contain exactly five substantive themes:
 
 - English file: five English paragraphs.
 - Chinese file: five Chinese paragraphs.
-- Bilingual file: five pairs; each English paragraph is immediately followed by its Chinese translation, with a blank line between pairs.
+- Bilingual file: exactly ten paragraph blocks grouped into five pairs. In each pair, write the English paragraph, a blank line, then its Chinese translation. Do not insert labels, headings, or list items between them.
 
 In the bilingual body, interleave English and Chinese source by source or paragraph by paragraph. Never put the entire English digest before the Chinese translation.
 

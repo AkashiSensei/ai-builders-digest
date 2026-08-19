@@ -38,13 +38,18 @@ jobs:
           repository: zarazhangrui/follow-builders
           ref: main
           path: _follow-builders
-          fetch-depth: 1
+          # Weekly runs need enough feed commits to bracket the previous
+          # Monday-to-Monday window. The small fixed depth keeps this simple.
+          fetch-depth: 30
           persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
+      - name: Test digest automation scripts
+        run: node --test .github/scripts/*.test.mjs
 
       - name: Validate and stage feed inputs
         id: context
@@ -53,6 +58,9 @@ jobs:
           FOLLOW_BUILDERS_DIR: _follow-builders
           DIGEST_INPUT_DIR: .codex-input
           MAX_FEED_AGE_HOURS: "24"
+          MAX_SNAPSHOT_GAP_HOURS: "2"
+          WEEKLY_HISTORY_LIMIT: "30"
+          MIN_WEEKLY_SNAPSHOTS: "8"
         run: node .github/scripts/prepare-digest-input.mjs
 
       - name: Remove the source checkout
@@ -65,7 +73,7 @@ jobs:
           openai-api-key: ${{ secrets.DEEPSEEK_API_KEY }}
           responses-api-endpoint: https://api.deepseek.com/responses
           model: deepseek-v4-flash
-          prompt-file: .github/codex/prompts/generate-digest.md
+          prompt-file: ${{ steps.context.outputs.prompt_file }}
           effort: high
           sandbox: workspace-write
           safety-strategy: drop-sudo
@@ -95,6 +103,8 @@ jobs:
               exit 1
             fi
           done
+
+          node .github/scripts/validate-digest-output.mjs
 
           rm -rf -- "$GITHUB_WORKSPACE/.codex-input"
 
