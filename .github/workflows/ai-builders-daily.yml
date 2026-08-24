@@ -2,8 +2,9 @@ name: AI Builders Daily Digest
 
 on:
   schedule:
-    # 07:00 Asia/Shanghai (GitHub schedules use UTC).
-    - cron: "0 23 * * *"
+    # 16:30 Asia/Shanghai (GitHub schedules use UTC). This leaves a
+    # buffer after Follow Builders' daily feed update.
+    - cron: "30 8 * * *"
   workflow_dispatch:
 
 permissions:
