@@ -6,20 +6,20 @@
 
 ## Reader's Briefing
 
-**1. Intelligence is getting cheaper, and efficiency is becoming critical infrastructure.** Vercel CEO Guillermo Rauch says OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, evidence that demand for intelligence is highly elastic and that gateways are inevitable. OpenAI's Thibault Sottiaux frames the same shift from the supply side: 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure.
+**1. Intelligence is getting cheaper, and efficiency is becoming critical infrastructure.** Vercel CEO Guillermo Rauch says OpenAI Sol's price cuts and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, evidence that demand for intelligence is highly elastic and that gateways are inevitable. OpenAI's Thibault Sottiaux makes the same point from the supply side: 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure.
 
 **2. Good evals measure the jobs to be done, not just the final answer.** Meta's Madhu Guru, in part seven of his series on building evals, argues against golden sets of right answers that only check the final output. Using a financial-analysis agent as an example, he walks through stages such as client understanding, evidence gathering, data analysis, and the recommendation itself, each deserving its own eval so failures can be diagnosed. Peter Yang surfaces Shreya's related distinction: top-down evals start from the task description, where Claude does a very good job, while bottom-up evals come from your gut reactions to sample outputs, and "Claude is very, very bad at coming up with bottom-up evals. That's all you."
 
 **3. Systems of record face an agent reckoning.** Y Combinator President and CEO Garry Tan predicts that systems of record will need to become AI harnesses or face replacement by agents.
 
-**4. Claude enters Apple's on-device AI stack.** The Claude Blog announced a Swift package that lets Apple developers use the Foundation Models framework for fast local tasks and then hand off to Claude when a request calls for multi-step reasoning, code generation, or current web information, with typed Swift values streaming back into the same view, on iOS 27, iPadOS 27, macOS 27, visionOS 27, and watchOS 27.
+**4. Claude enters Apple's on-device AI stack.** The Claude Blog announced a Swift package that lets Apple developers use the Foundation Models framework for fast local tasks like summarization or extraction, then hand off to Claude when a request calls for multi-step reasoning, code generation, or current web information, with typed Swift values streaming back into the same view, on iOS 27, iPadOS 27, macOS 27, visionOS 27, and watchOS 27.
 
-**5. Agent tooling is moving beyond the CLI.** Peter Steinberger of OpenClaw argues that CLI tools are nice but UI visualizations where your team works are nicer, and he demoed adding a rotation USB protocol to his claw so it can drive a 360 webcam. Guillermo Rauch lays out the philosophy behind extending fx: open protocols such as MCP, Skills, and Plugins, plus "the best one, Unix," with libfx enabling embeddability into bigger programs.
+**5. Agent tooling is moving beyond the CLI.** OpenClaw's Peter Steinberger argues that CLI tools are nice but UI visualizations where your team works are nicer, and he demoed adding a rotation USB protocol to his claw so it can drive a 360 webcam. Guillermo Rauch lays out the philosophy behind extending fx: open protocols such as MCP, Skills, and Plugins, plus "the best one, Unix," with libfx enabling embeddability into bigger programs.
 
 ## X / Twitter
 
 ### Thibault Sottiaux: Codex & ChatGPT at OpenAI
-Sottiaux predicts 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure. He also posted an update on the Codex and ChatGPT usage reset: the reset has been propagated to accounts, along with fixes to usage issues found the day before, and more improvements are coming.
+Sottiaux predicts that 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure. He also shared a status update on the Codex and ChatGPT usage reset: the reset has been propagated to accounts, fixes have landed for usage issues found the previous day, and more improvements are coming.
 
 - [Thibault Sottiaux on model efficiency and reliability](https://x.com/thsottiaux/status/2091581575108653374)
 - [Thibault Sottiaux on the usage reset](https://x.com/thsottiaux/status/2091688655828246890)
@@ -35,7 +35,7 @@ In part seven of his evals series, Guru lays out the Goldilocks principle for ev
 - [Madhu Guru on the Goldilocks principle for evals](https://x.com/realmadhuguru/status/2091684812012875981)
 
 ### Guillermo Rauch: CEO of Vercel
-Rauch argues intelligence is getting cheaper: OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, showing that demand for intelligence is highly elastic and that if you are not using a gateway, you are missing out on inference price volatility that lowers operating costs and increases margins. He also laid out the philosophy for extending fx: open protocols, including MCP, Skills, and Plugins, and "the best one, Unix," where small programs do one thing well and compose, plus libfx so you can build your own CLI, background agent, or software factory, local or cloud.
+Rauch argues that intelligence is getting cheaper: OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, showing that demand for intelligence is highly elastic and that skipping a gateway means missing inference price volatility that lowers operating costs and increases margins. He also laid out the philosophy for extending fx: open protocols, including MCP, Skills, and Plugins, and "the best one, Unix," where small programs do one thing well and compose, plus libfx so you can build your own CLI, background agent, or software factory, local or cloud.
 
 - [Guillermo Rauch on intelligence getting cheaper](https://x.com/rauchg/status/2091671326897713424)
 - [Guillermo Rauch on fx's open-protocol philosophy](https://x.com/rauchg/status/2091583525661384813)
@@ -46,7 +46,7 @@ Tan predicts that systems of record will need to become AI harnesses or face rep
 - [Garry Tan on systems of record and agents](https://x.com/garrytan/status/2091742825042030681)
 
 ### Peter Steinberger: OpenClaw
-Steinberger argues CLI agent tools are nice, but UI visualizations where your team works are nicer. He also demoed adding a rotation USB protocol to his project and telling his claw to look around, with the claw now having fun with his 360 webcam.
+Steinberger argues that CLI agent tools are nice, but UI visualizations where your team works are nicer. He also demoed adding a rotation USB protocol to his project and telling his claw to look around, with the claw now having fun with his 360 webcam.
 
 - [Peter Steinberger on CLI vs. UI visualizations](https://x.com/steipete/status/2091650136506327253)
 - [Peter Steinberger on the rotation USB protocol demo](https://x.com/steipete/status/2091639468935831910)

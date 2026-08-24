@@ -6,7 +6,7 @@
 
 ## 导读
 
-**1. 智能正在变便宜，效率开始成为关键基础设施。** Vercel CEO Guillermo Rauch 表示，OpenAI Sol 的降价以及 Vercel AI Gateway 上的折扣让 Sol 成为 Vercel 增长最快的 frontier 模型，这说明智能的需求弹性极高，gateway 正在变得不可避免。OpenAI 的 Thibault Sottiaux 则从供给侧给出了同样的判断：2026 年是企业开始认真对待模型效率与可靠性的年份，因为模型正在成为关键基础设施。
+**1. 智能正在变便宜，效率开始成为关键基础设施。** Vercel CEO Guillermo Rauch 表示，OpenAI Sol 的降价以及 Vercel AI Gateway 上的折扣让 Sol 成为 Vercel 增长最快的 frontier 模型，这说明智能的需求弹性极高，gateway 正在变得不可避免。OpenAI 的 Thibault Sottiaux 从供给侧给出了同样的判断：2026 年是企业开始认真对待模型效率与可靠性的年份，因为模型正在成为关键基础设施。
 
 **2. 好的 eval 应该度量「要做的工作」，而不只是最终答案。** Meta 的 Madhu Guru 在「如何构建好的 eval」系列第七篇中反对只检查最终输出的一组标准答案。他以金融分析 agent 为例，指出理解客户、收集证据、分析数据、给出建议等每个阶段都值得有自己的 eval，才能定位问题出在哪里。Peter Yang 分享了 Shreya 的类似区分：自上而下的 eval 从任务描述出发，Claude 做得非常好；自下而上的 eval 来自你对大量样本输出的直觉反馈，而「Claude 非常非常不擅长构建自下而上的 eval，这部分只能靠你」。
 

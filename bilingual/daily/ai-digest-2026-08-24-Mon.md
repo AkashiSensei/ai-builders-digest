@@ -6,9 +6,9 @@
 
 ## Reader's Briefing / 导读
 
-**1. Intelligence is getting cheaper, and efficiency is becoming critical infrastructure.** Vercel CEO Guillermo Rauch says OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, evidence that demand for intelligence is highly elastic and that gateways are inevitable. OpenAI's Thibault Sottiaux frames the same shift from the supply side: 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure.
+**1. Intelligence is getting cheaper, and efficiency is becoming critical infrastructure.** Vercel CEO Guillermo Rauch says OpenAI Sol's price cuts and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, evidence that demand for intelligence is highly elastic and that gateways are inevitable. OpenAI's Thibault Sottiaux makes the same point from the supply side: 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure.
 
-智能正在变便宜，效率开始成为关键基础设施。Vercel CEO Guillermo Rauch 表示，OpenAI Sol 的降价以及 Vercel AI Gateway 上的折扣让 Sol 成为 Vercel 增长最快的 frontier 模型，这说明智能的需求弹性极高，gateway 正在变得不可避免。OpenAI 的 Thibault Sottiaux 则从供给侧给出了同样的判断：2026 年是企业开始认真对待模型效率与可靠性的年份，因为模型正在成为关键基础设施。
+智能正在变便宜，效率开始成为关键基础设施。Vercel CEO Guillermo Rauch 表示，OpenAI Sol 的降价以及 Vercel AI Gateway 上的折扣让 Sol 成为 Vercel 增长最快的 frontier 模型，这说明智能的需求弹性极高，gateway 正在变得不可避免。OpenAI 的 Thibault Sottiaux 从供给侧给出了同样的判断：2026 年是企业开始认真对待模型效率与可靠性的年份，因为模型正在成为关键基础设施。
 
 **2. Good evals measure the jobs to be done, not just the final answer.** Meta's Madhu Guru, in part seven of his series on building evals, argues against golden sets of right answers that only check the final output. Using a financial-analysis agent as an example, he walks through stages such as client understanding, evidence gathering, data analysis, and the recommendation itself, each deserving its own eval so failures can be diagnosed. Peter Yang surfaces Shreya's related distinction: top-down evals start from the task description, where Claude does a very good job, while bottom-up evals come from your gut reactions to sample outputs, and "Claude is very, very bad at coming up with bottom-up evals. That's all you."
 
@@ -18,18 +18,18 @@
 
 Systems of record 正面临 agent 的挑战。Y Combinator 总裁兼 CEO Garry Tan 预测，systems of record（系统记录）要么变成 AI harness，要么面临被 agent 取代。
 
-**4. Claude enters Apple's on-device AI stack.** The Claude Blog announced a Swift package that lets Apple developers use the Foundation Models framework for fast local tasks and then hand off to Claude when a request calls for multi-step reasoning, code generation, or current web information, with typed Swift values streaming back into the same view, on iOS 27, iPadOS 27, macOS 27, visionOS 27, and watchOS 27.
+**4. Claude enters Apple's on-device AI stack.** The Claude Blog announced a Swift package that lets Apple developers use the Foundation Models framework for fast local tasks like summarization or extraction, then hand off to Claude when a request calls for multi-step reasoning, code generation, or current web information, with typed Swift values streaming back into the same view, on iOS 27, iPadOS 27, macOS 27, visionOS 27, and watchOS 27.
 
 Claude 进入 Apple 的设备端 AI 体系。Claude Blog 宣布推出一个 Swift package，让 Apple 开发者先用 Foundation Models framework 处理摘要、抽取等快速本地任务，当请求需要多步推理、代码生成或最新网络信息时，再把任务交给 Claude；类型化的 Swift 值会流式传回同一个视图，支持 iOS 27、iPadOS 27、macOS 27、visionOS 27 和 watchOS 27。
 
-**5. Agent tooling is moving beyond the CLI.** Peter Steinberger of OpenClaw argues that CLI tools are nice but UI visualizations where your team works are nicer, and he demoed adding a rotation USB protocol to his claw so it can drive a 360 webcam. Guillermo Rauch lays out the philosophy behind extending fx: open protocols such as MCP, Skills, and Plugins, plus "the best one, Unix," with libfx enabling embeddability into bigger programs.
+**5. Agent tooling is moving beyond the CLI.** OpenClaw's Peter Steinberger argues that CLI tools are nice but UI visualizations where your team works are nicer, and he demoed adding a rotation USB protocol to his claw so it can drive a 360 webcam. Guillermo Rauch lays out the philosophy behind extending fx: open protocols such as MCP, Skills, and Plugins, plus "the best one, Unix," with libfx enabling embeddability into bigger programs.
 
 Agent 工具正在超越 CLI。OpenClaw 的 Peter Steinberger 认为 CLI 工具不错，但团队日常所在的 UI 可视化更胜一筹，他还演示了为自己的 claw 加入 rotation USB 协议，让它能操作 360 度摄像头。Guillermo Rauch 则阐述了扩展 fx 的哲学：建立在 MCP、Skills、Plugins 等开放协议之上，还有「最好的一个，Unix」，再加上让 fx 可以嵌入更大程序的 libfx。
 
 ## X / Twitter
 
 ### Thibault Sottiaux: Codex & ChatGPT at OpenAI
-Sottiaux predicts 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure. He also posted an update on the Codex and ChatGPT usage reset: the reset has been propagated to accounts, along with fixes to usage issues found the day before, and more improvements are coming.
+Sottiaux predicts that 2026 is the year companies start seriously caring about model efficiency and reliability as models become critical infrastructure. He also shared a status update on the Codex and ChatGPT usage reset: the reset has been propagated to accounts, fixes have landed for usage issues found the previous day, and more improvements are coming.
 
 Sottiaux 预测 2026 年是企业开始认真对待模型效率与可靠性的年份，因为模型正在成为关键基础设施。他还发布了一则用量更新：reset 已经同步到所有账号，并修复了前一天发现的用量问题，后续还会有更多改进。
 
@@ -51,7 +51,7 @@ Guru 在「如何构建好的 eval」系列第七篇中提出 eval 构建的 Gol
 - [Madhu Guru on the Goldilocks principle for evals](https://x.com/realmadhuguru/status/2091684812012875981)
 
 ### Guillermo Rauch: CEO of Vercel
-Rauch argues intelligence is getting cheaper: OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, showing that demand for intelligence is highly elastic and that if you are not using a gateway, you are missing out on inference price volatility that lowers operating costs and increases margins. He also laid out the philosophy for extending fx: open protocols, including MCP, Skills, and Plugins, and "the best one, Unix," where small programs do one thing well and compose, plus libfx so you can build your own CLI, background agent, or software factory, local or cloud.
+Rauch argues that intelligence is getting cheaper: OpenAI Sol's price reductions and discounts on the Vercel AI Gateway have made Sol Vercel's fastest-growing frontier model, showing that demand for intelligence is highly elastic and that skipping a gateway means missing inference price volatility that lowers operating costs and increases margins. He also laid out the philosophy for extending fx: open protocols, including MCP, Skills, and Plugins, and "the best one, Unix," where small programs do one thing well and compose, plus libfx so you can build your own CLI, background agent, or software factory, local or cloud.
 
 Rauch 认为智能正在变便宜：OpenAI Sol 的降价和 Vercel AI Gateway 上的折扣让 Sol 成为 Vercel 增长最快的 frontier 模型，这说明智能的需求弹性极高，不用 gateway 就会错过推理价格的波动，而那是降低运营成本、提升利润的机会。他还阐述了扩展 fx 的哲学：开放协议，包括 MCP、Skills、Plugins，以及「最好的一个，Unix」，即只做一件事的小程序彼此组合，再加上让 fx 可以嵌入更大程序的 libfx，你可以构建自己的 CLI、后台 agent 或软件工厂，本地或云端皆可。
 
@@ -66,7 +66,7 @@ Tan 预测，systems of record 要么变成 AI harness，要么面临被 agent �
 - [Garry Tan on systems of record and agents](https://x.com/garrytan/status/2091742825042030681)
 
 ### Peter Steinberger: OpenClaw
-Steinberger argues CLI agent tools are nice, but UI visualizations where your team works are nicer. He also demoed adding a rotation USB protocol to his project and telling his claw to look around, with the claw now having fun with his 360 webcam.
+Steinberger argues that CLI agent tools are nice, but UI visualizations where your team works are nicer. He also demoed adding a rotation USB protocol to his project and telling his claw to look around, with the claw now having fun with his 360 webcam.
 
 Steinberger 认为 CLI agent 工具不错，但团队日常所在的 UI 可视化更胜一筹。他还演示了为自己的项目加入 rotation USB 协议，并让他的 claw 环顾四周，现在它正在玩他的 360 度摄像头。
 
