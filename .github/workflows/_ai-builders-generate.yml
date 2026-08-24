@@ -68,7 +68,9 @@ jobs:
 
       - name: Generate digest with Codex and DeepSeek
         id: codex
-        uses: openai/codex-action@v1
+        # v1.12 can hang after generation and make the hosted runner lose
+        # communication (openai/codex-action#150). Pin the last working v1.11.
+        uses: openai/codex-action@52fe01ec70a42f454c9d2ebd47598f9fd6893d56
         with:
           openai-api-key: ${{ secrets.DEEPSEEK_API_KEY }}
           responses-api-endpoint: https://api.deepseek.com/responses
