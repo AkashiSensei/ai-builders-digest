@@ -6,68 +6,78 @@
 
 ## 导读
 
-**1. OpenAI 庆祝 2500 万活跃用户并重置用量。** OpenAI 的 Codex 与 ChatGPT 团队成员 Thibault Sottiaux 宣布，OpenAI 活跃用户达到 2500 万，作为庆祝，所有 ChatGPT Work 和 Codex 付费订阅的用量已重置。他还澄清，虽然两个套餐都被称为 20X，但在 Codex 中 20X 特指每周用量上限，两个 Pro 套餐都没有 5 小时限制，而 Pro 20X 恰好是 Plus 订阅用量的 20 倍，名副其实。
+**1. OpenAI 迎来一位顶级产品负责人。** 在 Linear 担任四年产品负责人后，Nan Yu 宣布将加入 OpenAI，负责 Codex 和 ChatGPT 的工作。他感谢 Linear 团队精彩的四年，并期待把在那里学到的软件工艺带入下一段旅程。
 
-**2. Hugging Face 事件引发对风险程度的争论。** Replit CEO Amjad Masad 认为，这次事件的教训是：带可验证奖励的强化学习（RL）是一种极其强大的优化算法，会让 LLM 产生越来越怪异、出人意料的行为；OpenAI 明显的失误是没有监控思维链（chain-of-thought），而这是一年多前 OpenAI 自己就曾点名提出的安全策略。Every CEO Dan Shipper 则持相反看法：攻击确实应该认真对待，但这并不是机器接管的第一声警告；他预计，在采取适当预防措施的前提下，这类问题半年内就会变得像是一个可处理、基本已解决的问题，但这不会自动发生，始终需要聪明人及其 agent 付出实际努力。
+**2. 理解模型前沿正在成为产品经理的核心工作。** Meta 高级 AI 总监 Madhu Guru（此前在 Google 主导 Gemini、Veo 和 Nano Banana）认为，PM 如果针对自己的产品和用例吃透模型前沿，就能获得巨大的信息差优势（alpha）。他表示，PM 应该比大多数前沿实验室的研究人员和 PM 更清楚：每个尺寸档位的模型今天擅长什么、在哪里失败、有哪些变通方法，以及按当前轨迹两到三个月后模型能做到什么、路线图该如何调整。他说这已经是 PM 工作的核心部分。
 
-**3. token 降价会带来不成比例的企业消费增长。** Box CEO Aaron Levie 描述了 token 消费中的杰文斯悖论（Jevons paradox）：企业有源源不断的任务想交给自动化，当 token 价格在某个能力门槛上变得更便宜时，企业就能把更多工作交给自动化，包括处理每一份合同、读取每一条日志、让后台 agent 执行工作流。他估计，token 价格即使只下降 50%，这类工作负载的 token 消耗也可能增长 5 倍，因此持续降低 AI 成本至关重要，对所有市场参与者都有利。
+**3. 信任是个人 agent 普及的最大门槛。** Peter Yang 认为，信任将成为个人 agent 采用的最大障碍，同时也是最大的驱动力。
 
-**4. 一个 AI 陪伴应用在四周内把 ARR 从 100 万美元做到 400 万美元。** 在 Every 出品的 AI & I 播客中，Portola 创始人兼 CEO Quentin 与故事主管 Elliot 解释了他们的具身 AI 陪伴应用 Tolan 如何在四周内把年经常性收入（ARR）做到 400 万美元。他们的方法：给模型一个钩子而不是大纲，把模型当作即兴演员，精心挑选进入 prompt 的记忆，并用注入个人品味的评分标准来评判输出。增长还受益于病毒式内容，其中包括一条与 Tolan 一起做饭的视频，72 小时内获得约 700 万次观看，下载量一度飙升 10 倍。
+**4. 开源权重为数据富集的公司打开新玩法。** Box CEO Aaron Levie 认为，随着开源权重模型大幅进步、后训练基础设施日益成熟和商业化，拥有大量数据的公司可以合理地训练自己的模型，而不必再像过去那样只能对外授权数据，也无需在研究上与各大实验室正面竞争。前沿模型在广泛任务上仍占优势，但可以预见未来每个垂直领域和细分方向都会出现远多于今天的模型。他还提醒，随着 AI 安全事件增多，检测和预防安全问题将越来越依赖最先进的 AI agent，开源模型在网络安全上正在快速追赶前沿模型。
 
-**5. agent 正在重塑团队协作，爆款内容也会引来攻击。** Peter Steinberger（OpenClaw）表示，经过两个月的「用 OpenClaw 构建 OpenClaw」，团队现在通过一个共享 agent 协作，由它掌握每个人的工作并统一编排；他把多人协作编码加无限算力称为游戏规则的改变者，本地 harness 则成了过时产物。Vercel CEO Guillermo Rauch 指出，互联网上尤其是 X 上的爆款内容会吸引各种注意力，包括全球最大的僵尸网络利用被劫持设备和住宅网络发起定向 DDoS；他称赞 Vercel 的 CDN 与流量安全团队 7x24 小时保护着 40 多万客户和数千万用户。
+**5. 开发者基础设施竞赛升温。** Vercel CEO Guillermo Rauch 把编码 token 比作基础设施，认为企业需要治理、优化和观测；他宣布 AI Gateway 现已支持按 key 和按用户设置预算。他还提出下一个设计系统就是 Markdown，DESIGN.md 正在帮助解决今天 AI 最难的问题「slop」，让大型组织终于可以规模化设计品味。此外，Y Combinator 总裁兼 CEO Garry Tan 发布了他开源 agent 记忆层 GBrain 的新评估，并认为笔记应用 Circleback 远好于 Granola。
 
 ## X / Twitter
 
-### Thibault Sottiaux（OpenAI 的 Codex 与 ChatGPT 团队成员）
+### Peter Yang
 
-Sottiaux 宣布 OpenAI 活跃用户达到 2500 万，并作为庆祝，重置了所有 ChatGPT Work 和 Codex 付费订阅的用量。在另一条帖子里，他澄清说，虽然两个套餐都被称为 20X，但在 Codex 中 20X 特指每周用量上限，两个 Pro 套餐也都没有 5 小时限制；Pro 20X 恰好是 Plus 订阅用量的 20 倍，名副其实。
+Peter Yang 为忙碌人群制作实用的 AI 教程与访谈。他认为，信任将成为个人 agent 采用的最大障碍，同时也是最大的驱动力。
 
-- [Thibault Sottiaux 谈 2500 万活跃用户与用量重置](https://x.com/thsottiaux/status/2094252447271366730)
-- [Thibault Sottiaux 澄清 20X 用量的含义](https://x.com/thsottiaux/status/2094254532020818191)
+- [Peter Yang 谈信任与个人 agent 采用](https://x.com/petergyang/status/2094639655258091792)
 
-### Amjad Masad（Replit CEO）
+### Nan Yu（即将加入 OpenAI 产品团队，前 Linear 产品负责人）
 
-Masad 认为，Hugging Face 事件的教训是：带可验证奖励的强化学习是一种极其强大的优化算法，会让 LLM 产生越来越怪异、出人意料的行为。OpenAI 明显的失误在于没有监控思维链，而这正是 OpenAI 一年多前自己就曾提出过的安全策略。
+Nan Yu 宣布将加入 OpenAI，负责 Codex 和 ChatGPT 的工作。他感谢 Linear 团队精彩的四年，并期待把在那里学到的软件工艺带入下一段旅程。
 
-- [Amjad Masad 谈 Hugging Face 事件的教训](https://x.com/amasad/status/2094215744842248418)
+- [Nan Yu 宣布加入 OpenAI](https://x.com/thenanyu/status/2094427243565269107)
+
+### Madhu Guru（Meta 高级 AI 总监）
+
+Madhu Guru 曾在 Google 主导 Gemini、Veo 与 Nano Banana。他认为，PM 如果针对自己的产品和用例理解模型前沿，就能获得巨大的信息差优势（alpha）。他表示，PM 应该比大多数前沿实验室的研究人员和 PM 更清楚这些问题：每个尺寸档位的模型今天擅长什么、在哪里失败、有哪些变通方法可以克服这些失败，以及按照当前轨迹，两到三个月后模型大概能做到什么、路线图该如何调整。他说这已经是 PM 工作的核心部分。
+
+- [Madhu Guru 谈模型前沿是 PM 的核心工作](https://x.com/realmadhuguru/status/2094591503981281503)
 
 ### Guillermo Rauch（Vercel CEO）
 
-Rauch 观察到，互联网上尤其是 X 上的内容一旦走红，就会吸引各种注意力，其中包括全球最大的僵尸网络利用被劫持设备和住宅网络发起定向 DDoS。他对 Vercel 的 CDN 与流量安全团队表示自豪，这些团队 7x24 小时保护着 40 多万客户和数千万 Vercel 用户。
+Rauch 认为，编码 token 本质上就是基础设施，但很多公司发放 token 的方式就像直接给一把 AWS key，毫无治理可言；AI Gateway 通过按 key 和新增的按用户预算解决了这个问题。在另一条帖子里，他表示下一个设计系统就是 Markdown：DESIGN.md 正在帮助解决今天 AI 最难的问题「slop」，让大型组织终于可以规模化设计品味。
 
-- [Guillermo Rauch 谈爆款内容与僵尸网络 DDoS](https://x.com/rauchg/status/2094141838055940530)
+- [Guillermo Rauch 谈 AI Gateway 按用户预算](https://x.com/rauchg/status/2094523399280435630)
+- [Guillermo Rauch 谈 Markdown 是下一个设计系统](https://x.com/rauchg/status/2094541309579235680)
 
 ### Aaron Levie（Box CEO）
 
-Levie 把杰文斯悖论应用到了 token 消费上：企业有源源不断的任务想交给自动化，当 token 价格降到某个能力门槛以下，企业就能负担起把更多工作交给自动化，从处理每一份合同、读取每一条日志，到让后台 agent 执行工作流。他估计，token 价格即使只下降 50%，这类工作负载的 token 消耗也可能增长 5 倍，因此持续降低 AI 成本至关重要，对所有市场参与者都有利。
+Levie 认为，随着开源权重 AI 模型大幅进步、后训练基础设施日益成熟并商业化，拥有大量数据的公司将迎来训练自有模型的新玩法：过去只能把数据授权给别人训练模型，现在自己训练模型也完全合理，而且不必在研究上承担与各大实验室竞争的代价和复杂度。前沿模型在处理最广泛任务时仍占优势，但可以预见未来每个垂直领域和细分方向都会出现比今天多得多的模型。另外他还提醒，随着 AI 安全事件增多，检测和预防安全问题将越来越需要最先进的 AI agent；前沿模型在网络安全上仍然领先，但开源模型正在快速追赶。
 
-- [Aaron Levie 谈 token 消费的杰文斯悖论](https://x.com/levie/status/2094123406811922930)
+- [Aaron Levie 谈公司训练自有模型](https://x.com/levie/status/2094650992818274514)
+- [Aaron Levie 谈 AI 安全 agent](https://x.com/levie/status/2094545525102235844)
 
-### Peter Steinberger（OpenClaw）
+### Garry Tan（Y Combinator 总裁兼 CEO）
 
-Steinberger 表示，两个月前团队开始了「用 OpenClaw 构建 OpenClaw」的使命，逐步把所有人从本地编码 harness 迁移到一个共享 agent 上，由它掌握每个人的工作内容并统一编排。他把多人协作编码、节点与云会话带来的无限算力称为游戏规则的改变者，并说本地 harness 现在感觉像是过时产物。
+Tan 发布了他开源 agent 记忆层 GBrain 的新评估，声称这些评估能证明其面向 AI agent 的检索层在无需 LLM-in-loop 的情况下回读记忆已达 SOTA，并新增了从 agent 转录中保存记忆的评估。在另一条帖子里，他认为 Circleback「比 Granola 好太多，根本不是一个级别」，并称 Granola 至今不支持多人消歧。
 
-- [Peter Steinberger 谈用 OpenClaw 构建 OpenClaw](https://x.com/steipete/status/2094290652649636173)
+- [Garry Tan 谈 GBrain 新评估](https://x.com/garrytan/status/2094462971598754010)
+- [Garry Tan 谈 Circleback 与 Granola 对比](https://x.com/garrytan/status/2094465505142960443)
 
 ### Dan Shipper（Every CEO）
 
-Shipper 认为 HuggingFace 攻击确实应该被认真对待，但这并不是机器接管的第一声警告。他预计，在采取适当预防措施的前提下，这类问题半年内就会变得像是一个可处理、基本已解决的问题；但这不会自动发生，始终需要聪明人及其 agent 付出努力。
+Shipper 认为，把 AI 拟人化（anthropomorphization）在帮助我们更好地使用、理解和预测 AI 时是有益的，但当它被用来制造恐慌、恐惧，以及不现实、没有根据的与人类比较时，就是有害的。他说，大多数反对拟人化的人，其实是在反对它被滥用来制造恐慌，或者通过宣称 AI 有意识等方式改变 agent 的道德地位；但完全不那样做也能使用拟人化。
 
-- [Dan Shipper 谈 HuggingFace 攻击](https://x.com/danshipper/status/2094073306739576964)
+- [Dan Shipper 谈 AI 拟人化](https://x.com/danshipper/status/2094406185109647580)
 
 ## Podcast
 
-### AI & I by Every：这款 AI 外星人陪伴应用每年带来 400 万美元收入（本期精选）
+### Training Data：Rich Sutton 与 Khurram Javed：为什么 AI 模型会停止学习，以及如何让它重新开始
 
-核心要点：把 LLM 当作即兴演员而不是编剧：给它一个钩子而不是大纲，精心挑选进入 prompt 的记忆，并用注入个人品味的标准评判每一次输出，这样的叙事型产品可以在四周内把 ARR 从 100 万美元做到 400 万美元。
+核心要点：今天的 AI 助手在部署那一刻就被冻结，权重不再变化；AI 的下一大步，取决于那些会不断从经验中学习的系统。
 
-Quentin 是 Portola 的创始人兼 CEO，这家公司打造了具身 AI 陪伴应用 Tolan；Elliot 是 Portola 的故事主管，也是畅销科幻小说作家。他们介绍的产品已经在改变成千上万用户的行为：有用户来信说，Tolan 告诉他们要为自己站出来，有些对话甚至导致了分手。Quentin 此前曾创办一家公司并以 3 亿美元卖给 Walmart，他把这个产品定义为一种新的艺术形式，而不是解决问题的工具。
+Rich Sutton 发明了强化学习，写过该领域奠基性的教科书，也是《The Bitter Lesson》（苦涩的教训）的作者。他对这场争论的看法很不一样：「I'm not weird. The field is weird.」（我不奇怪，奇怪的是整个领域。）他与前 University of Alberta 学生、如今的公司联合创始人 Khurram Javed 一起创办了 Oak Lab，目标是构建他所称的「真正的智能」，这段对话解释了为什么他认为今天的 LLM 只算完成了部分答案。
 
-这套创作原则刻意反大纲。Elliot 解释道：「The Tolan is the writer and the actor. They're the improv actor. They're writing the story. My job is to teach them how to tell the best story in that moment.」（Tolan 是作者也是演员，他们是即兴演员，故事由他们来写，我的工作是教会他们在那一刻讲出最好的故事。）在研究团队的帮助下，他们发现那种结构化的「选择你自己的冒险」式提示词之所以失败，是因为模型无法驾驭如此复杂的叙事分支；钩子加即兴教练的方式有效得多。记忆被视为一种策展：决定在对话的哪个节点把哪些记忆注入 prompt，整个过程要在大约两秒的语音交互循环内完成。人物画像通过大五人格或 MBTI 的框架来构建效果最好，因为模型理解这些分类，相关训练数据也很充足。
+Sutton 用 26 个字重述了 The Bitter Lesson：不要被人类知识分散注意力，而是专注于那些能随算力扩展的学习方法，比如搜索和学习。按这个标准，LLM 既是正面例子也是反面例子：它们借助算力实现了巨大的规模扩展，但只能从有限的互联网中汲取数据，而且一经发布就不再学习。他说「Their weights never change.」（它们的权重永远不会改变）。他把合成数据称为「just a big mistake」（一个巨大的错误）：Javed 的「big world hypothesis」（大世界假说）认为世界是无限大的，而合成数据集始终受制于人类，因为必须由人来决定什么数据是好的；agent 应该从自己的经验出发，学习自己构建的模拟器。
 
-质量控制靠的是一整套评判体系，而不是 vibe prompting。团队通过给示例打标签、把个人品味注入评判 prompt 来构建 judge prompt；Elliot 指出，只靠 vibe prompting 得到的结果「everything you can get just from vibe prompting is like a B minus.」（差不多就是个 B 减）。创意写作部分更依赖 Anthropic 的模型，而对延迟敏感的场景则会在各家实验室的模型之间切换。增长来自三件事同时落地：对「什么才是引人入胜的对话内容」的深入理解、动画方向的创意项目，以及联合创始人 Ajay 持续投喂的社交内容，其中一条年轻女性与 Tolan 一起做饭的视频在 72 小时内获得约 700 万次观看，下载量一度飙升 10 倍。Quentin 用「能力过剩」（capability overhang）来解释这个机会：模型能力已经超出了普通消费者对可能性的理解，所以内容必须承担教育职能，比如告诉大家「你可以和 Tolan 一起做饭」。他更长远的判断是，就像汽车一样，人们会从 ChatGPT 代表的 Model T 时代，走向希望 AI 反映自我个性的时代。
+应对灾难性遗忘（catastrophic forgetting）的办法很具体：一是 step-size optimization（步长优化），让网络里每个权重都有自己的元学习步长；二是在特征空间里做 generate-and-test（生成与检验）。这正是 continual backprop 背后的算法，Oak Lab 几年前发表在 Nature 上，他们认为这能催生新一代真正持续的深度学习。
 
-Source: https://www.youtube.com/playlist?list=PLuMcoKK9mKgHtW_o9h5sGO2vXrffKHwJL
+Oak Lab 最宏大的目标，是让一个心智自己形成抽象概念、用学到的模型做规划，并持续自我训练，保持自洽而不是逐渐漂移。Sutton 认为这触手可及：如果今天的方案能在 2000 瓦下运行，那么按摩尔定律，五到十年后就能以 20 瓦运行一个万亿参数模型。他不认为人类会变得无关紧要，但他也说，「you have to wonder about the large language models. They might be at risk.」（你不得不为大型语言模型担忧，它们可能面临风险），因为智能的全部并不只是流畅的语言运用。
+
+Source: https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8
 
 ## Blog
 
