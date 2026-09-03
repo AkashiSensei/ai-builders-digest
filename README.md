@@ -24,8 +24,8 @@ Latest weekly: ai-digest-2026-08-24-Mon.md [中文](zh/weekly/ai-digest-2026-08-
 
 ## Automation
 
-- Daily digest: 07:00 Asia/Shanghai.
-- Weekly digest: Monday 18:30 Asia/Shanghai. It deduplicates the upstream feed history into the previous complete Monday-to-Monday week, after allowing time for Monday's upstream update.
+- Daily digest: 16:30 Asia/Shanghai. If GitHub starts a scheduled run after midnight, the digest still uses the intended Shanghai schedule date.
+- Weekly digest: Monday 18:30 Asia/Shanghai. It deduplicates the upstream feed history into the previous complete Monday-to-Monday week, after allowing time for Monday's upstream update. Internal upstream timing gaps up to six hours are disclosed in the digest; larger gaps or a missing window end stop publication.
 - Successful runs commit directly to `main`.
 - Required GitHub Actions secret: `DEEPSEEK_API_KEY`.
 

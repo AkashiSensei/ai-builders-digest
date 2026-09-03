@@ -34,7 +34,7 @@ function makeItem(kind, id, timestamp) {
   };
 }
 
-function createSource(snapshotCount = 8) {
+function createSource(snapshotCount = 8, generatedAtOffsetsHours = {}) {
   const root = fs.mkdtempSync(
     path.join(os.tmpdir(), "ai-builders-automation-test-"),
   );
@@ -51,7 +51,11 @@ function createSource(snapshotCount = 8) {
 
   const firstGeneratedAt = Date.parse("2026-08-10T06:30:00.000Z");
   for (let index = 0; index < snapshotCount; index += 1) {
-    const generatedAt = new Date(firstGeneratedAt + index * 24 * HOUR_MS);
+    const generatedAt = new Date(
+      firstGeneratedAt +
+        index * 24 * HOUR_MS +
+        (generatedAtOffsetsHours[index] ?? 0) * HOUR_MS,
+    );
     const itemTimestamp = new Date(generatedAt.getTime() - 12 * HOUR_MS);
     const tweets = [makeItem("tweet", `tweet-${index}`, itemTimestamp.toISOString())];
     const podcasts = [
@@ -132,7 +136,7 @@ function runPrepare(fixture, overrides = {}) {
   return { ...result, githubOutput };
 }
 
-function weeklyDocument(language, filename, sourceUrl) {
+function weeklyDocument(language, filename, sourceUrl, gapNotices = null) {
   const navigation = {
     en:
       `[English](./${filename}) | [中文](../../zh/weekly/${filename}) | ` +
@@ -165,6 +169,13 @@ function weeklyDocument(language, filename, sourceUrl) {
       "覆盖范围：2026-08-10 00:00 至 2026-08-17 00:00（Asia/Shanghai）",
     ],
   };
+  const notices = {
+    en: gapNotices ? [gapNotices.english] : [],
+    zh: gapNotices ? [gapNotices.chinese] : [],
+    bilingual: gapNotices
+      ? [gapNotices.english, gapNotices.chinese]
+      : [],
+  };
 
   return [
     navigation[language],
@@ -174,6 +185,7 @@ function weeklyDocument(language, filename, sourceUrl) {
     "# AI Builders Digest",
     "",
     ...coverage[language],
+    ...notices[language],
     "",
     briefingHeading[language],
     "",
@@ -213,6 +225,7 @@ test("weekly preparation uses eight snapshots and exact Shanghai boundaries", (t
     [context.coverage.start, context.coverage.end],
     ["2026-08-09T16:00:00.000Z", "2026-08-16T16:00:00.000Z"],
   );
+  assert.equal(context.coverage.gapNotices, null);
   assert.equal(context.feeds.sourceSnapshotCount, 8);
 
   const xFeed = JSON.parse(
@@ -275,10 +288,48 @@ test("daily preparation keeps the latest-feed path", (t) => {
   );
 });
 
-test("output validation accepts sourced weekly editions and rejects unknown URLs", (t) => {
+test("scheduled daily preparation keeps the intended date after midnight", (t) => {
   const fixture = createSource();
   t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
-  const preparation = runPrepare(fixture);
+
+  const commonOverrides = {
+    DIGEST_TYPE: "daily",
+    DIGEST_NOW: "2026-08-17T17:30:00.000Z",
+    DIGEST_SCHEDULE_LOCAL_TIME: "16:30",
+  };
+  const scheduledResult = runPrepare(fixture, {
+    ...commonOverrides,
+    DIGEST_EVENT_NAME: "schedule",
+  });
+  assert.equal(scheduledResult.status, 0, scheduledResult.stderr);
+  const scheduledContext = JSON.parse(
+    fs.readFileSync(path.join(fixture.input, "run-context.json"), "utf8"),
+  );
+  assert.equal(scheduledContext.filename, "ai-digest-2026-08-17-Mon.md");
+
+  const manualResult = runPrepare(fixture, {
+    ...commonOverrides,
+    DIGEST_EVENT_NAME: "workflow_dispatch",
+  });
+  assert.equal(manualResult.status, 0, manualResult.stderr);
+  const manualContext = JSON.parse(
+    fs.readFileSync(path.join(fixture.input, "run-context.json"), "utf8"),
+  );
+  assert.equal(manualContext.filename, "ai-digest-2026-08-18-Tue.md");
+});
+
+test("output validation accepts sourced weekly editions and rejects unknown URLs", (t) => {
+  const fixture = createSource(8, { 3: 3 });
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const strictPreparation = runPrepare(fixture);
+  assert.notEqual(strictPreparation.status, 0);
+  assert.match(
+    `${strictPreparation.stdout}\n${strictPreparation.stderr}`,
+    /uncovered 3\.00h gap/u,
+  );
+
+  const preparation = runPrepare(fixture, { MAX_SNAPSHOT_GAP_HOURS: "6" });
   assert.equal(preparation.status, 0, preparation.stderr);
 
   const context = JSON.parse(
@@ -288,6 +339,18 @@ test("output validation accepts sourced weekly editions and rejects unknown URLs
     fs.readFileSync(path.join(fixture.input, "feed-x.json"), "utf8"),
   );
   const sourceUrl = xFeed.x[0].tweets[0].url;
+  assert.deepEqual(context.coverage.gaps.x, [
+    {
+      start: "2026-08-12T06:30:00.000Z",
+      end: "2026-08-12T09:30:00.000Z",
+      hours: 3,
+    },
+  ]);
+  assert.equal(
+    context.coverage.gapNotices.english,
+    "Known feed coverage gaps (UTC): X/Twitter " +
+      "2026-08-12T06:30:00.000Z to 2026-08-12T09:30:00.000Z (3.00h).",
+  );
   const project = path.join(fixture.root, "project");
   fs.mkdirSync(project);
   fs.writeFileSync(
@@ -321,7 +384,15 @@ test("output validation accepts sourced weekly editions and rejects unknown URLs
       context.filename,
     );
     fs.mkdirSync(path.dirname(output), { recursive: true });
-    fs.writeFileSync(output, weeklyDocument(language, context.filename, sourceUrl));
+    fs.writeFileSync(
+      output,
+      weeklyDocument(
+        language,
+        context.filename,
+        sourceUrl,
+        context.coverage.gapNotices,
+      ),
+    );
   }
 
   const validate = () =>
@@ -339,11 +410,24 @@ test("output validation accepts sourced weekly editions and rejects unknown URLs
   assert.equal(validResult.status, 0, validResult.stderr);
 
   const englishOutput = path.join(project, context.outputFiles[0]);
+  const validEnglish = fs.readFileSync(englishOutput, "utf8");
   fs.writeFileSync(
     englishOutput,
-    fs
-      .readFileSync(englishOutput, "utf8")
-      .replace(FOOTER, `https://example.com/not-in-feed\n\n${FOOTER}`),
+    validEnglish.replace(`${context.coverage.gapNotices.english}\n`, ""),
+  );
+  const missingNoticeResult = validate();
+  assert.notEqual(missingNoticeResult.status, 0);
+  assert.match(
+    `${missingNoticeResult.stdout}\n${missingNoticeResult.stderr}`,
+    /weekly coverage/u,
+  );
+
+  fs.writeFileSync(
+    englishOutput,
+    validEnglish.replace(
+      FOOTER,
+      `https://example.com/not-in-feed\n\n${FOOTER}`,
+    ),
   );
   const invalidResult = validate();
   assert.notEqual(invalidResult.status, 0);

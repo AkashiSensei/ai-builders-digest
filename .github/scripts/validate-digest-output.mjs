@@ -61,6 +61,66 @@ function setsEqual(left, right) {
   return left.size === right.size && [...left].every((value) => right.has(value));
 }
 
+function buildCoverageGapNotices(coverage) {
+  const specifications = [
+    {
+      collection: "x",
+      englishLabel: "X/Twitter",
+      chineseLabel: "X/Twitter",
+    },
+    {
+      collection: "podcasts",
+      englishLabel: "Podcast",
+      chineseLabel: "播客",
+    },
+    { collection: "blogs", englishLabel: "Blog", chineseLabel: "博客" },
+  ];
+  const englishGaps = [];
+  const chineseGaps = [];
+
+  for (const specification of specifications) {
+    const gaps = coverage.gaps?.[specification.collection];
+    if (!Array.isArray(gaps)) {
+      fail(
+        `Weekly coverage must contain a gaps array for ${specification.collection}.`,
+      );
+    }
+    for (const gap of gaps) {
+      const start = new Date(gap.start);
+      const end = new Date(gap.end);
+      if (
+        Number.isNaN(start.getTime()) ||
+        Number.isNaN(end.getTime()) ||
+        end.getTime() <= start.getTime() ||
+        !Number.isFinite(gap.hours) ||
+        gap.hours <= 0 ||
+        Math.abs((end.getTime() - start.getTime()) / (60 * 60 * 1000) - gap.hours) >
+          0.011
+      ) {
+        fail(
+          `Weekly coverage contains an invalid ${specification.collection} gap.`,
+        );
+      }
+      englishGaps.push(
+        `${specification.englishLabel} ${gap.start} to ${gap.end} ` +
+          `(${gap.hours.toFixed(2)}h)`,
+      );
+      chineseGaps.push(
+        `${specification.chineseLabel} ${gap.start} 至 ${gap.end}` +
+          `（${gap.hours.toFixed(2)} 小时）`,
+      );
+    }
+  }
+
+  if (englishGaps.length === 0) {
+    return null;
+  }
+  return {
+    english: `Known feed coverage gaps (UTC): ${englishGaps.join("; ")}.`,
+    chinese: `已知 feed 覆盖缺口（UTC）：${chineseGaps.join("；")}。`,
+  };
+}
+
 function validateReadme(filename, expectedLine, prefixes) {
   const current = readText(filename).split("\n");
   let original;
@@ -116,6 +176,7 @@ if (
   fail("run-context.json contains unexpected output paths.");
 }
 
+let weeklyGapNotices = null;
 if (digestType === "weekly") {
   const { coverage } = context;
   if (!coverage || coverage.timezone !== "Asia/Shanghai") {
@@ -154,6 +215,16 @@ if (digestType === "weekly") {
   }
   if ((context.feeds?.sourceSnapshotCount ?? 0) < 8) {
     fail("Weekly context must contain at least eight source snapshots.");
+  }
+
+  weeklyGapNotices = buildCoverageGapNotices(coverage);
+  if (
+    (weeklyGapNotices === null && coverage.gapNotices != null) ||
+    (weeklyGapNotices !== null &&
+      (coverage.gapNotices?.english !== weeklyGapNotices.english ||
+        coverage.gapNotices?.chinese !== weeklyGapNotices.chinese))
+  ) {
+    fail("Weekly coverage gap notices do not match the recorded gaps.");
   }
 
   for (const [filename, feed] of [
@@ -262,34 +333,67 @@ for (const language of ["en", "zh", "bilingual"]) {
     const chineseCoverage =
       `覆盖范围：${context.coverage.startDate} 00:00 至 ` +
       `${context.coverage.endDate} 00:00（Asia/Shanghai）`;
-    const expectedCoverage =
+    const englishMetadata = [
+      englishCoverage,
+      ...(weeklyGapNotices ? [weeklyGapNotices.english] : []),
+    ];
+    const chineseMetadata = [
+      chineseCoverage,
+      ...(weeklyGapNotices ? [weeklyGapNotices.chinese] : []),
+    ];
+    const expectedMetadata =
       language === "en"
-        ? englishCoverage
+        ? englishMetadata
         : language === "zh"
-          ? chineseCoverage
-          : `${englishCoverage}\n${chineseCoverage}`;
-    if (!text.includes(expectedCoverage)) {
+          ? chineseMetadata
+          : [
+              englishCoverage,
+              chineseCoverage,
+              ...(weeklyGapNotices
+                ? [weeklyGapNotices.english, weeklyGapNotices.chinese]
+                : []),
+            ];
+    const metadataStart = lines.indexOf(expectedMetadata[0]);
+    if (
+      metadataStart === -1 ||
+      expectedMetadata.some(
+        (expectedLine, index) => lines[metadataStart + index] !== expectedLine,
+      )
+    ) {
       fail(`${filename} is missing its exact weekly coverage line.`);
     }
-    if (
-      countExactLine(lines, englishCoverage) !==
-        (language === "en" || language === "bilingual" ? 1 : 0) ||
-      countExactLine(lines, chineseCoverage) !==
-        (language === "zh" || language === "bilingual" ? 1 : 0)
-    ) {
-      fail(`${filename} contains duplicate or unexpected coverage lines.`);
+
+    const allMetadata = [
+      englishCoverage,
+      chineseCoverage,
+      ...(weeklyGapNotices
+        ? [weeklyGapNotices.english, weeklyGapNotices.chinese]
+        : []),
+    ];
+    for (const metadataLine of allMetadata) {
+      const expectedCount = expectedMetadata.includes(metadataLine) ? 1 : 0;
+      if (countExactLine(lines, metadataLine) !== expectedCount) {
+        fail(`${filename} contains duplicate or unexpected coverage lines.`);
+      }
     }
-    const firstCoverageIndex = lines.indexOf(
-      language === "zh" ? chineseCoverage : englishCoverage,
+
+    const gapNoticePrefixes = [
+      "Known feed coverage gaps (UTC):",
+      "已知 feed 覆盖缺口（UTC）：",
+    ];
+    const actualGapNotices = lines.filter((line) =>
+      gapNoticePrefixes.some((prefix) => line.startsWith(prefix)),
     );
-    const lastCoverageIndex = lines.indexOf(
-      language === "en" ? englishCoverage : chineseCoverage,
+    const expectedGapNotices = expectedMetadata.filter((line) =>
+      gapNoticePrefixes.some((prefix) => line.startsWith(prefix)),
     );
+    if (!sameArray(actualGapNotices, expectedGapNotices)) {
+      fail(`${filename} has a missing or unexpected weekly coverage gap notice.`);
+    }
+
     if (
-      firstCoverageIndex <= titleIndex ||
-      lastCoverageIndex >= briefingIndex ||
-      (language === "bilingual" &&
-        lastCoverageIndex !== firstCoverageIndex + 1)
+      metadataStart <= titleIndex ||
+      metadataStart + expectedMetadata.length - 1 >= briefingIndex
     ) {
       fail(`${filename} has a misplaced weekly coverage line.`);
     }

@@ -58,7 +58,7 @@ Each output file must use this exact top-level order:
 
 # AI Builders Digest
 
-[coverage line]
+[coverage line(s) and optional gap notice line(s)]
 
 ## Reader's Briefing
 [five weekly themes]
@@ -91,6 +91,16 @@ Use `coverage.startDate` and `coverage.endDate` from `run-context.json` exactly:
 - Chinese: `覆盖范围：{startDate} 00:00 至 {endDate} 00:00（Asia/Shanghai）`
 - Bilingual: the English line immediately followed by the Chinese line.
 
+If `coverage.gapNotices` is not `null`, place its exact lines immediately after
+the coverage line or lines:
+
+- English: `coverage.gapNotices.english`
+- Chinese: `coverage.gapNotices.chinese`
+- Bilingual: the English gap notice immediately followed by the Chinese one.
+
+Do not add a gap notice when `coverage.gapNotices` is `null`, and do not soften,
+omit, translate, or otherwise rewrite a provided notice.
+
 Do not describe the window as "the last 24 hours" or "today."
 
 ## Language-switch links
@@ -109,4 +119,4 @@ The link line must be the first line in each file.
 - In `README.zh-CN.md`, replace only `最新周报:` with `readme.chinese` from `run-context.json`. Also tolerate the legacy English label if present.
 - Do not change the latest daily line.
 
-Before finishing, verify that all three requested files exist, their first-line links and coverage lines are exact, all required headings are present, every absolute source URL exists in one of the three feed files, and no file outside the five allowed paths was changed.
+Before finishing, verify that all three requested files exist, their first-line links, coverage lines, and any required gap notices are exact, all required headings are present, every absolute source URL exists in one of the three feed files, and no file outside the five allowed paths was changed.

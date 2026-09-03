@@ -25,6 +25,8 @@ const weeklyHistoryLimit = Number(
 const minimumWeeklySnapshots = Number(
   process.env.MIN_WEEKLY_SNAPSHOTS ?? "8",
 );
+const digestEventName = process.env.DIGEST_EVENT_NAME ?? "";
+const scheduledLocalTime = process.env.DIGEST_SCHEDULE_LOCAL_TIME ?? "";
 const now = process.env.DIGEST_NOW
   ? new Date(process.env.DIGEST_NOW)
   : new Date();
@@ -60,14 +62,20 @@ const feedSpecifications = [
   {
     filename: "feed-x.json",
     collection: "x",
+    englishLabel: "X/Twitter",
+    chineseLabel: "X/Twitter",
   },
   {
     filename: "feed-podcasts.json",
     collection: "podcasts",
+    englishLabel: "Podcast",
+    chineseLabel: "播客",
   },
   {
     filename: "feed-blogs.json",
     collection: "blogs",
+    englishLabel: "Blog",
+    chineseLabel: "博客",
   },
 ];
 
@@ -131,7 +139,9 @@ function getLocalDateParts(date) {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
   }).formatToParts(date);
   return Object.fromEntries(parts.map(({ type, value }) => [type, value]));
 }
@@ -146,7 +156,7 @@ function formatUtcDate(date) {
 
 function getDigestCalendar() {
   const localParts = getLocalDateParts(now);
-  const localDateAtNoonUtc = new Date(
+  let localDateAtNoonUtc = new Date(
     Date.UTC(
       Number(localParts.year),
       Number(localParts.month) - 1,
@@ -155,10 +165,32 @@ function getDigestCalendar() {
     ),
   );
 
+  if (digestEventName === "schedule") {
+    const match = /^(\d{2}):(\d{2})$/u.exec(scheduledLocalTime);
+    const scheduledHour = Number(match?.[1]);
+    const scheduledMinute = Number(match?.[2]);
+    if (!match || scheduledHour > 23 || scheduledMinute > 59) {
+      throw new Error(
+        "DIGEST_SCHEDULE_LOCAL_TIME must use a valid HH:MM value for scheduled runs.",
+      );
+    }
+
+    const currentLocalMinute =
+      Number(localParts.hour) * 60 + Number(localParts.minute);
+    const scheduledMinuteOfDay = scheduledHour * 60 + scheduledMinute;
+    if (currentLocalMinute < scheduledMinuteOfDay) {
+      localDateAtNoonUtc = new Date(localDateAtNoonUtc.getTime() - DAY_MS);
+    }
+  }
+
+  const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+    localDateAtNoonUtc.getUTCDay()
+  ];
+
   if (digestType === "daily") {
     return {
       digestDate: formatUtcDate(localDateAtNoonUtc),
-      dayOfWeek: localParts.weekday,
+      dayOfWeek,
       localDateAtNoonUtc,
     };
   }
@@ -300,6 +332,32 @@ function validateWindowCoverage(intervals, windowStart, windowEnd, collection) {
   }
 
   return gaps;
+}
+
+function buildCoverageGapNotices(coverageGaps) {
+  const englishGaps = [];
+  const chineseGaps = [];
+
+  for (const specification of feedSpecifications) {
+    for (const gap of coverageGaps[specification.collection]) {
+      englishGaps.push(
+        `${specification.englishLabel} ${gap.start} to ${gap.end} ` +
+          `(${gap.hours.toFixed(2)}h)`,
+      );
+      chineseGaps.push(
+        `${specification.chineseLabel} ${gap.start} 至 ${gap.end}` +
+          `（${gap.hours.toFixed(2)} 小时）`,
+      );
+    }
+  }
+
+  if (englishGaps.length === 0) {
+    return null;
+  }
+  return {
+    english: `Known feed coverage gaps (UTC): ${englishGaps.join("; ")}.`,
+    chinese: `已知 feed 覆盖缺口（UTC）：${chineseGaps.join("；")}。`,
+  };
 }
 
 function isInsideWindow(value, windowStart, windowEnd, label) {
@@ -620,6 +678,7 @@ function prepareWeeklyFeeds(windowStart, windowEnd) {
       ),
       timezone: TIME_ZONE,
       gaps: coverageGaps,
+      gapNotices: buildCoverageGapNotices(coverageGaps),
     },
   };
 }

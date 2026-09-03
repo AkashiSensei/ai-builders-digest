@@ -15,5 +15,6 @@ jobs:
     uses: ./.github/workflows/_ai-builders-generate.yml
     with:
       digest_type: weekly
+      scheduled_local_time: "18:30"
     secrets:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

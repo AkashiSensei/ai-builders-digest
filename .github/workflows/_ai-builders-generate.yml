@@ -7,6 +7,10 @@ on:
         description: Digest cadence to generate
         required: true
         type: string
+      scheduled_local_time:
+        description: Configured Asia/Shanghai trigger time in HH:MM format
+        required: true
+        type: string
     secrets:
       DEEPSEEK_API_KEY:
         required: true
@@ -55,10 +59,14 @@ jobs:
         id: context
         env:
           DIGEST_TYPE: ${{ inputs.digest_type }}
+          DIGEST_EVENT_NAME: ${{ github.event_name }}
+          DIGEST_SCHEDULE_LOCAL_TIME: ${{ inputs.scheduled_local_time }}
           FOLLOW_BUILDERS_DIR: _follow-builders
           DIGEST_INPUT_DIR: .codex-input
           MAX_FEED_AGE_HOURS: "24"
-          MAX_SNAPSHOT_GAP_HOURS: "2"
+          # Small upstream timing gaps are preserved in run-context and must
+          # be disclosed in every generated weekly edition.
+          MAX_SNAPSHOT_GAP_HOURS: "6"
           WEEKLY_HISTORY_LIMIT: "30"
           MIN_WEEKLY_SNAPSHOTS: "8"
         run: node .github/scripts/prepare-digest-input.mjs
@@ -76,7 +84,7 @@ jobs:
           responses-api-endpoint: https://api.deepseek.com/responses
           model: deepseek-v4-flash
           prompt-file: ${{ steps.context.outputs.prompt_file }}
-          effort: high
+          effort: low
           sandbox: workspace-write
           safety-strategy: drop-sudo
           codex-args: '["--ephemeral"]'
