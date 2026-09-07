@@ -89,9 +89,10 @@ jobs:
           FOLLOW_BUILDERS_DIR: _follow-builders
           DIGEST_INPUT_DIR: .codex-input
           MAX_FEED_AGE_HOURS: "24"
-          # Small upstream timing gaps are preserved in run-context and must
-          # be disclosed in every generated weekly edition.
-          MAX_SNAPSHOT_GAP_HOURS: "6"
+          # Bounded upstream scheduler gaps are preserved in run-context and
+          # must be disclosed in every generated weekly edition. Larger gaps
+          # still stop publication rather than silently omitting a full day.
+          MAX_SNAPSHOT_GAP_HOURS: "18"
           WEEKLY_HISTORY_LIMIT: "30"
           MIN_WEEKLY_SNAPSHOTS: "8"
         run: node .github/scripts/prepare-digest-input.mjs

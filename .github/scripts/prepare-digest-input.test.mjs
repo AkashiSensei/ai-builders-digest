@@ -455,18 +455,18 @@ test("a late recovery skips instead of moving README back to an older date", (t)
   assert.match(outputs, /^skip_reason=superseded$/mu);
 });
 
-test("output validation accepts sourced weekly editions and rejects unknown URLs", (t) => {
-  const fixture = createSource(8, { 3: 3 });
+test("output validation accepts disclosed scheduler gaps and rejects unknown URLs", (t) => {
+  const fixture = createSource(8, { 3: 16.25 });
   t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
 
   const strictPreparation = runPrepare(fixture);
   assert.notEqual(strictPreparation.status, 0);
   assert.match(
     `${strictPreparation.stdout}\n${strictPreparation.stderr}`,
-    /uncovered 3\.00h gap/u,
+    /uncovered 16\.25h gap/u,
   );
 
-  const preparation = runPrepare(fixture, { MAX_SNAPSHOT_GAP_HOURS: "6" });
+  const preparation = runPrepare(fixture, { MAX_SNAPSHOT_GAP_HOURS: "18" });
   assert.equal(preparation.status, 0, preparation.stderr);
 
   const context = JSON.parse(
@@ -479,14 +479,14 @@ test("output validation accepts sourced weekly editions and rejects unknown URLs
   assert.deepEqual(context.coverage.gaps.x, [
     {
       start: "2026-08-12T06:30:00.000Z",
-      end: "2026-08-12T09:30:00.000Z",
-      hours: 3,
+      end: "2026-08-12T22:45:00.000Z",
+      hours: 16.25,
     },
   ]);
   assert.equal(
     context.coverage.gapNotices.english,
     "Known feed coverage gaps (UTC): X/Twitter " +
-      "2026-08-12T06:30:00.000Z to 2026-08-12T09:30:00.000Z (3.00h).",
+      "2026-08-12T06:30:00.000Z to 2026-08-12T22:45:00.000Z (16.25h).",
   );
   const project = path.join(fixture.root, "project");
   fs.mkdirSync(project);
