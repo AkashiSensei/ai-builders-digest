@@ -5,16 +5,34 @@ on:
     # 16:30 Asia/Shanghai (GitHub schedules use UTC). This leaves a
     # buffer after Follow Builders' daily feed update.
     - cron: "30 8 * * *"
+    # One low-frequency recovery slot at 10:30 Asia/Shanghai the next day.
+    # It targets the previous Shanghai calendar date and only generates when
+    # the primary slot did not already publish that edition.
+    - cron: "30 2 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  generate:
+  primary:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 8 * * *'
     uses: ./.github/workflows/_ai-builders-generate.yml
     with:
       digest_type: daily
       scheduled_local_time: "16:30"
+      scheduled_date_offset_days: 0
+      defer_unready_inputs: ${{ github.event_name == 'schedule' }}
+    secrets:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+  fallback:
+    if: github.event_name == 'schedule' && github.event.schedule == '30 2 * * *'
+    uses: ./.github/workflows/_ai-builders-generate.yml
+    with:
+      digest_type: daily
+      scheduled_local_time: "10:30"
+      scheduled_date_offset_days: -1
+      defer_unready_inputs: false
     secrets:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

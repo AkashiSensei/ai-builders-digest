@@ -40,7 +40,9 @@ function createSource(snapshotCount = 8, generatedAtOffsetsHours = {}) {
   );
   const source = path.join(root, "follow-builders");
   const input = path.join(root, "input");
+  const output = path.join(root, "digest-output");
   fs.mkdirSync(path.join(source, "prompts"), { recursive: true });
+  fs.mkdirSync(output, { recursive: true });
   for (const prompt of PROMPTS) {
     fs.writeFileSync(path.join(source, "prompts", prompt), `# ${prompt}\n`);
   }
@@ -112,7 +114,7 @@ function createSource(snapshotCount = 8, generatedAtOffsetsHours = {}) {
     execFileSync("git", ["-C", source, "commit", "--quiet", "-m", `feed ${index}`]);
   }
 
-  return { root, source, input };
+  return { root, source, input, output };
 }
 
 function runPrepare(fixture, overrides = {}) {
@@ -125,6 +127,7 @@ function runPrepare(fixture, overrides = {}) {
       DIGEST_NOW: "2026-08-17T10:30:00.000Z",
       FOLLOW_BUILDERS_DIR: fixture.source,
       DIGEST_INPUT_DIR: fixture.input,
+      DIGEST_OUTPUT_DIR: fixture.output,
       MAX_FEED_AGE_HOURS: "24",
       MAX_SNAPSHOT_GAP_HOURS: "2",
       WEEKLY_HISTORY_LIMIT: "30",
@@ -316,6 +319,140 @@ test("scheduled daily preparation keeps the intended date after midnight", (t) =
     fs.readFileSync(path.join(fixture.input, "run-context.json"), "utf8"),
   );
   assert.equal(manualContext.filename, "ai-digest-2026-08-18-Tue.md");
+});
+
+test("daily recovery slot targets the previous Shanghai date", (t) => {
+  const fixture = createSource();
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const result = runPrepare(fixture, {
+    DIGEST_TYPE: "daily",
+    DIGEST_EVENT_NAME: "schedule",
+    DIGEST_NOW: "2026-08-18T02:30:00.000Z",
+    DIGEST_SCHEDULE_LOCAL_TIME: "10:30",
+    DIGEST_SCHEDULE_DATE_OFFSET_DAYS: "-1",
+  });
+  assert.equal(result.status, 0, result.stderr);
+
+  const context = JSON.parse(
+    fs.readFileSync(path.join(fixture.input, "run-context.json"), "utf8"),
+  );
+  assert.equal(context.filename, "ai-digest-2026-08-17-Mon.md");
+  assert.deepEqual(context.schedule, {
+    localTime: "10:30",
+    dateOffsetDays: -1,
+  });
+});
+
+test("preflight resolves an eligible target without reading upstream feeds", (t) => {
+  const fixture = createSource();
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const result = runPrepare(fixture, {
+    DIGEST_TYPE: "daily",
+    DIGEST_PREFLIGHT_ONLY: "true",
+    FOLLOW_BUILDERS_DIR: path.join(fixture.root, "missing-upstream"),
+  });
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /requires generation/u);
+  const outputs = fs.readFileSync(result.githubOutput, "utf8");
+  assert.match(outputs, /^should_generate=true$/mu);
+  assert.equal(fs.existsSync(fixture.input), false);
+});
+
+test("scheduled primary defers stale feeds while a strict recovery run fails", (t) => {
+  const deferredFixture = createSource();
+  t.after(() => fs.rmSync(deferredFixture.root, { recursive: true, force: true }));
+
+  const overrides = {
+    DIGEST_TYPE: "daily",
+    DIGEST_EVENT_NAME: "schedule",
+    DIGEST_NOW: "2026-08-18T10:30:00.000Z",
+    DIGEST_SCHEDULE_LOCAL_TIME: "16:30",
+  };
+  const deferred = runPrepare(deferredFixture, {
+    ...overrides,
+    DEFER_UNREADY_INPUTS: "true",
+  });
+  assert.equal(deferred.status, 0, deferred.stderr);
+  assert.match(deferred.stdout, /Deferring daily digest/u);
+  const deferredOutputs = fs.readFileSync(deferred.githubOutput, "utf8");
+  assert.match(deferredOutputs, /^should_generate=false$/mu);
+  assert.match(deferredOutputs, /^skip_reason=inputs_not_ready$/mu);
+
+  const strictFixture = createSource();
+  t.after(() => fs.rmSync(strictFixture.root, { recursive: true, force: true }));
+  const strict = runPrepare(strictFixture, overrides);
+  assert.notEqual(strict.status, 0);
+  assert.match(`${strict.stdout}\n${strict.stderr}`, /is stale/u);
+});
+
+test("an existing digest skips before feed validation and model generation", (t) => {
+  const fixture = createSource();
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const filename = "ai-digest-2026-08-17-Mon.md";
+  for (const language of ["en", "zh", "bilingual"]) {
+    const output = path.join(fixture.output, language, "daily", filename);
+    fs.mkdirSync(path.dirname(output), { recursive: true });
+    fs.writeFileSync(output, "already generated\n");
+  }
+
+  const result = runPrepare(fixture, {
+    DIGEST_TYPE: "daily",
+    DIGEST_EVENT_NAME: "schedule",
+    DIGEST_NOW: "2026-08-18T02:30:00.000Z",
+    DIGEST_SCHEDULE_LOCAL_TIME: "10:30",
+    DIGEST_SCHEDULE_DATE_OFFSET_DAYS: "-1",
+    MAX_FEED_AGE_HOURS: "1",
+  });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /all language editions already exist/u);
+  const outputs = fs.readFileSync(result.githubOutput, "utf8");
+  assert.match(outputs, /^should_generate=false$/mu);
+  assert.match(outputs, /^skip_reason=already_exists$/mu);
+  assert.equal(fs.existsSync(path.join(fixture.input, "run-context.json")), false);
+});
+
+test("partial digest output fails instead of overwriting an edition", (t) => {
+  const fixture = createSource();
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const output = path.join(
+    fixture.output,
+    "en/daily/ai-digest-2026-08-17-Mon.md",
+  );
+  fs.mkdirSync(path.dirname(output), { recursive: true });
+  fs.writeFileSync(output, "partial\n");
+
+  const result = runPrepare(fixture, { DIGEST_TYPE: "daily" });
+  assert.notEqual(result.status, 0);
+  assert.match(`${result.stdout}\n${result.stderr}`, /only partially present/u);
+});
+
+test("a late recovery skips instead of moving README back to an older date", (t) => {
+  const fixture = createSource();
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  fs.writeFileSync(
+    path.join(fixture.output, "README.md"),
+    "Latest daily: ai-digest-2026-08-18-Tue.md [links]\n",
+  );
+  const result = runPrepare(fixture, {
+    DIGEST_TYPE: "daily",
+    DIGEST_EVENT_NAME: "schedule",
+    DIGEST_NOW: "2026-08-18T02:30:00.000Z",
+    DIGEST_SCHEDULE_LOCAL_TIME: "10:30",
+    DIGEST_SCHEDULE_DATE_OFFSET_DAYS: "-1",
+    MAX_FEED_AGE_HOURS: "1",
+  });
+
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /already points to newer daily digest/u);
+  const outputs = fs.readFileSync(result.githubOutput, "utf8");
+  assert.match(outputs, /^should_generate=false$/mu);
+  assert.match(outputs, /^skip_reason=superseded$/mu);
 });
 
 test("output validation accepts sourced weekly editions and rejects unknown URLs", (t) => {

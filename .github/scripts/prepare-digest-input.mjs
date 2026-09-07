@@ -15,6 +15,9 @@ const sourceDirectory = path.resolve(
 const inputDirectory = path.resolve(
   process.env.DIGEST_INPUT_DIR ?? ".codex-input",
 );
+const outputDirectory = path.resolve(
+  process.env.DIGEST_OUTPUT_DIR ?? ".",
+);
 const maxFeedAgeHours = Number(process.env.MAX_FEED_AGE_HOURS ?? "24");
 const maxSnapshotGapHours = Number(
   process.env.MAX_SNAPSHOT_GAP_HOURS ?? "2",
@@ -27,9 +30,21 @@ const minimumWeeklySnapshots = Number(
 );
 const digestEventName = process.env.DIGEST_EVENT_NAME ?? "";
 const scheduledLocalTime = process.env.DIGEST_SCHEDULE_LOCAL_TIME ?? "";
+const scheduledDateOffsetDays = Number(
+  process.env.DIGEST_SCHEDULE_DATE_OFFSET_DAYS ?? "0",
+);
+const deferUnreadyInputs = process.env.DEFER_UNREADY_INPUTS === "true";
+const preflightOnly = process.env.DIGEST_PREFLIGHT_ONLY === "true";
 const now = process.env.DIGEST_NOW
   ? new Date(process.env.DIGEST_NOW)
   : new Date();
+
+class InputNotReadyError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "InputNotReadyError";
+  }
+}
 
 if (!new Set(["daily", "weekly"]).has(digestType)) {
   throw new Error("DIGEST_TYPE must be either 'daily' or 'weekly'.");
@@ -56,6 +71,14 @@ for (const [name, value] of [
 
 if (Number.isNaN(now.getTime())) {
   throw new Error("DIGEST_NOW must be a valid ISO date when provided.");
+}
+if (!Number.isInteger(scheduledDateOffsetDays)) {
+  throw new Error("DIGEST_SCHEDULE_DATE_OFFSET_DAYS must be an integer.");
+}
+if (Math.abs(scheduledDateOffsetDays) > 7) {
+  throw new Error(
+    "DIGEST_SCHEDULE_DATE_OFFSET_DAYS must be between -7 and 7.",
+  );
 }
 
 const feedSpecifications = [
@@ -127,7 +150,7 @@ function validateFeedAge(feed, label) {
     );
   }
   if (ageHours > maxFeedAgeHours) {
-    throw new Error(
+    throw new InputNotReadyError(
       `${label} is stale (${ageHours.toFixed(2)}h old; maximum is ${maxFeedAgeHours}h).`,
     );
   }
@@ -181,6 +204,9 @@ function getDigestCalendar() {
     if (currentLocalMinute < scheduledMinuteOfDay) {
       localDateAtNoonUtc = new Date(localDateAtNoonUtc.getTime() - DAY_MS);
     }
+    localDateAtNoonUtc = new Date(
+      localDateAtNoonUtc.getTime() + scheduledDateOffsetDays * DAY_MS,
+    );
   }
 
   const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
@@ -291,7 +317,7 @@ function getInterval(feed, label) {
 
 function validateWindowCoverage(intervals, windowStart, windowEnd, collection) {
   if (intervals.length < minimumWeeklySnapshots) {
-    throw new Error(
+    throw new InputNotReadyError(
       `${collection} has only ${intervals.length} snapshots intersecting the weekly window; at least ${minimumWeeklySnapshots} are required.`,
     );
   }
@@ -326,7 +352,7 @@ function validateWindowCoverage(intervals, windowStart, windowEnd, collection) {
 
   if (cursor < windowEnd.getTime()) {
     const gapHours = (windowEnd.getTime() - cursor) / HOUR_MS;
-    throw new Error(
+    throw new InputNotReadyError(
       `${collection} does not reach the weekly window end; ${gapHours.toFixed(2)}h are uncovered. The current Monday feed may not be ready yet.`,
     );
   }
@@ -683,93 +709,185 @@ function prepareWeeklyFeeds(windowStart, windowEnd) {
   };
 }
 
-fs.mkdirSync(inputDirectory, { recursive: true });
-
-const calendar = getDigestCalendar();
-const weeklyWindow =
-  digestType === "weekly"
-    ? getWeeklyWindow(calendar.localDateAtNoonUtc)
-    : null;
-const preparedFeeds =
-  digestType === "weekly"
-    ? prepareWeeklyFeeds(weeklyWindow.windowStart, weeklyWindow.windowEnd)
-    : prepareDailyFeeds();
-
-for (const filename of promptFilenames) {
-  const sourcePath = path.join(sourceDirectory, "prompts", filename);
-  if (!fs.existsSync(sourcePath)) {
-    throw new Error(`Required prompt is missing: ${sourcePath}`);
-  }
-  fs.copyFileSync(sourcePath, path.join(inputDirectory, filename));
+function buildTarget() {
+  const calendar = getDigestCalendar();
+  const filename = `ai-digest-${calendar.digestDate}-${calendar.dayOfWeek}.md`;
+  const outputFiles = [
+    `en/${digestType}/${filename}`,
+    `zh/${digestType}/${filename}`,
+    `bilingual/${digestType}/${filename}`,
+  ];
+  const commitMessage =
+    `add: ${digestType} digest ${calendar.digestDate} ` +
+    `(${calendar.dayOfWeek}) by Codex`;
+  const promptFile =
+    digestType === "weekly"
+      ? ".github/codex/prompts/generate-weekly-digest.md"
+      : ".github/codex/prompts/generate-digest.md";
+  return { calendar, filename, outputFiles, commitMessage, promptFile };
 }
 
-const filename = `ai-digest-${calendar.digestDate}-${calendar.dayOfWeek}.md`;
-const outputFiles = [
-  `en/${digestType}/${filename}`,
-  `zh/${digestType}/${filename}`,
-  `bilingual/${digestType}/${filename}`,
-];
-const commitMessage = `add: ${digestType} digest ${calendar.digestDate} (${calendar.dayOfWeek}) by Codex`;
-const promptFile =
-  digestType === "weekly"
-    ? ".github/codex/prompts/generate-weekly-digest.md"
-    : ".github/codex/prompts/generate-digest.md";
-
-const context = {
-  digestType,
-  timezone: TIME_ZONE,
-  digestDate: calendar.digestDate,
-  dayOfWeek: calendar.dayOfWeek,
-  filename,
-  outputFiles,
-  promptFile,
-  coverage: preparedFeeds.coverage,
-  readme: {
-    english:
-      `Latest ${digestType}: ${filename} ` +
-      `[中文](zh/${digestType}/${filename}) | ` +
-      `[English](en/${digestType}/${filename}) | ` +
-      `[Bilingual](bilingual/${digestType}/${filename})`,
-    chinese:
-      `${digestType === "daily" ? "最新日报" : "最新周报"}: ${filename} ` +
-      `[中文](zh/${digestType}/${filename}) | ` +
-      `[English](en/${digestType}/${filename}) | ` +
-      `[双语](bilingual/${digestType}/${filename})`,
-  },
-  commitMessage,
-  feeds: {
-    generatedAt: preparedFeeds.generatedAt,
-    sourceSnapshotCount: preparedFeeds.sourceSnapshots.length,
-    sourceSnapshots: preparedFeeds.sourceSnapshots,
-    counts: {
-      xBuilders: preparedFeeds.feedData.x.length,
-      totalTweets: preparedFeeds.feedData.x.reduce(
-        (total, builder) => total + builder.tweets.length,
-        0,
-      ),
-      podcastEpisodes: preparedFeeds.feedData.podcasts.length,
-      blogPosts: preparedFeeds.feedData.blogs.length,
-    },
-  },
-  preparedAt: now.toISOString(),
-};
-
-fs.writeFileSync(
-  path.join(inputDirectory, "run-context.json"),
-  `${JSON.stringify(context, null, 2)}\n`,
-);
-
-if (process.env.GITHUB_OUTPUT) {
+function writeStepOutputs(target, shouldGenerate, skipReason = "") {
+  if (!process.env.GITHUB_OUTPUT) {
+    return;
+  }
   fs.appendFileSync(
     process.env.GITHUB_OUTPUT,
     [
-      `filename=${filename}`,
+      `filename=${target.filename}`,
       `digest_type=${digestType}`,
-      `commit_message=${commitMessage}`,
-      `prompt_file=${promptFile}`,
+      `commit_message=${target.commitMessage}`,
+      `prompt_file=${target.promptFile}`,
+      `should_generate=${shouldGenerate}`,
+      `skip_reason=${skipReason}`,
       "",
     ].join("\n"),
   );
 }
 
-console.log(JSON.stringify(context, null, 2));
+function getLatestPublishedDate() {
+  const readmePath = path.join(outputDirectory, "README.md");
+  if (!fs.existsSync(readmePath)) {
+    return null;
+  }
+  const readme = fs.readFileSync(readmePath, "utf8");
+  const match = new RegExp(
+    `^Latest ${digestType}: ai-digest-(\\d{4}-\\d{2}-\\d{2})-`,
+    "mu",
+  ).exec(readme);
+  return match?.[1] ?? null;
+}
+
+function main() {
+  const target = buildTarget();
+  const existingOutputFiles = target.outputFiles.filter((filename) =>
+    fs.existsSync(path.join(outputDirectory, filename)),
+  );
+
+  if (existingOutputFiles.length === target.outputFiles.length) {
+    writeStepOutputs(target, false, "already_exists");
+    console.log(
+      `Skipping ${digestType} digest ${target.calendar.digestDate}: ` +
+        "all language editions already exist.",
+    );
+    return;
+  }
+  if (existingOutputFiles.length > 0) {
+    throw new Error(
+      `Digest ${target.filename} is only partially present: ` +
+      `${existingOutputFiles.join(", ")}. Refusing to overwrite it.`,
+    );
+  }
+
+  const latestPublishedDate = getLatestPublishedDate();
+  if (latestPublishedDate === target.calendar.digestDate) {
+    throw new Error(
+      `README.md points to ${target.filename}, but its three language editions ` +
+        "are missing.",
+    );
+  }
+  if (latestPublishedDate > target.calendar.digestDate) {
+    writeStepOutputs(target, false, "superseded");
+    console.log(
+      `Skipping ${digestType} digest ${target.calendar.digestDate}: ` +
+        `README.md already points to newer ${digestType} digest ` +
+        `${latestPublishedDate}.`,
+    );
+    return;
+  }
+
+  if (preflightOnly) {
+    writeStepOutputs(target, true);
+    console.log(
+      `${digestType} digest ${target.calendar.digestDate} requires generation.`,
+    );
+    return;
+  }
+
+  fs.mkdirSync(inputDirectory, { recursive: true });
+
+  const weeklyWindow =
+    digestType === "weekly"
+      ? getWeeklyWindow(target.calendar.localDateAtNoonUtc)
+      : null;
+  let preparedFeeds;
+  try {
+    preparedFeeds =
+      digestType === "weekly"
+        ? prepareWeeklyFeeds(weeklyWindow.windowStart, weeklyWindow.windowEnd)
+        : prepareDailyFeeds();
+  } catch (error) {
+    if (!(error instanceof InputNotReadyError) || !deferUnreadyInputs) {
+      throw error;
+    }
+    writeStepOutputs(target, false, "inputs_not_ready");
+    console.log(
+      `Deferring ${digestType} digest ${target.calendar.digestDate}: ` +
+        error.message,
+    );
+    return;
+  }
+
+  for (const promptFilename of promptFilenames) {
+    const sourcePath = path.join(sourceDirectory, "prompts", promptFilename);
+    if (!fs.existsSync(sourcePath)) {
+      throw new Error(`Required prompt is missing: ${sourcePath}`);
+    }
+    fs.copyFileSync(sourcePath, path.join(inputDirectory, promptFilename));
+  }
+
+  const context = {
+    digestType,
+    timezone: TIME_ZONE,
+    digestDate: target.calendar.digestDate,
+    dayOfWeek: target.calendar.dayOfWeek,
+    filename: target.filename,
+    outputFiles: target.outputFiles,
+    promptFile: target.promptFile,
+    schedule:
+      digestEventName === "schedule"
+        ? {
+            localTime: scheduledLocalTime,
+            dateOffsetDays: scheduledDateOffsetDays,
+          }
+        : null,
+    coverage: preparedFeeds.coverage,
+    readme: {
+      english:
+        `Latest ${digestType}: ${target.filename} ` +
+        `[中文](zh/${digestType}/${target.filename}) | ` +
+        `[English](en/${digestType}/${target.filename}) | ` +
+        `[Bilingual](bilingual/${digestType}/${target.filename})`,
+      chinese:
+        `${digestType === "daily" ? "最新日报" : "最新周报"}: ${target.filename} ` +
+        `[中文](zh/${digestType}/${target.filename}) | ` +
+        `[English](en/${digestType}/${target.filename}) | ` +
+        `[双语](bilingual/${digestType}/${target.filename})`,
+    },
+    commitMessage: target.commitMessage,
+    feeds: {
+      generatedAt: preparedFeeds.generatedAt,
+      sourceSnapshotCount: preparedFeeds.sourceSnapshots.length,
+      sourceSnapshots: preparedFeeds.sourceSnapshots,
+      counts: {
+        xBuilders: preparedFeeds.feedData.x.length,
+        totalTweets: preparedFeeds.feedData.x.reduce(
+          (total, builder) => total + builder.tweets.length,
+          0,
+        ),
+        podcastEpisodes: preparedFeeds.feedData.podcasts.length,
+        blogPosts: preparedFeeds.feedData.blogs.length,
+      },
+    },
+    preparedAt: now.toISOString(),
+  };
+
+  fs.writeFileSync(
+    path.join(inputDirectory, "run-context.json"),
+    `${JSON.stringify(context, null, 2)}\n`,
+  );
+  writeStepOutputs(target, true);
+  console.log(JSON.stringify(context, null, 2));
+}
+
+main();

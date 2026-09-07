@@ -5,16 +5,34 @@ on:
     # Monday 18:30 Asia/Shanghai (GitHub schedules use UTC). This leaves a
     # buffer after Follow Builders' Monday feed update.
     - cron: "30 10 * * 1"
+    # One recovery slot on Tuesday at 12:30 Asia/Shanghai. Both slots target
+    # the same Monday edition, and an existing edition is skipped before the
+    # model is called.
+    - cron: "30 4 * * 2"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  generate:
+  primary:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 10 * * 1'
     uses: ./.github/workflows/_ai-builders-generate.yml
     with:
       digest_type: weekly
       scheduled_local_time: "18:30"
+      scheduled_date_offset_days: 0
+      defer_unready_inputs: ${{ github.event_name == 'schedule' }}
+    secrets:
+      DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+  fallback:
+    if: github.event_name == 'schedule' && github.event.schedule == '30 4 * * 2'
+    uses: ./.github/workflows/_ai-builders-generate.yml
+    with:
+      digest_type: weekly
+      scheduled_local_time: "12:30"
+      scheduled_date_offset_days: 0
+      defer_unready_inputs: false
     secrets:
       DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

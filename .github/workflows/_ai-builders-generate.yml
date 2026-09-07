@@ -11,6 +11,16 @@ on:
         description: Configured Asia/Shanghai trigger time in HH:MM format
         required: true
         type: string
+      scheduled_date_offset_days:
+        description: Calendar-day offset from the scheduled Shanghai slot
+        required: false
+        type: number
+        default: 0
+      defer_unready_inputs:
+        description: Skip safely when upstream feeds are not ready yet
+        required: false
+        type: boolean
+        default: false
     secrets:
       DEEPSEEK_API_KEY:
         required: true
@@ -27,8 +37,8 @@ jobs:
       contents: read
     outputs:
       has_patch: ${{ steps.package.outputs.has_patch }}
-      filename: ${{ steps.context.outputs.filename }}
-      commit_message: ${{ steps.context.outputs.commit_message }}
+      filename: ${{ steps.context.outputs.filename || steps.target.outputs.filename }}
+      commit_message: ${{ steps.context.outputs.commit_message || steps.target.outputs.commit_message }}
     steps:
       - name: Check out digest repository
         uses: actions/checkout@v5
@@ -36,7 +46,23 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check whether this digest still needs generation
+        id: target
+        env:
+          DIGEST_TYPE: ${{ inputs.digest_type }}
+          DIGEST_EVENT_NAME: ${{ github.event_name }}
+          DIGEST_SCHEDULE_LOCAL_TIME: ${{ inputs.scheduled_local_time }}
+          DIGEST_SCHEDULE_DATE_OFFSET_DAYS: ${{ inputs.scheduled_date_offset_days }}
+          DIGEST_PREFLIGHT_ONLY: "true"
+        run: node .github/scripts/prepare-digest-input.mjs
+
       - name: Check out latest Follow Builders feeds
+        if: steps.target.outputs.should_generate == 'true'
         uses: actions/checkout@v5
         with:
           repository: zarazhangrui/follow-builders
@@ -47,20 +73,19 @@ jobs:
           fetch-depth: 30
           persist-credentials: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
       - name: Test digest automation scripts
+        if: steps.target.outputs.should_generate == 'true'
         run: node --test .github/scripts/*.test.mjs
 
       - name: Validate and stage feed inputs
+        if: steps.target.outputs.should_generate == 'true'
         id: context
         env:
           DIGEST_TYPE: ${{ inputs.digest_type }}
           DIGEST_EVENT_NAME: ${{ github.event_name }}
           DIGEST_SCHEDULE_LOCAL_TIME: ${{ inputs.scheduled_local_time }}
+          DIGEST_SCHEDULE_DATE_OFFSET_DAYS: ${{ inputs.scheduled_date_offset_days }}
+          DEFER_UNREADY_INPUTS: ${{ inputs.defer_unready_inputs }}
           FOLLOW_BUILDERS_DIR: _follow-builders
           DIGEST_INPUT_DIR: .codex-input
           MAX_FEED_AGE_HOURS: "24"
@@ -72,9 +97,11 @@ jobs:
         run: node .github/scripts/prepare-digest-input.mjs
 
       - name: Remove the source checkout
+        if: steps.context.outputs.should_generate == 'true'
         run: rm -rf -- "$GITHUB_WORKSPACE/_follow-builders"
 
       - name: Generate digest with Codex and DeepSeek
+        if: steps.context.outputs.should_generate == 'true'
         id: codex
         # v1.12 can hang after generation and make the hosted runner lose
         # communication (openai/codex-action#150). Pin the last working v1.11.
@@ -91,6 +118,7 @@ jobs:
           output-file: ${{ runner.temp }}/codex-output.md
 
       - name: Validate changes and create patch
+        if: steps.context.outputs.should_generate == 'true'
         id: package
         shell: bash
         env:
@@ -148,13 +176,25 @@ jobs:
           fi
 
       - name: Upload digest patch
-        if: steps.package.outputs.has_patch == 'true'
+        if: steps.context.outputs.should_generate == 'true' && steps.package.outputs.has_patch == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: digest-patch-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/digest.patch
           if-no-files-found: error
           retention-days: 1
+
+      - name: Record deferred generation
+        if: steps.context.outputs.skip_reason == 'inputs_not_ready'
+        run: echo "Upstream feeds are not ready; the recovery slot will try once more." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record duplicate prevention
+        if: steps.target.outputs.skip_reason == 'already_exists' || steps.context.outputs.skip_reason == 'already_exists'
+        run: echo "The target digest already exists; skipped before calling the model." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Record superseded recovery
+        if: steps.target.outputs.skip_reason == 'superseded' || steps.context.outputs.skip_reason == 'superseded'
+        run: echo "A newer digest is already published; skipped this late recovery to keep README monotonic." >> "$GITHUB_STEP_SUMMARY"
 
   publish:
     needs: generate
