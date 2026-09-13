@@ -69,11 +69,11 @@ Each output file must use this exact top-level order:
 
 Use `## 导读` in the Chinese file and `## Reader's Briefing / 导读` in the bilingual file.
 
-The briefing must contain exactly five substantive themes:
+The briefing must contain five or six substantive themes:
 
-- English file: five English paragraphs.
-- Chinese file: five Chinese paragraphs.
-- Bilingual file: exactly ten paragraph blocks grouped into five pairs. In each pair, write the English paragraph, a blank line, then its Chinese translation. Do not insert labels, headings, or list items between them.
+- English file: five or six English paragraphs.
+- Chinese file: five or six Chinese paragraphs.
+- Bilingual file: ten or twelve paragraph blocks grouped into five or six pairs. In each pair, write the English paragraph, a blank line, then its Chinese translation. Do not insert labels, headings, or list items between them.
 
 In the bilingual body, interleave English and Chinese source by source or paragraph by paragraph. Never put the entire English digest before the Chinese translation.
 

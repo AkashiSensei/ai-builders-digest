@@ -546,6 +546,76 @@ test("output validation accepts disclosed scheduler gaps and rejects unknown URL
   const validResult = validate();
   assert.equal(validResult.status, 0, validResult.stderr);
 
+  const outputPaths = Object.fromEntries(
+    ["en", "zh", "bilingual"].map((language) => [
+      language,
+      path.join(project, language, "weekly", context.filename),
+    ]),
+  );
+  const originalOutputs = Object.fromEntries(
+    Object.entries(outputPaths).map(([language, output]) => [
+      language,
+      fs.readFileSync(output, "utf8"),
+    ]),
+  );
+  const extraBriefingBlocks = {
+    en: "Sixth weekly theme.",
+    zh: "第六个每周主题。",
+  };
+  for (const language of ["en", "zh"]) {
+    fs.writeFileSync(
+      outputPaths[language],
+      originalOutputs[language].replace(
+        "## X / Twitter",
+        `${extraBriefingBlocks[language]}\n\n## X / Twitter`,
+      ),
+    );
+  }
+  const optionalIntroResult = validate();
+  assert.equal(optionalIntroResult.status, 0, optionalIntroResult.stderr);
+
+  fs.writeFileSync(
+    outputPaths.bilingual,
+    originalOutputs.bilingual.replace(
+      "## X / Twitter",
+      "Sixth weekly theme.\n\n## X / Twitter",
+    ),
+  );
+  const unpairedThemeResult = validate();
+  assert.notEqual(unpairedThemeResult.status, 0);
+  assert.match(
+    `${unpairedThemeResult.stdout}\n${unpairedThemeResult.stderr}`,
+    /must contain 10 or 12 briefing paragraphs/u,
+  );
+
+  fs.writeFileSync(
+    outputPaths.bilingual,
+    fs.readFileSync(outputPaths.bilingual, "utf8").replace(
+      "## X / Twitter",
+      "第六个每周主题。\n\n## X / Twitter",
+    ),
+  );
+  const sixThemeResult = validate();
+  assert.equal(sixThemeResult.status, 0, sixThemeResult.stderr);
+
+  fs.writeFileSync(
+    outputPaths.en,
+    fs.readFileSync(outputPaths.en, "utf8").replace(
+      "## X / Twitter",
+      "Seventh weekly theme.\n\n## X / Twitter",
+    ),
+  );
+  const tooManyThemesResult = validate();
+  assert.notEqual(tooManyThemesResult.status, 0);
+  assert.match(
+    `${tooManyThemesResult.stdout}\n${tooManyThemesResult.stderr}`,
+    /must contain 5 or 6 briefing paragraphs/u,
+  );
+
+  for (const language of ["en", "zh", "bilingual"]) {
+    fs.writeFileSync(outputPaths[language], originalOutputs[language]);
+  }
+
   const englishOutput = path.join(project, context.outputFiles[0]);
   const validEnglish = fs.readFileSync(englishOutput, "utf8");
   fs.writeFileSync(

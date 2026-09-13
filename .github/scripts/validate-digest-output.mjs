@@ -310,11 +310,11 @@ for (const language of ["en", "zh", "bilingual"]) {
     fail(`${filename} does not follow the required document structure.`);
   }
 
-  const expectedBlocks = language === "bilingual" ? 10 : 5;
+  const allowedBlocks = language === "bilingual" ? [10, 12] : [5, 6];
   const blocks = paragraphBlocks(lines, briefingIndex + 1, xIndex);
-  if (blocks.length !== expectedBlocks) {
+  if (!allowedBlocks.includes(blocks.length)) {
     fail(
-      `${filename} must contain exactly ${expectedBlocks} briefing paragraphs; found ${blocks.length}.`,
+      `${filename} must contain ${allowedBlocks.join(" or ")} briefing paragraphs; found ${blocks.length}.`,
     );
   }
 
