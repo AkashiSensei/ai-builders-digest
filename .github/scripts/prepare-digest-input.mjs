@@ -22,6 +22,7 @@ const maxFeedAgeHours = Number(process.env.MAX_FEED_AGE_HOURS ?? "24");
 const maxSnapshotGapHours = Number(
   process.env.MAX_SNAPSHOT_GAP_HOURS ?? "2",
 );
+const MIN_REPORTED_GAP_MS = 60 * 1000;
 const weeklyHistoryLimit = Number(
   process.env.WEEKLY_HISTORY_LIMIT ?? "30",
 );
@@ -341,11 +342,13 @@ function validateWindowCoverage(intervals, windowStart, windowEnd, collection) {
           `${collection} has an uncovered ${gapHours.toFixed(2)}h gap before ${new Date(intervalStart).toISOString()}.`,
         );
       }
-      gaps.push({
-        start: new Date(cursor).toISOString(),
-        end: new Date(intervalStart).toISOString(),
-        hours: Number(gapHours.toFixed(2)),
-      });
+      if (intervalStart - cursor >= MIN_REPORTED_GAP_MS) {
+        gaps.push({
+          start: new Date(cursor).toISOString(),
+          end: new Date(intervalStart).toISOString(),
+          hours: Number(gapHours.toFixed(2)),
+        });
+      }
     }
     cursor = Math.max(cursor, intervalEnd);
   }

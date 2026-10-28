@@ -256,6 +256,27 @@ test("weekly preparation uses eight snapshots and exact Shanghai boundaries", (t
   assert.match(outputs, /prompt_file=.github\/codex\/prompts\/generate-weekly-digest\.md/u);
 });
 
+test("weekly preparation ignores second-level jitter but reports material gaps", (t) => {
+  const fixture = createSource(8, { 3: 13 / 3600, 5: 2 / 60 });
+  t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
+
+  const result = runPrepare(fixture);
+  assert.equal(result.status, 0, result.stderr);
+
+  const context = JSON.parse(
+    fs.readFileSync(path.join(fixture.input, "run-context.json"), "utf8"),
+  );
+  assert.deepEqual(context.coverage.gaps.x, [
+    {
+      start: "2026-08-14T06:30:00.000Z",
+      end: "2026-08-14T06:32:00.000Z",
+      hours: 0.03,
+    },
+  ]);
+  assert.match(context.coverage.gapNotices.english, /\(0\.03h\)/u);
+  assert.doesNotMatch(context.coverage.gapNotices.english, /0\.00h/u);
+});
+
 test("weekly preparation fails instead of publishing without Monday's snapshot", (t) => {
   const fixture = createSource(7);
   t.after(() => fs.rmSync(fixture.root, { recursive: true, force: true }));
