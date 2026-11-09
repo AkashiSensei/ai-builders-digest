@@ -1,0 +1,103 @@
+[English](../../en/daily/ai-digest-2026-11-09-Mon.md) | [中文](../../zh/daily/ai-digest-2026-11-09-Mon.md) | [Bilingual](./ai-digest-2026-11-09-Mon.md)
+
+---
+
+# AI Builders Digest
+
+## Reader's Briefing / 导读
+
+Box CEO Aaron Levie argues that AI is moving from an era where output arrives at the pace of a chat back-and-forth to one where a problem can be handed to a set of agents that do an arbitrarily large amount of work. Agent swarms and parallel fan-out can turn 20-50% productivity gains into gains without a clear upper limit, he says, starting with coding and extending to cyber, science, life sciences, and any field where computer-based work can be parallelized. The deeper shift is that compute becomes the variable teams can flex, breaking the old assumption that more time on a task means more output.
+
+Box CEO Aaron Levie 认为，AI 正从“产出速度大致等于你和它来回聊天速度”的阶段，进入“把一个问题交给一组 agent，让它们完成任意规模工作”的阶段。Agent swarm 和并行分发，可以把 20% 到 50% 的生产力提升，变成没有明显上限的提升。这个变化先从编程开始，正在延伸到网络安全、科学、生命科学，以及任何可以把基于电脑的工作并行化的领域。更深一层的变化是，算力成为团队可以灵活调用的变量，过去“花的时间越多，产出越多”的假设正在被打破。
+
+Nan Yu, who works on product for Codex at OpenAI, makes the case for the dumbest architecture and design that will work, not the simplest. Simple is something you iterate toward, he says, while cleverness means users also have to be just as clever to understand your cleverness. He argues that AI makes software much easier when you know what you want to build and much harder when you do not: without clarity, teams ship a pile of junk and spend a lot of money doing it. YC President and CEO Garry Tan adds that once frontier models make software easy to change, existing bugs become a little bit unbearable, and personal just-in-time software looks inevitable.
+
+在 OpenAI 负责 Codex 产品的 Nan Yu 主张，应该选择“最笨但能工作”的架构和设计，而不是“最简单”的方案。他说，简单是迭代出来的结果，而聪明会让用户也必须一样聪明，才能理解你的聪明。他还认为，当你知道自己要做什么时，AI 让软件变得容易得多；当你不知道时，AI 会让它难得多。没有清晰度，团队会交付一堆垃圾，还为此花掉很多钱。YC 总裁兼 CEO Garry Tan 补充说，一旦前沿模型让软件变得容易修改，现有的 bug 就会变得有点难以忍受，个人化的即时软件也显得不可避免。
+
+Mihail Eric, who teaches the Modern Software Developer at Stanford and is Head of AI at Monaco, is refreshing AI-native engineering education around the internals of the harness. His course has students build a coding agent from scratch in roughly 200 lines, then intercept the requests of a state-of-the-art agent to inspect its system, plan, and compaction prompts. The curriculum moves through context engineering at scale, tool design and MCP, agent configuration, agent-ready codebases, agentic code review, and security. His blunt framing is that "the floor is much higher": a well-trained AI-native engineer can be extremely valuable, but only with enough foundational software engineering to reason about architecture, trade-offs, and verification.
+
+在斯坦福教授 Modern Software Developer、同时担任 Monaco AI 负责人的 Mihail Eric，正在围绕 harness 的内部机制刷新 AI 原生工程教育。他的课程让学生用大约 200 行代码从零构建一个 coding agent，然后拦截一个最先进 agent 的请求，查看它的 system、plan 和 compaction prompt。课程还会讲到规模化 context engineering、工具设计与 MCP、agent 配置、agent-ready 代码库、agentic code review 和安全。他的直白判断是，“the floor is much higher”：训练有素的 AI 原生工程师可以非常有价值，但前提是有足够的软件工程基础，能够思考架构、取舍和验证。
+
+Eric's operating advice for teams is "you buy to learn and you build to keep." Monaco buys where a mature product earns its place, such as Devin for code review, and builds where the market does not meet its infrastructure needs, including its Monocoder background-agent platform and Hal Slack bot. He is equally skeptical of skill sprawl: most skills are written badly, trigger at the wrong time, and need to be pruned, though skills that encode organizational knowledge can last. He also expects platform engineering to become more important, because it owns the cloud, developer experience, and security boundaries that agents operate inside.
+
+Eric 给团队的操作建议是，“you buy to learn and you build to keep”。Monaco 会在成熟产品确实有价值时购买，比如用 Devin 做 code review；当市场无法满足自己的基础设施需求时，就自己构建，包括 Monocoder 后台 agent 平台和 Hal Slack bot。他对 skill 泛滥同样保持怀疑：大多数 skill 写得不好，会在错误的时候触发，需要定期清理；不过，能够承载组织知识的 skill 可能活得更久。他还预计 platform engineer 会越来越重要，因为它掌握着 agent 运行所依赖的云、开发者体验和安全边界。
+
+Builder Zara Zhang has almost stopped using the term "vibe coding" because of its negative connotation: it implies that the output lacked effort or soul and is just AI slop. She argues that people can put their heart and soul into work made with AI coding tools, and that the two are not contradictory. She also describes the joy of building a product as the collision between the predictability of how technology behaves and the unpredictability of how humans behave.
+
+Builder Zara Zhang 几乎不再使用“vibe coding”这个词，因为它带有负面含义，暗示产出没有投入多少努力或灵魂，只是 AI slop。她认为，人们在使用 AI 编程工具时，同样可以投入心血，这两件事并不矛盾。她还说，做产品的快乐，来自技术行为的可预测性与人类行为的不可预测性之间的碰撞。
+
+Vercel CEO Guillermo Rauch built a physical simulation of a record player with WebGL2 and Web Audio, converting a song into the physical shape of a groove and letting a simulated stylus ride the walls 384,000 times a second; the crackle, pops, wow and flutter, and dull inner grooves emerge as natural byproducts. FPV Ventures partner Nikunj Kothari argues that the way to meet interesting people in San Francisco is to show your work rather than ask for networking or to "pick your brain." A thoughtful cold email, a five-line pointed DM, a shipped side project, or an organized meetup all count, and he says even the busiest people have 15 minutes if you give them a reason.
+
+Vercel CEO Guillermo Rauch 用 WebGL2 和 Web Audio 做了一个唱片机的物理模拟。它把一首歌转换成凹槽的物理形状，再让模拟唱针每秒 384,000 次沿着槽壁运动，爆裂声、噼啪声、wow 和 flutter，以及内圈音轨变闷，都是模拟自然产生的结果。FPV Ventures 合伙人 Nikunj Kothari 则认为，在旧金山认识有趣的人，靠的是展示你的作品，而不是要求“networking”或“pick your brain”。一封用心的 cold email、一条五行的精准 DM、一个已经上线的 side project，或者一个你组织的 meetup，都算数；他说，即使是最忙的人，只要你给出理由，也能挤出 15 分钟。
+
+## X / Twitter
+
+### Nan Yu
+
+Nan Yu, who works on product for Codex at OpenAI, argues that builders should choose the "dumbest" architecture and design that will work rather than the "simplest." Simple is something you iterate toward, he says, while cleverness means users also have to be just as clever to understand your cleverness. He also argues that AI makes software much easier when you know what you want to build and much harder when you do not: without clarity, teams ship a pile of junk and spend a lot of money doing it.
+
+在 OpenAI 负责 Codex 产品的 Nan Yu 主张，应该选择“最笨但能工作”的架构和设计，而不是“最简单”的方案。他说，简单是迭代出来的结果，而聪明意味着用户也必须一样聪明，才能理解你的聪明。他还认为，当你知道自己要做什么时，AI 让软件容易得多；当你不知道时，AI 会让它难得多。没有清晰度，团队会交付一堆垃圾，还为此花掉很多钱。([post](https://x.com/thenanyu/status/2119493015190249556)) ([post](https://x.com/thenanyu/status/2119462979179892925)) ([post](https://x.com/thenanyu/status/2119462224721002560))
+
+### Guillermo Rauch
+
+Vercel CEO Guillermo Rauch built a physical simulation of a record player with WebGL2 and Web Audio. It converts a song into the physical shape of a groove, then a simulated stylus rides those walls 384,000 times a second; the crackle, pops, wow and flutter, and dull inner grooves are natural byproducts of the simulation. The converted songs are public domain or CC-licensed, and he links the code for others to remix and redeploy.
+
+Vercel CEO Guillermo Rauch 用 WebGL2 和 Web Audio 做了一个唱片机的物理模拟。它把一首歌转换成凹槽的物理形状，再让模拟唱针每秒 384,000 次沿着槽壁运动；爆裂声、噼啪声、wow 和 flutter，以及内圈音轨变闷，都是模拟自然产生的结果。转换后的歌曲属于公有领域或 CC 授权，他也给出了代码链接，方便别人 remix 和重新部署。([post](https://x.com/rauchg/status/2119536313712230802))
+
+### Aaron Levie
+
+Box CEO Aaron Levie argues that AI is moving from output at roughly the rate of a chat back-and-forth to agents that can take an arbitrarily large amount of work. Agent swarms and parallel fan-out can turn 20-50% productivity gains into gains without a clear upper limit, starting with coding and extending to cyber, science, life sciences, and any field where computer-based work can be parallelized. He says builders should re-check what is possible every three to six months, because recent progress in computer and tool use, less context rot, reasoning, multimodality, and domain expertise lets agents use existing APIs and systems instead of generating everything from scratch.
+
+Box CEO Aaron Levie 认为，AI 正从“产出速度大致等于聊天来回速度”的阶段，进入“把问题交给 agent，让它们完成任意规模工作”的阶段。Agent swarm 和并行分发，可以把 20% 到 50% 的生产力提升，变成没有明显上限的提升，先从编程开始，再延伸到网络安全、科学、生命科学，以及任何可以把基于电脑的工作并行化的领域。他还说，builder 应该每三到六个月重新检查一次“现在能做什么”，因为最近在 computer use、工具使用、减少 context rot、推理、多模态和领域专业能力上的进步，让 agent 可以使用现有的 API 和系统，而不是从零生成一切。([post](https://x.com/levie/status/2119592025440092192)) ([post](https://x.com/levie/status/2119502716770902234))
+
+### Garry Tan
+
+YC President and CEO Garry Tan says his gstack-evals project tried to replicate a Jev Engineering article and found that it replicated, with particle-1 performing even better. He argues that once frontier models make software easy to change, existing bugs become a little bit unbearable, and personal just-in-time software looks inevitable. His conclusion: "You're really going to want your own software factory."
+
+YC 总裁兼 CEO Garry Tan 说，他的 gstack-evals 项目尝试复现一篇 Jev Engineering 文章，结果发现文章可以复现，而 particle-1 的表现更好。他认为，一旦前沿模型让软件变得容易修改，现有的 bug 就会变得有点难以忍受，个人化的即时软件也显得不可避免。他的结论是：“You're really going to want your own software factory.” ([post](https://x.com/garrytan/status/2119624260675350605)) ([post](https://x.com/garrytan/status/2119615647592395037)) ([post](https://x.com/garrytan/status/2119612084220842483))
+
+### Zara Zhang
+
+Builder Zara Zhang has almost stopped using the term "vibe coding" because it implies that the output did not get much effort or soul and is just AI slop. She argues that people can put their heart and soul into work made with AI coding tools, and the two are not contradictory; she wants a better word for it. She also says the joy of building a product comes from the collision between the predictability of how technology behaves and the unpredictability of how humans behave.
+
+Builder Zara Zhang 几乎不再使用“vibe coding”这个词，因为它暗示产出没有投入多少努力或灵魂，只是 AI slop。她认为，人们在使用 AI 编程工具时，同样可以投入心血，这两件事并不矛盾；她想要一个更好的说法。她还说，做产品的快乐，来自技术行为的可预测性与人类行为的不可预测性之间的碰撞。([post](https://x.com/zarazhangrui/status/2119592080318341128)) ([post](https://x.com/zarazhangrui/status/2119342420412510686))
+
+### Nikunj Kothari
+
+FPV Ventures partner Nikunj Kothari says the way to meet interesting people in San Francisco is to show your work, not to ask for "networking," "synergies," or to "pick your brain." A thoughtful cold email, a five-line pointed DM, a shipped side project, or an organized meetup all count. He says even the busiest people have 15 minutes if you give them a reason.
+
+FPV Ventures 合伙人 Nikunj Kothari 说，在旧金山认识有趣的人，靠的是展示你的作品，而不是要求“networking”“synergies”或“pick your brain”。一封用心的 cold email、一条五行的精准 DM、一个已经上线的 side project，或者一个你组织的 meetup，都算数。他说，即使是最忙的人，只要你给出理由，也能挤出 15 分钟。([post](https://x.com/nikunj/status/2119670529254981756))
+
+## Podcast
+
+### Latent Space: One Million AI Engineer Special / 斯坦福如何教授 AI 原生工程，对话 Mihail Eric（Monaco）
+
+Episode: [watch](https://www.youtube.com/watch?v=dpY7YzZo4kE)
+
+**The Takeaway:** AI-native engineering raises the floor for what a junior engineer must know, not lowers it.
+
+**核心观点：** AI 原生工程提高的是初级工程师必须达到的下限，而不是降低门槛。
+
+Mihail Eric teaches the Modern Software Developer at Stanford and is Head of AI at Monaco. His course starts by having students build a coding agent from scratch in roughly 200 lines, then uses proxy interception to inspect the prompts inside a state-of-the-art harness. The point is not to worship a tool. It is to make the machinery legible: context engineering at scale, tool design, MCP, compaction, sub-agents, agent-ready codebases, code review, and security all become design decisions rather than vendor features.
+
+Mihail Eric 在斯坦福教授 Modern Software Developer，同时是 Monaco 的 AI 负责人。他的课程先让学生用大约 200 行代码从零构建一个 coding agent，再通过代理拦截请求，查看一个最先进 harness 内部的 prompt。重点不是崇拜某个工具，而是让整台机器变得可理解：规模化 context engineering、工具设计、MCP、compaction、sub-agent、agent-ready 代码库、code review 和安全，都是设计决策，而不是厂商功能。
+
+Eric's bluntest claim is that "the floor is much higher." A well-trained AI-native engineer can be among a company's most useful assets, but only with enough foundational software engineering to reason about architecture, trade-offs, and verification. Otherwise, a one-line prompt that produces tens of thousands of lines of code can leave the builder out of touch with the system, while writing the code has become much easier than understanding it. He recommends experimenting for ten minutes a day rather than trying to track every new tool.
+
+Eric 最直白的判断是，“the floor is much higher”。训练有素的 AI 原生工程师可以成为公司里最有用的资产之一，但前提是有足够的软件工程基础，能够思考架构、取舍和验证。否则，一句 prompt 生成几万行代码，只会让 builder 跟不上系统，而写代码已经比理解代码容易得多。他建议每天花十分钟做实验，而不是试图追上每一个新工具。
+
+His operating philosophy for teams is "you buy to learn and you build to keep." Monaco buys where a mature product exists, such as Devin for code review, and builds where the market does not meet its infrastructure needs, including its Monocoder background-agent platform and Hal Slack bot. Security follows the same logic: every dependency is attack surface, though he cautions that rebuilding everything in-house trades third-party scrutiny for your own blind spots.
+
+他给团队的操作哲学是，“you buy to learn and you build to keep”。Monaco 会在成熟产品存在时购买，比如用 Devin 做 code review；当市场无法满足基础设施需求时，就自己构建，包括 Monocoder 后台 agent 平台和 Hal Slack bot。安全也是同一套逻辑：每一个依赖都是攻击面；但他也提醒，全部自己重写，会用第三方的审视换取自己的盲区。
+
+The larger destination is the software factory: a machine that builds the machine, with humans concentrated at intent and review. Eric expects platform engineering to become more important, not less, because it owns the cloud, developer experience, and security boundaries that agents operate inside. His advice to students who want to stand out is specific: build benchmarks and evals, write rigorous engineering posts, and attempt something ambitious enough to prove you can execute.
+
+更大的目标是 software factory：一台制造机器的机器，人类集中在 intent 和 review 上。Eric 预计 platform engineering 会变得更重要，而不是更不重要，因为它掌握着 agent 运行所依赖的云、开发者体验和安全边界。他给想脱颖而出的学生的建议很具体：做 benchmark 和 eval，写严谨的工程博客，尝试足够有野心的项目，证明自己能够执行。
+
+## Blog
+
+The validated feed contained no new qualifying blog posts.
+
+经过验证的 feed 中没有新的合格博客文章。
+
+Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders
