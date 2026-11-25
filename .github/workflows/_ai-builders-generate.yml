@@ -22,7 +22,7 @@ on:
         type: boolean
         default: false
     secrets:
-      DEEPSEEK_API_KEY:
+      OPENAI_API_KEY:
         required: true
 
 concurrency:
@@ -101,18 +101,17 @@ jobs:
         if: steps.context.outputs.should_generate == 'true'
         run: rm -rf -- "$GITHUB_WORKSPACE/_follow-builders"
 
-      - name: Generate digest with Codex and DeepSeek
+      - name: Generate digest with Codex and OpenAI
         if: steps.context.outputs.should_generate == 'true'
         id: codex
         # v1.12 can hang after generation and make the hosted runner lose
         # communication (openai/codex-action#150). Pin the last working v1.11.
         uses: openai/codex-action@52fe01ec70a42f454c9d2ebd47598f9fd6893d56
         with:
-          openai-api-key: ${{ secrets.DEEPSEEK_API_KEY }}
-          responses-api-endpoint: https://api.deepseek.com/responses
-          model: deepseek-v4-flash
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          model: gpt-6.1-sol
           prompt-file: ${{ steps.context.outputs.prompt_file }}
-          effort: low
+          effort: medium
           sandbox: workspace-write
           safety-strategy: drop-sudo
           codex-args: '["--ephemeral"]'
