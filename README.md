@@ -16,7 +16,7 @@ This project is in beta. Daily and weekly updates are generated in GitHub Action
 
 ---
 
-Latest daily: ai-digest-2026-11-24-Tue.md [中文](zh/daily/ai-digest-2026-11-24-Tue.md) | [English](en/daily/ai-digest-2026-11-24-Tue.md) | [Bilingual](bilingual/daily/ai-digest-2026-11-24-Tue.md)
+Latest daily: ai-digest-2026-11-27-Fri.md [中文](zh/daily/ai-digest-2026-11-27-Fri.md) | [English](en/daily/ai-digest-2026-11-27-Fri.md) | [Bilingual](bilingual/daily/ai-digest-2026-11-27-Fri.md)
 
 Latest weekly: ai-digest-2026-11-23-Mon.md [中文](zh/weekly/ai-digest-2026-11-23-Mon.md) | [English](en/weekly/ai-digest-2026-11-23-Mon.md) | [Bilingual](bilingual/weekly/ai-digest-2026-11-23-Mon.md)
 
