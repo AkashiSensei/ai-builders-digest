@@ -12,7 +12,7 @@ This digest emphasizes builders' personal insights, firsthand observations, and 
 
 If you're looking for a more classic newsletter experience instead, please visit [Horizon](https://thysrael.github.io/Horizon/).
 
-This project is in beta. Daily and weekly updates are generated in GitHub Actions by Codex from the verified Follow Builders feeds. If an update is delayed, check the workflow run, feed freshness, and OpenAI API availability.
+This project is in beta. Daily and weekly updates are generated in GitHub Actions by Codex from the verified Follow Builders feeds. If an update is delayed, check the workflow run, feed freshness, and DeepSeek API availability.
 
 ---
 
@@ -28,8 +28,8 @@ Latest weekly: ai-digest-2026-11-23-Mon.md [中文](zh/weekly/ai-digest-2026-11-
 - Weekly digest: primary slot on Monday at 18:30 Asia/Shanghai, with one recovery slot on Tuesday at 12:30. It deduplicates the upstream feed history into the previous complete Monday-to-Monday week. Upstream scheduler gaps up to 18 hours are disclosed exactly; larger gaps stop publication.
 - Recovery slots skip before the model call when all three language editions already exist, so each date or week is generated at most once. A recovery that arrives after a newer edition is also skipped to prevent the README pointer from moving backwards.
 - Successful runs commit directly to `main`.
-- Required GitHub Actions secret: `OPENAI_API_KEY`.
+- Required GitHub Actions secret: `DEEPSEEK_API_KEY`.
 
 Powered by: the latest verified feeds from the [follow-builders skill](https://github.com/zarazhangrui/follow-builders).
 
-Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/), using OpenAI GPT-6.1 Sol as the model backend.
+Executed by: [GitHub Actions](https://github.com/features/actions) & [Codex](https://chatgpt.com/codex/), using DeepSeek V4 Flash as the model backend.
